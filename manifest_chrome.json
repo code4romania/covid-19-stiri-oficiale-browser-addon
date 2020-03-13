@@ -1,10 +1,10 @@
 {
 	"manifest_version": 2,
 	"name": "COVID-19 ȘTIRI OFICIALE",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Informații despre Coronavirus (COVID-19)",
 	"permissions": [
-		"*://raw.githubusercontent.com/*",
+		"https://raw.githubusercontent.com/",
 		"activeTab"
 	],
 	"content_scripts": [
