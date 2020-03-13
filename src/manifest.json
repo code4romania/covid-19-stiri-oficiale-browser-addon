@@ -3,10 +3,11 @@
 	"name": "COVID-19 ȘTIRI OFICIALE",
 	"version": "1.0.0",
 	"description": "Informații despre Coronavirus (COVID-19)",
-	"content_scripts": 
-	[
+	"content_scripts": [
 		{
-			"matches": ["*://*/*"],
+			"matches": [
+				"*://*/*"
+			],
 			"js": [
 				"dependencies/popper.js",
 				"dependencies/tippy-bundle.umd.js",
@@ -18,6 +19,18 @@
 			],
 			"run_at": "document_end"
 		}
-	]
+	],
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	},
+	"icons": {
+		"16": "images/icon-16.png",
+		"19": "images/icon-19.png",
+		"38": "images/icon-38.png",
+		"48": "images/icon-48.png",
+		"96": "images/icon-96.png",
+		"128": "images/icon-128.png"
+	}
 }
-
