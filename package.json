@@ -4,7 +4,9 @@
   "description": "A browser extension that links terms on pages you visit with official sources.",
   "scripts": {
     "clean": "rm -rf src/dependencies/ ; mkdir -p src/dependencies/",
-    "build": "npm run clean ; cp node_modules/@popperjs/core/dist/umd/popper.js src/dependencies/popper.js ; cp node_modules/tippy.js/dist/tippy-bundle.umd.js src/dependencies/tippy-bundle.umd.js ; cp node_modules/tippy.js/themes/light.css src/dependencies/light.css",
+    "copy": "cp node_modules/@popperjs/core/dist/umd/popper.js src/dependencies/popper.js ; cp node_modules/tippy.js/dist/tippy-bundle.umd.js src/dependencies/tippy-bundle.umd.js ; cp node_modules/tippy.js/themes/light.css src/dependencies/light.css",
+    "web-ext-build": "node_modules/web-ext/bin/web-ext build -s src -a dist -o",
+    "build": "npm i ; npm run clean ; npm run copy ; npm run web-ext-build",
     "firefox": "node_modules/web-ext/bin/web-ext run --pref browser.ctrlTab.recentlyUsedOrder=false --url https://hotnews.ro --url about:debugging#/runtime/this-firefox -s src",
     "chrome": "node_modules/web-ext/bin/web-ext run -t chromium --url https://hotnews.ro -s src",
     "android": "node_modules/web-ext/bin/web-ext run --android-device=b0254ffd -t firefox-android --firefox-apk org.mozilla.firefox --url https://hotnews.ro -s src"

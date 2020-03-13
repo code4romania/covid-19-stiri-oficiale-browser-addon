@@ -17,8 +17,7 @@ This project is built by amazing volunteers and you can be one of them! Here's a
 You can also list any pending features and planned improvements for the project here.
 
 ## Built With
-npm i
-npm run build
+npm build
 
 npm run firefox
 npm run chrome
