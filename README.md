@@ -16,14 +16,18 @@ This project is built by amazing volunteers and you can be one of them! Here's a
 
 You can also list any pending features and planned improvements for the project here.
 
-## Built With
-npm build
+## Firefox Built With
+npm run build
 
+## Chrome Built With
+npm run build-chrome
+
+## Local debug and test with
 npm run firefox
 npm run chrome
 
 edit your device name in package.json for running on andorid
-npm run chrome
+npm run android
 
 ### Programming languages
 
