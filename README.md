@@ -17,6 +17,14 @@ This project is built by amazing volunteers and you can be one of them! Here's a
 You can also list any pending features and planned improvements for the project here.
 
 ## Built With
+npm i
+npm run build
+
+npm run firefox
+npm run chrome
+
+edit your device name in package.json for running on andorid
+npm run chrome
 
 ### Programming languages
 
@@ -51,7 +59,7 @@ Describe and show how to build your code and run the tests.
 
 ## License
 
-This project is licensed under the MPL 2.0 License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the GPLv3 License - see the [LICENSE](LICENSE) file for details
 
 ## About Code4Ro
 
