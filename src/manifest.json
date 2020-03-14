@@ -29,6 +29,16 @@
 			"background.js"
 		]
 	},
+	"authors": [
+		{
+			"name": "Andrei Cristian Petcu",
+			"email": "petcuandrei@protonmail.com"
+		},
+		{
+			"name": "Code for Romania Task Force",
+			"email": "taskforce@code4.ro"
+		}
+	],
 	"icons": {
 		"16": "images/icon-16.png",
 		"19": "images/icon-19.png",
