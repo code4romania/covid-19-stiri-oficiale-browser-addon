@@ -120,7 +120,7 @@ function splitTextByTerm(fullString, term) {
 	} else {
 		matchType = "MID";
 		begin = fullString.substring(0, termIndex);
-		end = fullString.substring(termIndex - 1, stop);
+		end = fullString.substring(term.length + termIndex, stop);
 	}
 	return {
 		begin,
