@@ -29,6 +29,11 @@
 			"background.js"
 		]
 	},
+	"web_accessible_resources": [
+		"images/logo.png",
+		"images/logo-full.svg",
+		"images/gov_logo.png"
+	],
 	"icons": {
 		"16": "images/icon-16.png",
 		"19": "images/icon-19.png",

@@ -117,7 +117,7 @@ function splitTextByTerm(fullString, term) {
 function createTooltip(termData, tooltipCount) {
 	let content = `
 	<div class="emergency_news_header">
-		<span class="emergency_news_logo"></span>
+		<img src="images/logo.png" class="emergency_news_logo"></img>
 		<span>Un proiect dezvoltat de</span>
 		<span class="emergency_news_code4ro_logo"></span>
 		<span>În parteneriat cu</span>
