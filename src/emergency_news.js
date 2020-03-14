@@ -57,10 +57,18 @@ function handleText(textNode) {
 					divWithTooltip.textContent = term;
 
 					textNode.parentNode.insertBefore(divWithTooltip, after);
+
+					let content = `<div><b>${termData.title}</b></div>`;
+					if (termData.explanation) {
+						content += `<div><a href="${termData.link}"></div>`;
+					}
+					for (var i = 0; i < termData.links.length; i++) {
+						const link = termData.links[i];
+						content += `<div><a href="${link}">${link}</a></div>`;
+					}
+
 					tippy('.emergency_news_item' + + tooltipCount, {
-						content: `
-						<div><b>${termData.title}</b></div>
-						<div>${termData.explanation} <a href="${termData.link}">${termData.link}</a></div>`,
+						content: content,
 						allowHTML: true,
 						interactive: true,
 						theme: 'light'
