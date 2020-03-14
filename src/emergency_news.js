@@ -36,12 +36,14 @@ function walk(node) {
 let tooltipCount = 0;
 
 function handleText(textNode) {
+	var r = new RegExp();
 	for (var term in terms) {
 		if (terms.hasOwnProperty(term)) {
+			r.compile(term, 'ig');
 			var termData = terms[term];
 			try {
-				const matchIndex = textNode.nodeValue.indexOf(term);
-				if (matchIndex > 0) {
+				const matchIndex = textNode.nodeValue.match(r);
+				if (matchIndex && matchIndex.length > 0) {
 					const splitText = textNode.nodeValue.split(term);
 					const textBefore = splitText[0];
 					const textAfter = splitText[1];
