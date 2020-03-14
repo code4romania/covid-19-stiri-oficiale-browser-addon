@@ -1,0 +1,12 @@
+{
+	"coronavirus": {
+		"title": "Coronavirus",
+		"explanation": "Coronaviruses (CoV) are a large family of viruses that cause illness ranging from the common cold to more severe diseases",
+		"link": "https://www.who.int/health-topics/coronavirus"
+	},
+	"COVID-19": {
+		"title": "Covid-19",
+		"explanation": "Coronavirus disease 2019 (COVID-19) is an infectious disease caused by the severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2). The disease has spread globally since 2019, resulting in the 2019–20 coronavirus pandemic. Common symptoms include fever, cough and shortness of breath. Muscle pain, sputum production and sore throat are some of the less common symptoms.0 While the majority of cases result in mild symptoms, some progress to pneumonia and multi-organ failure. The case fatality rate is estimated at between 1% and 5% but varies by age and other health conditions.",
+		"link": "https://en.m.wikipedia.org/wiki/Coronavirus_disease_2019"
+	}
+}

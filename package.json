@@ -1,6 +1,6 @@
 {
   "name": "emergency-news-addon",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "A browser extension that links terms on pages you visit with official sources.",
   "scripts": {
     "clean": "rm -rf src/dependencies/ ; mkdir -p src/dependencies/",

@@ -1,7 +1,11 @@
 let terms = {};
 
 async function loadData() {
-    const httpData = await fetch("https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/terms.json");
+    let termsLocation = './terms.json';
+    if(navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0){
+        termsLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/terms.json';
+    }
+    const httpData = await fetch(termsLocation);
     terms = await httpData.json();
     setTimeout(loadData, 1000 * 60 * 60 * 12);
 }
