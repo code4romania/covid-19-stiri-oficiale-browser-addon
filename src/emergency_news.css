@@ -2,3 +2,23 @@
     background-color: #06d6c7;
     color: black;
 }
+
+.tippy-content {
+    background-color: #f9f9f9;
+}
+
+.tippy-content .emergency_news_header {
+    background-color: #ffffff;
+}
+
+.tippy-content .emergency_news_logo {
+    background-image: url("./images/logo.png");
+}
+
+.tippy-content .emergency_news_code4ro_logo {
+    background-image: url("./images/logo-full.svg");
+}
+
+.tippy-content .emergency_news_gov_logo {
+    background-image: url("./images/gov_logo.png");
+}

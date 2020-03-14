@@ -74,22 +74,7 @@ function handleText(textNode) {
 					divWithTooltip.textContent = term;
 
 					textNode.parentNode.insertBefore(divWithTooltip, after);
-
-					let content = `<div><b>${termData.title}</b></div>`;
-					if (termData.explanation) {
-						content += `<div>${termData.explanation}"</div>`;
-					}
-					for (let i = 0; i < termData.links.length; i++) {
-						const link = termData.links[i];
-						content += `<div><a href="${link}">${link}</a></div>`;
-					}
-
-					tippy('.emergency_news_item' + + tooltipCount, {
-						content: content,
-						allowHTML: true,
-						interactive: true,
-						theme: 'light'
-					});
+					createTooltip(termData, tooltipCount);
 				}
 			} catch{ }
 		}
@@ -127,4 +112,31 @@ function splitTextByTerm(fullString, term) {
 		end,
 		matchType
 	}
+}
+
+function createTooltip(termData, tooltipCount) {
+	let content = `
+	<div class="emergency_news_header">
+		<span class="emergency_news_logo"></span>
+		<span>Un proiect dezvoltat de</span>
+		<span class="emergency_news_code4ro_logo"></span>
+		<span>În parteneriat cu</span>
+		<span class="emergency_news_gov_logo"></span>
+	</div>
+	<div><b>${termData.title}</b></div>`;
+	if (termData.explanation) {
+		content += `<div>${termData.explanation}"</div>`;
+	}
+	for (let i = 0; i < termData.links.length; i++) {
+		const link = termData.links[i];
+		content += `<div><a href="${link}">${link}</a></div>`;
+	}
+
+	tippy('.emergency_news_item' + + tooltipCount, {
+		content: content,
+		allowHTML: true,
+		interactive: true,
+		theme: 'light',
+		trigger: 'click'
+	});
 }
