@@ -10,8 +10,8 @@ async function loadData() {
     setTimeout(loadData, 1000 * 60 * 60 * 12);
 }
 
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    sendResponse({ terms });
+browser.runtime.onMessage.addListener((request, sender) => {
+    return Promise.resolve({ terms });
 });
 
 loadData();
