@@ -1,29 +1,12 @@
 {
 	"manifest_version": 2,
 	"name": "COVID-19 ȘTIRI OFICIALE",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Informații despre Coronavirus (COVID-19)",
 	"permissions": [
 		"https://raw.githubusercontent.com/",
-		"activeTab"
-	],
-	"content_scripts": [
-		{
-			"matches": [
-				"*://*/*"
-			],
-			"js": [
-				"dependencies/browser-polyfill.js",
-				"dependencies/popper.js",
-				"dependencies/tippy-bundle.umd.js",
-				"emergency_news.js"
-			],
-			"css": [
-				"dependencies/light.css",
-				"emergency_news.css"
-			],
-			"run_at": "document_end"
-		}
+		"activeTab",
+		"contextMenus"
 	],
 	"background": {
 		"scripts": [
