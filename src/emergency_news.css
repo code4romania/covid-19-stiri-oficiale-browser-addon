@@ -29,6 +29,13 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 5px;
+    font-size: 12px;
+}
+
+@media (max-width: 800px) {
+    .tippy-content .emergency_news_header div {
+        display: none;
+    }
 }
 
 .tippy-content .emergency_news_body {
@@ -52,8 +59,4 @@
 .tippy-content .emergency_news_gov_logo {
     height: 35px;
     padding: 5px;
-}
-
-.emergency_news_header {
-    font-size: 12px;
 }
