@@ -2,10 +2,6 @@
     font-weight: normal;
 }
 
-.tippy-box a {
-    color: #1c1080;
-}
-
 @media (min-width: 800px) {
     .tippy-content {
         width: 600px;
@@ -40,6 +36,10 @@
 
 .tippy-content .emergency_news_body {
     padding: 10px;
+}
+
+.tippy-box .emergency_news_body a {
+    color: #1c1080;
 }
 
 .tippy-content .emergency_news_body div {

@@ -117,10 +117,17 @@ function splitTextByTerm(fullString, term) {
     }
 }
 
+let logoNews = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/images/logo-news-full.png";
+let logoCode4Ro = "https://code4.ro/images/logo-full.svg";
+let logoGov = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/4a30a4ae177827ea7c124a4ce2cc8a11ffaad509/src/images/logo-gov.png";
+
+if (navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0) {
+    logoNews = browser.runtime.getURL("images/logo-news-full.png");
+    logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
+    logoGov = browser.runtime.getURL("images/logo-gov.png");
+}
+
 function createTooltip(termData, tooltipCount) {
-    const logoNews = browser.runtime.getURL("images/logo-news-full.png");
-    const logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
-    const logoGov = browser.runtime.getURL("images/logo-gov.png");
     let links = "";
     for (let i = 0; i < termData.links.length; i++) {
         const link = termData.links[i];
@@ -143,7 +150,7 @@ function createTooltip(termData, tooltipCount) {
 	</div>
 	<div class="emergency_news_body">
         <div><b>${termData.title}</b></div>
-        <div>${termData.explanation||""}</div>
+        <div>${termData.explanation || ""}</div>
         <div>${links}</div>
     </div>`;
 
@@ -151,7 +158,6 @@ function createTooltip(termData, tooltipCount) {
         content: content,
         allowHTML: true,
         interactive: true,
-        trigger: 'click',
         theme: 'light'
     });
 }
