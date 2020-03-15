@@ -46,17 +46,17 @@
     padding-top: 3px;
 }
 
-.tippy-content .emergency_news_logo {
-    height: 35px;
+.tippy-content img.emergency_news_logo {
+    height: 35px !important;
     padding: 5px 60px 5px 5px;
 }
 
-.tippy-content .emergency_news_code4ro_logo {
-    height: 35px;
+.tippy-content img.emergency_news_code4ro_logo {
+    height: 35px !important;
     padding: 5px 10px 5px 5px;
 }
 
-.tippy-content .emergency_news_gov_logo {
-    height: 35px;
+.tippy-content img.emergency_news_gov_logo {
+    height: 35px !important;
     padding: 5px;
 }
