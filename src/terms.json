@@ -18,5 +18,12 @@
             "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized/",
             "http://www.ms.ro/coronavirus-covid-19/"
         ]
+    },
+    "autoizolare": {
+        "title": "Autoizolare",
+        "explanation": "În mod obligatoriu, românii care se întorc în țară din zone de risc vor trebui să intre în autoizolare la domiciliu, ceea ce presupune ca întreaga familie să facă același lucru.<p>NU intrați în contact direct cu persoanele aflate în autoizolare la domiciliu, indiferent dacă prezintă sau nu simptome specifice coronavirus. Dacă vă aflați în autoizolare la domiciliu respectați cu strictețe recomandările autorităților, NU părăsiți sub nicio formă domiciliul pe perioada celor 14 zile, NU primiți vizitatori și NU intrați în contact apropiat cu eventualele persoane care vă furnizează alimente sau produse.</p><p><b>În cazul în care încălcați regimul autoizolării la domiciliu riscați amendă de până la 20.000 de lei, precum și dosar penal în cazul în care contribuiți la răspândirea virusului.</b></p>Mai multe informații găsiți aici:",
+        "links": [
+            "http://www.ms.ro/recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus-covid-19/"
+        ]
     }
 }

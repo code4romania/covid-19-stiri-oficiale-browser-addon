@@ -7,7 +7,7 @@ async function loadData() {
     }
     const httpData = await fetch(termsLocation);
     terms = await httpData.json();
-    setTimeout(loadData, 1000 * 60 * 60 * 12);
+    setTimeout(loadData, 1000 * 60 * 60);
 }
 
 browser.runtime.onMessage.addListener((request, sender) => {
