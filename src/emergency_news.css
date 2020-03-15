@@ -19,6 +19,8 @@
 .tippy-content .emergency_news_header {
     background-color: #ffffff;
     display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     height: 50px;
     padding: 10px;
 }
@@ -37,7 +39,7 @@
 .tippy-content .emergency_news_code4ro_logo {
     background: url("https://code4.ro/images/logo-full.svg") no-repeat;
     background-size: contain;
-    width: 50px;
+    width: 100px;
     height: 50px;
 }
 
