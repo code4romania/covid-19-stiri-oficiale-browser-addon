@@ -47,9 +47,16 @@ function simplifyText(input) {
 }
 
 var tooltipCount = 0;
+var whiteListTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "p", "strong", "em", "b", "span", "div", "label", "b", "i", "u"]);
 
 function handleText(textNode) {
+    if (!whiteListTags.has(textNode.parentNode.tagName.toLowerCase())) {
+        return;
+    }
     if (textNode.nodeValue.indexOf("http://") === 0 || textNode.nodeValue.indexOf("https://") === 0) {
+        return;
+    }
+    if (textNode.nodeValue.trim().length < 10) {
         return;
     }
     for (let term in terms) {
@@ -158,6 +165,7 @@ function createTooltip(termData, tooltipCount) {
         content: content,
         allowHTML: true,
         interactive: true,
+        trigger: 'click',
         theme: 'light'
     });
 }
