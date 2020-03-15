@@ -122,12 +122,18 @@ function createTooltip(termData, tooltipCount) {
     const logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
     const logoGov = browser.runtime.getURL("images/logo-gov.png");
     let content = `
-	<div class="emergency_news_header">
-		<img src="${logoNews}" class="emergency_news_logo"></img>
+    <div class="emergency_news_header">
+        <a href="https://code4.ro/ro/apps/stiri-oficiale/">
+            <img src="${logoNews}" class="emergency_news_logo"></img>
+        </a>
 		<div>Un proiect dezvoltat de</div>
-		<img src="${logoCode4Ro}" class="emergency_news_code4ro_logo"></img>
+        <a href="https://code4.ro/">
+    		<img src="${logoCode4Ro}" class="emergency_news_code4ro_logo"></img>
+        </a>
 		<div>În parteneriat cu</div>
-		<img src="${logoGov}" class="emergency_news_gov_logo"></img>
+        <a href="https://www.gov.ro/">
+    		<img src="${logoGov}" class="emergency_news_gov_logo"></img>
+        </a>
 	</div>
 	<div class="emergency_news_body">
 	<div><b>${termData.title}</b></div>`;
