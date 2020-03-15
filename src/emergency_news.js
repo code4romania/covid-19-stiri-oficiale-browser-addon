@@ -151,6 +151,7 @@ function createTooltip(termData, tooltipCount) {
         content: content,
         allowHTML: true,
         interactive: true,
+        trigger: 'click',
         theme: 'light'
     });
 }

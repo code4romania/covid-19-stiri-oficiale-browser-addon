@@ -1,5 +1,4 @@
 .tippy-box {
-    max-width: 600px;
     font-weight: normal;
 }
 
@@ -7,8 +6,10 @@
     color: #1c1080;
 }
 
-.tippy-content {
-    width: 600px;
+@media (min-width: 800px) {
+    .tippy-content {
+        width: 600px;
+    }
 }
 
 .emergency_news {
@@ -26,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 50px;
+    flex-wrap: wrap;
     padding: 5px;
 }
 
