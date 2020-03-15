@@ -2,8 +2,8 @@ let terms = {};
 
 async function loadData() {
     let termsLocation = './terms.json';
-    if(navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0){
-        termsLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/terms.json';
+    if (navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0) {
+        termsLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/terms.json';
     }
     const httpData = await fetch(termsLocation);
     terms = await httpData.json();
@@ -22,9 +22,9 @@ if (!!chrome.contextMenus) {
         id: "highlight-terms",
         title: "Evidențiează surse oficiale",
         contexts: ["all"]
-    }, () => { });
+    }, () => {});
 
-    chrome.contextMenus.onClicked.addListener(function (info, tab) {
+    chrome.contextMenus.onClicked.addListener(function(info, tab) {
         if (info.menuItemId == "highlight-terms") {
             const styles = [
                 "dependencies/light.css",
@@ -33,7 +33,7 @@ if (!!chrome.contextMenus) {
             styles.forEach((stylesName) => {
                 chrome.tabs.insertCSS(tab.id, {
                     file: stylesName,
-                }, () => { });
+                }, () => {});
             })
             const scripts = [
                 "dependencies/browser-polyfill.js",
@@ -44,7 +44,7 @@ if (!!chrome.contextMenus) {
             scripts.forEach((scriptName) => {
                 chrome.tabs.executeScript(tab.id, {
                     file: scriptName,
-                }, () => { });
+                }, () => {});
             })
         }
     });
