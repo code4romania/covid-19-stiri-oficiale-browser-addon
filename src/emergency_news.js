@@ -155,7 +155,6 @@ function createTooltip(termData, tooltipCount) {
         <a href="https://code4.ro/">
     		<img src="${logoCode4Ro}" class="emergency_news_code4ro_logo"></img>
         </a>
-		<div>În parteneriat cu</div>
         <a href="https://www.gov.ro/">
     		<img src="${logoGov}" class="emergency_news_gov_logo"></img>
         </a>
