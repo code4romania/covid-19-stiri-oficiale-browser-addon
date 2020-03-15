@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: space-evenly;
     height: 50px;
-    padding: 10px;
+    padding: 5px;
 }
 
 .tippy-content .emergency_news_body {
@@ -30,22 +30,20 @@
 }
 
 .tippy-content .emergency_news_logo {
-    background: url("https://code4.ro/ro/apps/stiri-oficiale/logo.png") no-repeat;
-    background-size: contain;
-    width: 50px;
-    height: 50px;
+    height: 35px;
+    padding: 5px 60px 5px 5px;
 }
 
 .tippy-content .emergency_news_code4ro_logo {
-    background: url("https://code4.ro/images/logo-full.svg") no-repeat;
-    background-size: contain;
-    width: 100px;
     height: 35px;
+    padding: 5px 10px 5px 5px;
 }
 
 .tippy-content .emergency_news_gov_logo {
-    background: url("https://gov.ro/front/view/img/logo.png") no-repeat;
-    background-size: contain;
-    width: 50px;
-    height: 50px;
+    height: 35px;
+    padding: 5px;
+}
+
+.emergency_news_header {
+    font-size: 12px;
 }

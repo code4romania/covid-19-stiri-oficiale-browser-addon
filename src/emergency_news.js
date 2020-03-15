@@ -113,13 +113,16 @@ function splitTextByTerm(fullString, term) {
 }
 
 function createTooltip(termData, tooltipCount) {
+    const logoNews = browser.runtime.getURL("images/logo-news-full.png");
+    const logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
+    const logoGov = browser.runtime.getURL("images/logo-gov.png");
     let content = `
 	<div class="emergency_news_header">
-		<div class="emergency_news_logo"></div>
+		<img src="${logoNews}" class="emergency_news_logo"></img>
 		<div>Un proiect dezvoltat de</div>
-		<div class="emergency_news_code4ro_logo"></div>
+		<img src="${logoCode4Ro}" class="emergency_news_code4ro_logo"></img>
 		<div>În parteneriat cu</div>
-		<div class="emergency_news_gov_logo"></div>
+		<img src="${logoGov}" class="emergency_news_gov_logo"></img>
 	</div>
 	<div class="emergency_news_body">
 	<div><b>${termData.title}</b></div>`;
