@@ -1,5 +1,5 @@
 .tippy-box {
-    font-weight: normal;
+    font-weight: normal !important;
 }
 
 @media (min-width: 800px) {
@@ -25,7 +25,10 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     padding: 5px;
-    font-size: 12px;
+}
+
+.tippy-content .emergency_news_header div {
+    font-size: 12px !important;
 }
 
 @media (max-width: 800px) {
