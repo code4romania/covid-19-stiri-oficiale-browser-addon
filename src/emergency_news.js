@@ -121,6 +121,12 @@ function createTooltip(termData, tooltipCount) {
     const logoNews = browser.runtime.getURL("images/logo-news-full.png");
     const logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
     const logoGov = browser.runtime.getURL("images/logo-gov.png");
+    let links = "";
+    for (let i = 0; i < termData.links.length; i++) {
+        const link = termData.links[i];
+        links += `<div><a href="${link}">${link}</a></div>`;
+    }
+
     let content = `
     <div class="emergency_news_header">
         <a href="https://code4.ro/ro/apps/stiri-oficiale/">
@@ -136,21 +142,15 @@ function createTooltip(termData, tooltipCount) {
         </a>
 	</div>
 	<div class="emergency_news_body">
-	<div><b>${termData.title}</b></div>`;
-    if (termData.explanation) {
-        content += `<div>${termData.explanation}</div>`;
-    }
-    for (let i = 0; i < termData.links.length; i++) {
-        const link = termData.links[i];
-        content += `<div><a href="${link}">${link}</a></div>`;
-    }
-    content += `</div>`;
+        <div><b>${termData.title}</b></div>
+        <div>${termData.explanation||""}</div>
+        <div>${links}</div>
+    </div>`;
 
     tippy('.emergency_news_item' + +tooltipCount, {
         content: content,
         allowHTML: true,
         interactive: true,
-        theme: 'light',
-        trigger: 'click'
+        theme: 'light'
     });
 }

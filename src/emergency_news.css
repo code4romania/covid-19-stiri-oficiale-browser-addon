@@ -34,6 +34,10 @@
     padding: 10px;
 }
 
+.tippy-content .emergency_news_body div {
+    padding-top: 3px;
+}
+
 .tippy-content .emergency_news_logo {
     height: 35px;
     padding: 5px 60px 5px 5px;
