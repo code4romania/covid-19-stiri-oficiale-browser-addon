@@ -69,7 +69,7 @@ function handleText(textNode) {
                     tooltipCount++;
                     divWithTooltip.classList.add("emergency_news");
                     divWithTooltip.classList.add("emergency_news_item" + tooltipCount);
-                    divWithTooltip.textContent = term;
+                    divWithTooltip.textContent = splittedText.originalTerm;
 
                     textNode.parentNode.insertBefore(divWithTooltip, after);
                     createTooltip(termData, tooltipCount);
@@ -105,10 +105,15 @@ function splitTextByTerm(fullString, term) {
         begin = fullString.substring(0, termIndex);
         end = fullString.substring(term.length + termIndex, stop);
     }
+    let originalTerm = term;
+    if (termIndex > -1) {
+        originalTerm = fullString.substring(termIndex, term.length);
+    }
     return {
         begin,
         end,
-        matchType
+        matchType,
+        originalTerm
     }
 }
 

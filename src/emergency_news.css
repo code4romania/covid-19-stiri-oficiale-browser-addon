@@ -1,5 +1,10 @@
 .tippy-box {
     max-width: 600px;
+    font-weight: normal;
+}
+
+.tippy-box a {
+    color: #1c1080;
 }
 
 .tippy-content {
