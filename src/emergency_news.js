@@ -107,7 +107,7 @@ function splitTextByTerm(fullString, term) {
     }
     let originalTerm = term;
     if (termIndex > -1) {
-        originalTerm = fullString.substring(termIndex, term.length);
+        originalTerm = fullString.substring(termIndex, termIndex + term.length);
     }
     return {
         begin,
