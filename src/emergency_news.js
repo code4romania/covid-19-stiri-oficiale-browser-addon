@@ -28,7 +28,9 @@ function walk(node) {
             break;
 
         case 3: // Text node
-            handleText(node);
+            try {
+                handleText(node);
+            } catch {}
             break;
     }
 }
@@ -51,6 +53,9 @@ var whiteListTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "p", "strong", 
 
 function handleText(textNode) {
     if (!whiteListTags.has(textNode.parentNode.tagName.toLowerCase())) {
+        return;
+    }
+    if (textNode.parentNode.parentNode.tagName.toLowerCase() === "a") {
         return;
     }
     if (textNode.nodeValue.indexOf("http://") === 0 || textNode.nodeValue.indexOf("https://") === 0) {
