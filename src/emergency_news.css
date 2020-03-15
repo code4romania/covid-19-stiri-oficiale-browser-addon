@@ -1,3 +1,11 @@
+.tippy-box {
+    max-width: 600px;
+}
+
+.tippy-content {
+    width: 600px;
+}
+
 .emergency_news {
     background-color: #06d6c7;
     color: black;
@@ -5,20 +13,37 @@
 
 .tippy-content {
     background-color: #f9f9f9;
+    padding: 0px 0px;
 }
 
 .tippy-content .emergency_news_header {
     background-color: #ffffff;
+    display: flex;
+    height: 50px;
+    padding: 10px;
+}
+
+.tippy-content .emergency_news_body {
+    padding: 10px;
 }
 
 .tippy-content .emergency_news_logo {
-    background-image: url("./images/logo.png");
+    background: url("https://code4.ro/ro/apps/stiri-oficiale/logo.png") no-repeat;
+    background-size: contain;
+    width: 50px;
+    height: 50px;
 }
 
 .tippy-content .emergency_news_code4ro_logo {
-    background-image: url("./images/logo-full.svg");
+    background: url("https://code4.ro/images/logo-full.svg") no-repeat;
+    background-size: contain;
+    width: 50px;
+    height: 50px;
 }
 
 .tippy-content .emergency_news_gov_logo {
-    background-image: url("./images/gov_logo.png");
+    background: url("https://gov.ro/front/view/img/logo.png") no-repeat;
+    background-size: contain;
+    width: 50px;
+    height: 50px;
 }
