@@ -132,7 +132,7 @@ function splitTextByTerm(fullString, term) {
 
 var logoNews = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/images/logo-news-full.png";
 var logoCode4Ro = "https://code4.ro/images/logo-full.svg";
-var logoGov = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/4a30a4ae177827ea7c124a4ce2cc8a11ffaad509/src/images/logo-gov.jpg";
+var logoGov = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/ac175e68f309c8283ffed3bfd29aac2f93f62472/src/images/logo-gov.jpg";
 
 if (navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0) {
     logoNews = browser.runtime.getURL("images/logo-news-full.png");
@@ -156,7 +156,7 @@ function createTooltip(termData, tooltipCount) {
         <a href="https://code4.ro/">
     		<img src="${logoCode4Ro}" class="emergency_news_code4ro_logo"></img>
         </a>
-        <a href="https://www.gov.ro/">
+        <a href="http://adr.gov.ro/">
     		<img src="${logoGov}" class="emergency_news_gov_logo"></img>
         </a>
 	</div>
