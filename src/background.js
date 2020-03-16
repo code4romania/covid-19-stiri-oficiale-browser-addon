@@ -9,8 +9,24 @@ async function loadData() {
         }
     }
     const httpData = await fetch(termsLocation);
-    terms = await httpData.json();
+    terms = expandTerms(await httpData.json());
     setTimeout(loadData, 1000 * 60 * 60);
+}
+
+function expandTerms(termsInput) {
+    let newTerms = {};
+    for (let term in termsInput) {
+        if (termsInput.hasOwnProperty(term)) {
+            newTerms[term] = termsInput[term];
+            if (termsInput[term].hasOwnProperty("aliases")) {
+                let aliases = termsInput[term].aliases;
+                for (var i = 0; i < aliases; i++) {
+                    newTerms[aliases[i]] = termsInput[term];
+                }
+            }
+        }
+    }
+    return newTerms;
 }
 
 browser.runtime.onMessage.addListener((request, sender) => {
