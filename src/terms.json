@@ -9,7 +9,7 @@
     },
     "coronavirus": {
         "title": "Coronavirus",
-        "aliases": ["covid-19"],
+        "aliases": ["covid-19", "Coronavirusul", "Coronavirusului", "coronaviruses"],
         "explanation": "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. <p>Acestea sunt disponibile aici:</p>",
         "links": [
             "https://www.stirioficiale.ro",

@@ -45,7 +45,10 @@ function simplifyText(input) {
     const noCedila = noComas.toLowerCase()
         .split('ş').join('s')
         .split('ţ').join('t');
-    return noCedila;
+    const noSpecialCharacters = noCedila.toLowerCase()
+        .split('-').join(' ')
+        .split('_').join(' ');
+    return noSpecialCharacters;
 }
 
 var tooltipCount = 0;
