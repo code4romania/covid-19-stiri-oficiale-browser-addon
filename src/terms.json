@@ -1,8 +1,21 @@
 {
+    "simptomele coronavirus": {
+        "title": "Simptomele Coronavirus",
+        "explanation": "Persoanele infectate cu 2019-nCoV sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus.<p>Mai multe informații găsiți aici:</p>",
+        "links": [
+            "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+        ]
+    },
+    "simptomele covid-19": {
+        "title": "Coronavirus",
+        "explanation": "Persoanele infectate cu 2019-nCoV sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus.<p>Mai multe informații găsiți aici:</p>",
+        "links": [
+            "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+        ]
+    },
     "coronavirus": {
         "title": "Coronavirus",
         "explanation": "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. Acestea sunt disponibile aici:",
-        "link": "https://www.stirioficiale.ro",
         "links": [
             "https://www.stirioficiale.ro",
             "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized/",
@@ -12,7 +25,6 @@
     "covid-19": {
         "title": "Coronavirus",
         "explanation": "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. Acestea sunt disponibile aici:",
-        "link": "https://www.stirioficiale.ro",
         "links": [
             "https://www.stirioficiale.ro",
             "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized/",
