@@ -10,7 +10,7 @@
     "coronavirus": {
         "title": "Coronavirus",
         "aliases": ["covid-19"],
-        "explanation": "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. Acestea sunt disponibile aici:",
+        "explanation": "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. <p>Acestea sunt disponibile aici:</p>",
         "links": [
             "https://www.stirioficiale.ro",
             "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized/",
@@ -19,7 +19,7 @@
     },
     "autoizolare": {
         "title": "Autoizolare",
-        "explanation": "În mod obligatoriu, românii care se întorc în țară din zone de risc vor trebui să intre în autoizolare la domiciliu, ceea ce presupune ca întreaga familie să facă același lucru.<p>NU intrați în contact direct cu persoanele aflate în autoizolare la domiciliu, indiferent dacă prezintă sau nu simptome specifice coronavirus. Dacă vă aflați în autoizolare la domiciliu respectați cu strictețe recomandările autorităților, NU părăsiți sub nicio formă domiciliul pe perioada celor 14 zile, NU primiți vizitatori și NU intrați în contact apropiat cu eventualele persoane care vă furnizează alimente sau produse.</p><p><b>În cazul în care încălcați regimul autoizolării la domiciliu riscați amendă de până la 20.000 de lei, precum și dosar penal în cazul în care contribuiți la răspândirea virusului.</b></p>Mai multe informații găsiți aici:",
+        "explanation": "În mod obligatoriu, românii care se întorc în țară din zone de risc vor trebui să intre în autoizolare la domiciliu, ceea ce presupune ca întreaga familie să facă același lucru.<p>NU intrați în contact direct cu persoanele aflate în autoizolare la domiciliu, indiferent dacă prezintă sau nu simptome specifice coronavirus. Dacă vă aflați în autoizolare la domiciliu respectați cu strictețe recomandările autorităților, NU părăsiți sub nicio formă domiciliul pe perioada celor 14 zile, NU primiți vizitatori și NU intrați în contact apropiat cu eventualele persoane care vă furnizează alimente sau produse.</p><p><b>În cazul în care încălcați regimul autoizolării la domiciliu riscați amendă de până la 20.000 de lei, precum și dosar penal în cazul în care contribuiți la răspândirea virusului.</b><p>Mai multe informații găsiți aici:</p>",
         "links": [
             "http://www.ms.ro/recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus-covid-19/"
         ]
@@ -27,9 +27,24 @@
     "incubație": {
         "title": "Perioada de incubație Coronavirus",
         "aliases": ["Perioada de incubație coronavirus", "Perioada de incubație a noului coronavirus"],
-        "explanation": " Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date.</p>Mai multe informații găsiți aici:",
+        "explanation": " Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date.<p>Mai multe informații găsiți aici:</p>",
         "links": [
             "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+        ]
+    },
+    "transmitere": {
+        "title": "Transmitere Coronavirus",
+        "aliases": ["Transmitere Coronavirus", "transmitere covid-19", "transmit coronavirus", "transmit covid-19"],
+        "explanation": "Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact strâns cu o persoană infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și gură, astfel eviați atingerea dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit coronavirus.<p>Mai multe informații găsiți aici:</p>",
+        "links": [
+            "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+        ]
+    },
+    "stare de urgență": {
+        "title": "Stare de urgență începând cu 16 martie",
+        "explanation": "<p>Această stare de urgență va face posibilă alocarea de noi resurse importante pentru gestionarea crizei. În acest fel, Guvernul va avea posibilitatea să aloce mai mulți bani domeniului sănătății, mai mulți bani pentru medicamente, mai mulți bani pentru aparatura medicală absolut necesară.</p><p>Mai multe informații găsiți aici:</p>",
+        "links": [
+            "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636"
         ]
     }
 }
