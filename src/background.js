@@ -20,13 +20,21 @@ function expandTerms(termsInput) {
             newTerms[term] = termsInput[term];
             if (termsInput[term].hasOwnProperty("aliases")) {
                 let aliases = termsInput[term].aliases;
-                for (var i = 0; i < aliases; i++) {
-                    newTerms[aliases[i]] = termsInput[term];
-                }
+                aliases.forEach(function(alias) {
+                    newTerms[alias] = termsInput[term];
+                });
             }
         }
     }
-    return newTerms;
+    let orderedTerms = new Map();
+    Object.keys(newTerms)
+        .sort((a, b) => {
+            return b.length - a.length || b.localeCompare(a);
+        })
+        .forEach(function(key) {
+            orderedTerms.set(key, newTerms[key]);
+        });
+    return orderedTerms;
 }
 
 browser.runtime.onMessage.addListener((request, sender) => {

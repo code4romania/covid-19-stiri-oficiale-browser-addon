@@ -64,32 +64,28 @@ function handleText(textNode) {
     if (textNode.nodeValue.trim().length < 10) {
         return;
     }
-    for (let term in terms) {
-        if (terms.hasOwnProperty(term)) {
-            let termData = terms[term];
-            try {
-                const splittedText = splitTextByTerm(textNode.nodeValue, term);
-                if (splittedText.matchType !== "MISSING") {
-                    const textBefore = splittedText.begin;
-                    const textAfter = splittedText.end;
+    terms.forEach((termData, term) => {
+        try {
+            const splittedText = splitTextByTerm(textNode.nodeValue, term);
+            if (splittedText.matchType !== "MISSING") {
+                const textBefore = splittedText.begin;
+                const textAfter = splittedText.end;
 
-                    const before = document.createTextNode(textBefore);
-                    const after = textNode;
-                    after.nodeValue = textAfter;
-                    textNode.parentNode.insertBefore(before, after);
-                    let divWithTooltip = document.createElement("span");
-                    tooltipCount++;
-                    divWithTooltip.classList.add("emergency_news");
-                    divWithTooltip.classList.add("emergency_news_item" + tooltipCount);
-                    divWithTooltip.textContent = splittedText.originalTerm;
+                const before = document.createTextNode(textBefore);
+                const after = textNode;
+                after.nodeValue = textAfter;
+                textNode.parentNode.insertBefore(before, after);
+                let divWithTooltip = document.createElement("span");
+                tooltipCount++;
+                divWithTooltip.classList.add("emergency_news");
+                divWithTooltip.classList.add("emergency_news_item" + tooltipCount);
+                divWithTooltip.textContent = splittedText.originalTerm;
 
-                    textNode.parentNode.insertBefore(divWithTooltip, after);
-                    createTooltip(termData, tooltipCount);
-                }
-            } catch {}
-        }
-    }
-
+                textNode.parentNode.insertBefore(divWithTooltip, after);
+                createTooltip(termData, tooltipCount);
+            }
+        } catch {}
+    })
 }
 
 
