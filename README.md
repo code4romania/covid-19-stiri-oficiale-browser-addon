@@ -9,7 +9,7 @@ Insert bullets description of the project if available.
 This is a browser extension that helps identify key expressions related to COVID-19 (coronavirus) and adds an infobox that links to official sources of information. Highlightning official sources helps to diminish the effects of 'fake news'.
 The concept is developed as part of the Civic Labs program from Code for Romania in partnership with the Authority for Romania's digitalization.
 
-Extensie de browser care ajută al identificarea expresiilor cheie legate de COVID-19 (coronavirus) și adaugă peste acestea un infobox care trimite către sursele oficiale de informare. Evidențierea surselor oficiale ajută la diminuarea efectelor 'fake news'.
+Extensie de browser care ajută la identificarea expresiilor cheie legate de COVID-19 (coronavirus) și adaugă peste acestea un infobox care trimite către sursele oficiale de informare. Evidențierea surselor oficiale ajută la diminuarea efectelor 'fake news'.
 Concept dezvoltat ca parte din programul Civic Labs al Code for Romania în parteneriat cu Autoritatea pentru Digitalizarea României.
 
 [Contributing](#contributing) | [Built with](#built-with) | [Repos and projects](#repos-and-projects) | [Deployment](#deployment) | [Feedback](#feedback) | [License](#license) | [About Code4Ro](#about-code4ro)
@@ -21,7 +21,7 @@ This project is built by amazing volunteers and you can be one of them! Here's a
 You can also list any pending features and planned improvements for the project here.
 
 ## Firefox Built With
-npm run build
+npm run build-firefox
 
 ## Chrome Built With
 npm run build-chrome
