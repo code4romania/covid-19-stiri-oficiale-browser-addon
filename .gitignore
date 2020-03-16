@@ -1,3 +1,4 @@
 node_modules
 dist
 src/dependencies/browser-polyfill.js
+src/manifest.json
