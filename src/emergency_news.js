@@ -67,8 +67,10 @@ function handleText(textNode) {
     if (textNode.nodeValue.trim().length < 10) {
         return;
     }
-    terms.forEach((termData, term) => {
+    terms.forEach((termKv) => {
         try {
+            const term = termKv.key;
+            const termData = termKv.value;
             const splittedText = splitTextByTerm(textNode.nodeValue, term);
             if (splittedText.matchType !== "MISSING") {
                 const textBefore = splittedText.begin;
@@ -128,14 +130,14 @@ function splitTextByTerm(fullString, term) {
     }
 }
 
-let logoNews = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/images/logo-news-full.png";
-let logoCode4Ro = "https://code4.ro/images/logo-full.svg";
-let logoGov = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/4a30a4ae177827ea7c124a4ce2cc8a11ffaad509/src/images/logo-gov.png";
+var logoNews = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/images/logo-news-full.png";
+var logoCode4Ro = "https://code4.ro/images/logo-full.svg";
+var logoGov = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/4a30a4ae177827ea7c124a4ce2cc8a11ffaad509/src/images/logo-gov.jpg";
 
 if (navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0) {
     logoNews = browser.runtime.getURL("images/logo-news-full.png");
     logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
-    logoGov = browser.runtime.getURL("images/logo-gov.png");
+    logoGov = browser.runtime.getURL("images/logo-gov.jpg");
 }
 
 function createTooltip(termData, tooltipCount) {

@@ -26,19 +26,24 @@ function expandTerms(termsInput) {
             }
         }
     }
-    let orderedTerms = new Map();
+    let orderedTerms = [];
     Object.keys(newTerms)
         .sort((a, b) => {
             return b.length - a.length || b.localeCompare(a);
         })
         .forEach(function(key) {
-            orderedTerms.set(key, newTerms[key]);
+            orderedTerms.push({
+                "key": key,
+                "value": newTerms[key]
+            });
         });
     return orderedTerms;
 }
 
-browser.runtime.onMessage.addListener((request, sender) => {
-    return Promise.resolve({ terms });
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    sendResponse({
+        "terms": terms
+    });
 });
 
 loadData();
