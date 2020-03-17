@@ -2,11 +2,10 @@ let terms = {};
 
 async function loadData() {
     let termsLocation = './terms.json';
-    if (navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0) {
-        const isProd = browser.runtime.id === "{2164fef6-64f4-4a8b-9a6d-9dd9c500dd88}";
-        if (isProd) {
-            termsLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/terms.json';
-        }
+    const isFirefoxProd = browser.runtime.id === "{2164fef6-64f4-4a8b-9a6d-9dd9c500dd88}";
+    const isChromeProd = browser.runtime.id === "pdcpkplohipjhdfdchpmgekifmcdbnha";
+    if (isFirefoxProd || isChromeProd) {
+        termsLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/terms.json';
     }
     const httpData = await fetch(termsLocation);
     terms = expandTerms(await httpData.json());

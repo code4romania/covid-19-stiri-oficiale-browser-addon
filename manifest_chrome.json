@@ -4,6 +4,7 @@
     "version": "1.1.4",
     "description": "Extensia ajută la identificarea expresiilor legate de coronavirus și adaugă peste acestea un infobox cu surse oficiale de informare.",
     "permissions": [
+        "https://raw.githubusercontent.com/",
         "activeTab",
         "contextMenus"
     ],
