@@ -144,19 +144,19 @@ function createTooltip(termData, tooltipCount) {
     let links = "";
     for (let i = 0; i < termData.links.length; i++) {
         const link = termData.links[i];
-        links += `<div><a href="${link}">${link}</a></div>`;
+        links += `<div><a target="_blank" href="${link}">${link}</a></div>`;
     }
 
     let content = `
     <div class="emergency_news_header">
-        <a href="https://code4.ro/ro/apps/stiri-oficiale/">
+        <a target="_blank" href="https://code4.ro/ro/apps/stiri-oficiale/">
             <img src="${logoNews}" class="emergency_news_logo"></img>
         </a>
 		<div>Un proiect dezvoltat de</div>
-        <a href="https://code4.ro/">
+        <a target="_blank" href="https://code4.ro/">
     		<img src="${logoCode4Ro}" class="emergency_news_code4ro_logo"></img>
         </a>
-        <a href="http://adr.gov.ro/">
+        <a target="_blank" href="http://adr.gov.ro/">
     		<img src="${logoGov}" class="emergency_news_gov_logo"></img>
         </a>
 	</div>
