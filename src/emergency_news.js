@@ -130,15 +130,9 @@ function splitTextByTerm(fullString, term) {
     }
 }
 
-var logoNews = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/images/logo-news-full.png";
-var logoCode4Ro = "https://code4.ro/images/logo-full.svg";
-var logoGov = "https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/images/logo-gov.png";
-
-if (navigator.userAgent.toLocaleLowerCase().indexOf('firefox') > 0) {
-    logoNews = browser.runtime.getURL("images/logo-news-full.png");
-    logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
-    logoGov = browser.runtime.getURL("images/logo-gov.png");
-}
+var logoNews = browser.runtime.getURL("images/logo-news-full.png");
+var logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
+var logoGov = browser.runtime.getURL("images/logo-gov.png");
 
 function createTooltip(termData, tooltipCount) {
     let links = "";
