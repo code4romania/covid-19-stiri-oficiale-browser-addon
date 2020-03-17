@@ -1,13 +1,28 @@
 {
     "manifest_version": 2,
-    "name": "COVID-19 Știri Oficiale",
+    "name": "COVID-19 Stiri Oficiale",
     "version": "1.1.4",
     "description": "Extensia ajută la identificarea expresiilor legate de coronavirus și adaugă peste acestea un infobox cu surse oficiale de informare.",
     "permissions": [
         "https://raw.githubusercontent.com/",
-        "activeTab",
-        "contextMenus"
+        "activeTab"
     ],
+    "content_scripts": [{
+        "matches": [
+            "*://*/*"
+        ],
+        "js": [
+            "dependencies/browser-polyfill.js",
+            "dependencies/popper.js",
+            "dependencies/tippy-bundle.umd.js",
+            "emergency_news.js"
+        ],
+        "css": [
+            "dependencies/light.css",
+            "emergency_news.css"
+        ],
+        "run_at": "document_end"
+    }],
     "background": {
         "scripts": [
             "dependencies/browser-polyfill.js",
@@ -15,9 +30,9 @@
         ]
     },
     "web_accessible_resources": [
-        "images/logo.png",
-        "images/logo-full.svg",
-        "images/gov_logo.png"
+        "images/logo-code4ro.svg",
+        "images/logo-news-full.png",
+        "images/logo-gov.png"
     ],
     "icons": {
         "16": "images/icon-16.png",
