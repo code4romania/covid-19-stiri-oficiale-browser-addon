@@ -1,0 +1,129 @@
+{
+    "version": "1",
+    "terms": [
+        {
+            "title": "Simptome Coronavirus",
+            "aliases": [
+                "simptomele covid-19",
+                "coronavirus prezinta simptome",
+                "simptomele covid-19",
+                "simptomele coronavirus"
+            ],
+            "paragraphs": [
+                "Persoanele infectate cu 2019-nCoV sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+            ]
+        },
+        {
+            "title": "Coronavirus",
+            "aliases": [
+                "coronavirus",
+                "covid-19",
+                "Coronavirusul",
+                "Coronavirusului",
+                "coronaviruses"
+            ],
+            "paragraphs": [
+                "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. ",
+                "Acestea sunt disponibile aici:"
+            ],
+            "links": [
+                "https://www.stirioficiale.ro",
+                "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized/",
+                "http://www.ms.ro/coronavirus-covid-19/"
+            ]
+        },
+        {
+            "title": "Autoizolare",
+            "aliases": [
+                "autoizolare"
+            ],
+            "paragraphs": [
+                "În mod obligatoriu, românii care se întorc în țară din zone de risc vor trebui să intre în autoizolare la domiciliu, ceea ce presupune ca întreaga familie să facă același lucru.",
+                "NU intrați în contact direct cu persoanele aflate în autoizolare la domiciliu, indiferent dacă prezintă sau nu simptome specifice coronavirus. Dacă vă aflați în autoizolare la domiciliu respectați cu strictețe recomandările autorităților, NU părăsiți sub nicio formă domiciliul pe perioada celor 14 zile, NU primiți vizitatori și NU intrați în contact apropiat cu eventualele persoane care vă furnizează alimente sau produse.",
+                "În cazul în care încălcați regimul autoizolării la domiciliu riscați amendă de până la 20.000 de lei, precum și dosar penal în cazul în care contribuiți la răspândirea virusului.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "http://www.ms.ro/recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus-covid-19/"
+            ]
+        },
+        {
+            "title": "Perioada de incubație Coronavirus",
+            "aliases": [
+                "incubație",
+                "Perioada de incubație coronavirus",
+                "Perioada de incubație a noului coronavirus"
+            ],
+            "paragraphs": [
+                " Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+            ]
+        },
+        {
+            "title": "Transmitere Coronavirus",
+            "aliases": [
+                "transmitere",
+                "Transmitere Coronavirus",
+                "transmitere covid-19",
+                "transmit coronavirus",
+                "transmit covid-19"
+            ],
+            "paragraphs": [
+                "Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact strâns cu o persoană infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și gură, astfel eviați atingerea dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit coronavirus.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+            ]
+        },
+        {
+            "title": "Stare de urgență începând cu 16 martie",
+            "aliases": [
+                "stare de urgență"
+            ],
+            "paragraphs": [
+                "",
+                "Această stare de urgență va face posibilă alocarea de noi resurse importante pentru gestionarea crizei. În acest fel, Guvernul va avea posibilitatea să aloce mai mulți bani domeniului sănătății, mai mulți bani pentru medicamente, mai mulți bani pentru aparatura medicală absolut necesară.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636"
+            ]
+        }
+    ],
+    "links": [
+        {
+            "title": "STIRI OFICIALE COVID-19",
+            "href": "https://stirioficiale.ro/"
+        },
+        {
+            "title": "dsu.mai.gov.ro",
+            "href": "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized/"
+        },
+        {
+            "title": "prefectura.mai.gov.ro",
+            "href": "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus/"
+        },
+        {
+            "title": "ms.ro",
+            "href": "http://www.ms.ro/coronavirus-covid-19/"
+        },
+        {
+            "title": "presidency.ro",
+            "href": "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636"
+        }
+    ],
+    "pageEnablingTerms": [
+        "coronavirus",
+        "covid-19",
+        "covid19",
+        "coronavirusul"
+    ]
+}
