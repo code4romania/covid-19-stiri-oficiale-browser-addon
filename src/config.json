@@ -25,7 +25,10 @@
                 "covid-19",
                 "Coronavirusul",
                 "Coronavirusului",
-                "coronaviruses"
+                "coronaviruses",
+                "covid19",
+                "2019-nCoV",
+                "SARS-CoV-2"
             ],
             "paragraphs": [
                 "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. ",
@@ -127,8 +130,10 @@
     "pageEnablingTerms": [
         "coronavirus",
         "covid-19",
+        "Coronavirusul",
+        "Coronavirusului",
+        "coronaviruses",
         "covid19",
-        "coronavirusul",
         "2019-nCoV",
         "SARS-CoV-2"
     ]
