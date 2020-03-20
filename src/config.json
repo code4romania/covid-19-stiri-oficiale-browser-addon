@@ -4,13 +4,14 @@
         {
             "title": "Simptome Coronavirus",
             "aliases": [
+                "simptome",
                 "simptomele covid-19",
                 "coronavirus prezinta simptome",
                 "simptomele covid-19",
                 "simptomele coronavirus"
             ],
             "paragraphs": [
-                "Persoanele infectate cu 2019-nCoV sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus.",
+                "Persoanele infectate cu SARS-CoV-2 sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus.",
                 "Mai multe informații găsiți aici:"
             ],
             "links": [
@@ -127,6 +128,8 @@
         "coronavirus",
         "covid-19",
         "covid19",
-        "coronavirusul"
+        "coronavirusul",
+        "2019-nCoV",
+        "SARS-CoV-2"
     ]
 }
