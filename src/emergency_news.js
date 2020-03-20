@@ -3,8 +3,15 @@ var emergencyNewsConfig = {};
 
 browser.runtime.sendMessage({}).then((message) => {
     emergencyNewsConfig = message;
-    terms = message.terms;
-    walk(document.body);
+    const simplifiedInnerContent = simplifyText(document.body.innerText);
+
+    const termIndex = emergencyNewsConfig.pageEnablingTerms.findIndex(function (enablingTerm) {
+        return simplifiedInnerContent.indexOf(enablingTerm) > -1;
+    });
+    if (termIndex > -1) {
+        terms = message.terms;
+        walk(document.body);
+    }
 });
 
 function walk(node) {
@@ -178,7 +185,6 @@ function createTooltip(termData, tooltipCount) {
         content: content,
         allowHTML: true,
         interactive: true,
-        trigger: 'click',
         theme: 'light'
     });
 }
