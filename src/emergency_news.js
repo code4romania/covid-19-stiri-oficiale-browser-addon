@@ -140,6 +140,11 @@ function createTooltip(termData, tooltipCount) {
         const link = termData.links[i];
         links += `<div><a target="_blank" href="${link}">${link}</a></div>`;
     }
+    let paragraphs = "";
+    for (let i = 0; i < termData.paragraphs.length; i++) {
+        const paragraph = termData.paragraphs[i];
+        paragraphs += `<p>${paragraph}</p>`;
+    }
 
     let content = `
     <div class="emergency_news_header">
@@ -156,7 +161,7 @@ function createTooltip(termData, tooltipCount) {
 	</div>
 	<div class="emergency_news_body">
         <div><b>${termData.title}</b></div>
-        <div>${termData.explanation || ""}</div>
+        <div>${paragraphs || ""}</div>
         <div>${links}</div>
     </div>`;
 
