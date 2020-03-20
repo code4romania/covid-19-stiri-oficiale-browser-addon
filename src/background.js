@@ -8,14 +8,13 @@ async function loadData() {
         configLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json';
     }
     const httpData = await fetch(configLocation);
-    config = await httpData.json();
-    config.terms = expandTerms(config.terms);
+    config = expandConfig(await httpData.json());
     setTimeout(loadData, 1000 * 60 * 60);
 }
 
-function expandTerms(termsInput) {
+function expandConfig(configInput) {
     let newTerms = [];
-    termsInput.forEach((term) => {
+    configInput.terms.forEach((term) => {
         if (!!term.aliases) {
             term.aliases.forEach(function (alias) {
                 newTerms.push({
@@ -28,11 +27,17 @@ function expandTerms(termsInput) {
     newTerms.sort((a, b) => {
         return b.key.length - a.key.length || b.key.localeCompare(a.key);
     })
-    return newTerms;
+    configInput.terms = newTerms;
+
+    let newLinks = {};
+    configInput.links.forEach((link) => {
+        newLinks[link.href] = link.title;
+    });
+    configInput.links = newLinks;
+    return configInput;
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log(config);
     sendResponse(config);
 });
 

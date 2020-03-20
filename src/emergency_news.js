@@ -1,6 +1,8 @@
 var terms = {};
+var emergencyNewsConfig = {};
 
 browser.runtime.sendMessage({}).then((message) => {
+    emergencyNewsConfig = message;
     terms = message.terms;
     walk(document.body);
 });
@@ -30,7 +32,7 @@ function walk(node) {
         case 3: // Text node
             try {
                 handleText(node);
-            } catch {}
+            } catch { }
             break;
     }
 }
@@ -89,7 +91,7 @@ function handleText(textNode) {
                 textNode.parentNode.insertBefore(divWithTooltip, after);
                 createTooltip(termData, tooltipCount);
             }
-        } catch {}
+        } catch { }
     })
 }
 
@@ -135,11 +137,18 @@ var logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
 var logoGov = browser.runtime.getURL("images/logo-gov.png");
 
 function createTooltip(termData, tooltipCount) {
-    let links = "";
+    let links = "<ol>";
     for (let i = 0; i < termData.links.length; i++) {
         const link = termData.links[i];
-        links += `<div><a target="_blank" href="${link}">${link}</a></div>`;
+        let linkTitle;
+        if (!!emergencyNewsConfig.links[link]) {
+            linkTitle = emergencyNewsConfig.links[link]
+        } else {
+            linkTitle = link;
+        }
+        links += `<li><a target="_blank" href="${link}">${linkTitle}</a></li>`;
     }
+    links += "</ol>";
     let paragraphs = "";
     for (let i = 0; i < termData.paragraphs.length; i++) {
         const paragraph = termData.paragraphs[i];
@@ -169,6 +178,7 @@ function createTooltip(termData, tooltipCount) {
         content: content,
         allowHTML: true,
         interactive: true,
+        trigger: 'click',
         theme: 'light'
     });
 }
