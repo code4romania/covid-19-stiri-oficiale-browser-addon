@@ -28,7 +28,8 @@
                 "coronaviruses",
                 "covid19",
                 "2019-nCoV",
-                "SARS-CoV-2"
+                "SARS-CoV-2",
+                "coronavirusuri"
             ],
             "paragraphs": [
                 "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. ",
@@ -74,6 +75,7 @@
             "title": "Transmitere Coronavirus",
             "aliases": [
                 "transmitere",
+                "Transmiterea",
                 "Transmitere Coronavirus",
                 "transmitere covid-19",
                 "transmit coronavirus",
@@ -135,6 +137,7 @@
         "coronaviruses",
         "covid19",
         "2019-nCoV",
-        "SARS-CoV-2"
+        "SARS-CoV-2",
+        "coronavirusuri"
     ]
 }

@@ -1,16 +1,17 @@
-var terms = {};
 var emergencyNewsConfig = {};
 
 browser.runtime.sendMessage({}).then((message) => {
-    emergencyNewsConfig = message;
-    const simplifiedInnerContent = simplifyText(document.body.innerText);
+    if (!emergencyNewsConfig.terms) {
+        emergencyNewsConfig = message;
+        const simplifiedInnerContent = simplifyText(document.body.innerText);
 
-    const termIndex = emergencyNewsConfig.pageEnablingTerms.findIndex(function (enablingTerm) {
-        return simplifiedInnerContent.indexOf(enablingTerm) > -1;
-    });
-    if (termIndex > -1) {
-        terms = message.terms;
-        walk(document.body);
+        const termIndex = emergencyNewsConfig.pageEnablingTerms.findIndex(function (enablingTerm) {
+            return simplifiedInnerContent.indexOf(enablingTerm) > -1;
+        });
+        if (termIndex > -1) {
+            terms = message.terms;
+            walk(document.body);
+        }
     }
 });
 
@@ -76,7 +77,7 @@ function handleText(textNode) {
     if (textNode.nodeValue.trim().length < 10) {
         return;
     }
-    terms.forEach((termKv) => {
+    emergencyNewsConfig.terms.forEach((termKv) => {
         try {
             const term = termKv.key;
             const termData = termKv.value;
