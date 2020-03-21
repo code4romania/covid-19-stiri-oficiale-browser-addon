@@ -1,8 +1,22 @@
-var terms = {};
+var emergencyNewsConfig = {};
 
 browser.runtime.sendMessage({}).then((message) => {
-    terms = message.terms;
-    walk(document.body);
+    if (!emergencyNewsConfig.terms) {
+        setTimeout(() => {
+            emergencyNewsConfig = message;
+            const simplifiedInnerContent = simplifyText(document.body.innerText);
+
+            const termIndex = emergencyNewsConfig.pageEnablingTerms
+                .map(simplifyText)
+                .findIndex((enablingTerm) => {
+                    return simplifiedInnerContent.indexOf(enablingTerm) > -1;
+                });
+            if (termIndex > -1) {
+                terms = message.terms;
+                walk(document.body);
+            }
+        }, 500);
+    }
 });
 
 function walk(node) {
@@ -30,7 +44,7 @@ function walk(node) {
         case 3: // Text node
             try {
                 handleText(node);
-            } catch {}
+            } catch { }
             break;
     }
 }
@@ -67,7 +81,7 @@ function handleText(textNode) {
     if (textNode.nodeValue.trim().length < 10) {
         return;
     }
-    terms.forEach((termKv) => {
+    emergencyNewsConfig.terms.forEach((termKv) => {
         try {
             const term = termKv.key;
             const termData = termKv.value;
@@ -89,7 +103,7 @@ function handleText(textNode) {
                 textNode.parentNode.insertBefore(divWithTooltip, after);
                 createTooltip(termData, tooltipCount);
             }
-        } catch {}
+        } catch { }
     })
 }
 
@@ -135,10 +149,22 @@ var logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
 var logoGov = browser.runtime.getURL("images/logo-gov.png");
 
 function createTooltip(termData, tooltipCount) {
-    let links = "";
+    let links = "<ol>";
     for (let i = 0; i < termData.links.length; i++) {
         const link = termData.links[i];
-        links += `<div><a target="_blank" href="${link}">${link}</a></div>`;
+        let linkTitle;
+        if (!!emergencyNewsConfig.links[link]) {
+            linkTitle = emergencyNewsConfig.links[link]
+        } else {
+            linkTitle = link;
+        }
+        links += `<li><a target="_blank" href="${link}">${linkTitle}</a></li>`;
+    }
+    links += "</ol>";
+    let paragraphs = "";
+    for (let i = 0; i < termData.paragraphs.length; i++) {
+        const paragraph = termData.paragraphs[i];
+        paragraphs += `<p>${paragraph}</p>`;
     }
 
     let content = `
@@ -156,7 +182,7 @@ function createTooltip(termData, tooltipCount) {
 	</div>
 	<div class="emergency_news_body">
         <div><b>${termData.title}</b></div>
-        <div>${termData.explanation || ""}</div>
+        <div>${paragraphs || ""}</div>
         <div>${links}</div>
     </div>`;
 
