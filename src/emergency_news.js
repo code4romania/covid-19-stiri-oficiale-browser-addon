@@ -2,16 +2,20 @@ var emergencyNewsConfig = {};
 
 browser.runtime.sendMessage({}).then((message) => {
     if (!emergencyNewsConfig.terms) {
-        emergencyNewsConfig = message;
-        const simplifiedInnerContent = simplifyText(document.body.innerText);
+        setTimeout(() => {
+            emergencyNewsConfig = message;
+            const simplifiedInnerContent = simplifyText(document.body.innerText);
 
-        const termIndex = emergencyNewsConfig.pageEnablingTerms.findIndex(function (enablingTerm) {
-            return simplifiedInnerContent.indexOf(enablingTerm) > -1;
-        });
-        if (termIndex > -1) {
-            terms = message.terms;
-            walk(document.body);
-        }
+            const termIndex = emergencyNewsConfig.pageEnablingTerms
+                .map(simplifyText)
+                .findIndex((enablingTerm) => {
+                    return simplifiedInnerContent.indexOf(enablingTerm) > -1;
+                });
+            if (termIndex > -1) {
+                terms = message.terms;
+                walk(document.body);
+            }
+        }, 500);
     }
 });
 
