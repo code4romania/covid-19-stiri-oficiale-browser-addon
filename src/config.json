@@ -29,7 +29,8 @@
                 "covid19",
                 "2019-nCoV",
                 "SARS-CoV-2",
-                "coronavirusuri"
+                "coronavirusuri",
+                "coronavirusurilor"
             ],
             "paragraphs": [
                 "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. ",
@@ -138,6 +139,7 @@
         "covid19",
         "2019-nCoV",
         "SARS-CoV-2",
-        "coronavirusuri"
+        "coronavirusuri",
+        "coronavirusurilor"
     ]
 }
