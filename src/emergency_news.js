@@ -151,11 +151,12 @@ function splitTextByTerm(fullString, term) {
 }
 
 function appendLinkElement(parent, href, imgSrc, imgClass) {
+    const imgUrl = browser.runtime.getURL(imgSrc);
     let linkElement = document.createElement("a");
     linkElement.setAttribute("target", "_blank");
     linkElement.setAttribute("href", href);
     let imgElement = document.createElement("img");
-    imgElement.setAttribute("src", imgSrc);
+    imgElement.setAttribute("src", imgUrl);
     imgElement.classList.add(imgClass);
     linkElement.appendChild(imgElement);
     parent.appendChild(linkElement);
@@ -169,49 +170,52 @@ function appendTitleElement(parent, titleText) {
     parent.appendChild(div);
 }
 
-var logoNews = browser.runtime.getURL("images/logo-news-full.png");
-var logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
-var logoGov = browser.runtime.getURL("images/logo-gov.png");
+function appendParagraphElements(parent, paragraphs){
+    let paragraphsParent = document.createElement("div");
+    paragraphs.forEach((paragraphData) => {
+        let paragraph = document.createElement("p");
+        paragraph.textContent = paragraphData;
+        paragraphsParent.appendChild(paragraph);
+    });
+    parent.appendChild(paragraphsParent);
+}
+
+function appendLinkElements(parent, links){
+    let linksParent = document.createElement("div");
+    let listElement = document.createElement("ol");
+    links.forEach((link) => {
+        let listItemElement = document.createElement("li");
+        let linkElement = document.createElement("a");
+        let linkTitle;
+        if (!!emergencyNewsConfig.links[link]) {
+            linkTitle = emergencyNewsConfig.links[link]
+        } else {
+            linkTitle = link;
+        }
+        linkElement.setAttribute("target", "_blank");
+        linkElement.setAttribute("href", link);
+        linkElement.textContent = linkTitle;
+        listItemElement.appendChild(linkElement);
+        listElement.appendChild(listItemElement);
+    });
+    linksParent.appendChild(listElement);
+    parent.appendChild(linksParent);
+}
 
 function createTooltip(termData, tooltipCount) {
     tippy('.emergency_news_item' + +tooltipCount, {
         content: () => {
             let emergencyNewsHeader = document.createElement("div");
             emergencyNewsHeader.classList.add("emergency_news_header");
-            appendLinkElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", logoNews, "emergency_news_logo");
-            appendLinkElement(emergencyNewsHeader, "https://code4.ro/", logoCode4Ro, "emergency_news_code4ro_logo");
-            appendLinkElement(emergencyNewsHeader, "http://adr.gov.ro/", logoGov, "emergency_news_gov_logo");
+            appendLinkElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
+            appendLinkElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
+            appendLinkElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
 
             let emergencyNewsBody = document.createElement("div");
             emergencyNewsBody.classList.add("emergency_news_body");
             appendTitleElement(emergencyNewsBody, termData.title);
-            let paragraphsParent = document.createElement("div");
-            termData.paragraphs.forEach((paragraphData) => {
-                let paragraph = document.createElement("p");
-                paragraph.textContent = paragraphData;
-                paragraphsParent.appendChild(paragraph);
-            });
-            emergencyNewsBody.appendChild(paragraphsParent);
-
-            let linksParent = document.createElement("div");
-            let listElement = document.createElement("ol");
-            termData.links.forEach((link) => {
-                let listItemElement = document.createElement("li");
-                let linkElement = document.createElement("a");
-                let linkTitle;
-                if (!!emergencyNewsConfig.links[link]) {
-                    linkTitle = emergencyNewsConfig.links[link]
-                } else {
-                    linkTitle = link;
-                }
-                linkElement.setAttribute("target", "_blank");
-                linkElement.setAttribute("href", link);
-                linkElement.textContent = linkTitle;
-                listItemElement.appendChild(linkElement);
-                listElement.appendChild(listItemElement);
-            });
-            linksParent.appendChild(listElement);
-            emergencyNewsBody.appendChild(linksParent);
+            appendParagraphElements(emergencyNewsBody, termData.paragraphs);
+            appendLinkElements(emergencyNewsBody, termData.links);
 
             let emergencyNewsContent = document.createElement("div");
             emergencyNewsContent.appendChild(emergencyNewsHeader);
