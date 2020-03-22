@@ -192,10 +192,31 @@ function createTooltip(termData, tooltipCount) {
         <div>${links}</div>
     </div>`;
 
+    let emergencyNewsContent = document.createElement("div");
+    let emergencyNewsHeader = document.createElement("div");
+    emergencyNewsHeader.classList.add("emergency_news_header");
+
+    let linkElement = document.createElement("a");
+    linkElement.setAttribute("target", "_blank");
+    linkElement.setAttribute("href", "https://code4.ro/ro/apps/stiri-oficiale/");
+    let imgElement = document.createElement("img");
+    imgElement.setAttribute("src", logoNews);
+    imgElement.classList.add("emergency_news_logo");
+    linkElement.appendChild(imgElement);
+    emergencyNewsHeader.appendChild(linkElement);
+
+    let emergencyNewsBody = document.createElement("div");
+
+    emergencyNewsContent.appendChild(emergencyNewsHeader);
+    emergencyNewsContent.appendChild(emergencyNewsBody);
+
+    // emergencyNewsHeader.innerText = "header";
+    emergencyNewsBody.innerText = "body";
+
     tippy('.emergency_news_item' + +tooltipCount, {
-        content: content,
-        allowHTML: true,
+        content: emergencyNewsContent,
         interactive: true,
+        trigger: 'click',
         theme: 'light'
     });
 }
