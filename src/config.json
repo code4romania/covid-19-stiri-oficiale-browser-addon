@@ -141,5 +141,9 @@
         "SARS-CoV-2",
         "coronavirusuri",
         "coronavirusurilor"
+    ],
+    "disabledOn":[
+        "https://cemafac.ro",
+        "https://test.cemafac.ro"
     ]
 }

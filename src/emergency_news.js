@@ -2,19 +2,25 @@ var emergencyNewsConfig = {};
 
 browser.runtime.sendMessage({}).then((message) => {
     if (!emergencyNewsConfig.terms) {
+        emergencyNewsConfig = message;
         setTimeout(() => {
-            emergencyNewsConfig = message;
+            const isDisabledDomain = emergencyNewsConfig.disabledOn
+                .findIndex((disabledUrlFragment) => {
+                    return document.URL.indexOf(disabledUrlFragment) > -1;
+                }) > -1;
+            if (isDisabledDomain) {
+                return;
+            }
             const simplifiedInnerContent = simplifyText(document.body.innerText);
-
-            const termIndex = emergencyNewsConfig.pageEnablingTerms
+            const hasEnablingTerm = emergencyNewsConfig.pageEnablingTerms
                 .map(simplifyText)
                 .findIndex((enablingTerm) => {
                     return simplifiedInnerContent.indexOf(enablingTerm) > -1;
-                });
-            if (termIndex > -1) {
-                terms = message.terms;
-                walk(document.body);
+                }) > -1;
+            if (!hasEnablingTerm) {
+                return;
             }
+            walk(document.body);
         }, 500);
     }
 });
