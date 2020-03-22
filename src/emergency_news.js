@@ -174,49 +174,50 @@ var logoCode4Ro = browser.runtime.getURL("images/logo-code4ro.svg");
 var logoGov = browser.runtime.getURL("images/logo-gov.png");
 
 function createTooltip(termData, tooltipCount) {
-    let emergencyNewsHeader = document.createElement("div");
-    emergencyNewsHeader.classList.add("emergency_news_header");
-    appendLinkElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", logoNews, "emergency_news_logo");
-    appendLinkElement(emergencyNewsHeader, "https://code4.ro/", logoCode4Ro, "emergency_news_code4ro_logo");
-    appendLinkElement(emergencyNewsHeader, "http://adr.gov.ro/", logoGov, "emergency_news_gov_logo");
-
-    let emergencyNewsBody = document.createElement("div");
-    emergencyNewsBody.classList.add("emergency_news_body");
-    appendTitleElement(emergencyNewsBody, termData.title);
-    let paragraphsParent = document.createElement("div");
-    termData.paragraphs.forEach((paragraphData) => {
-        let paragraph = document.createElement("p");
-        paragraph.textContent = paragraphData;
-        paragraphsParent.appendChild(paragraph);
-    });
-    emergencyNewsBody.appendChild(paragraphsParent);
-
-    let linksParent = document.createElement("div");
-    let listElement = document.createElement("ol");
-    termData.links.forEach((link) => {
-        let listItemElement = document.createElement("li");
-        let linkElement = document.createElement("a");
-        let linkTitle;
-        if (!!emergencyNewsConfig.links[link]) {
-            linkTitle = emergencyNewsConfig.links[link]
-        } else {
-            linkTitle = link;
-        }
-        linkElement.setAttribute("target", "_blank");
-        linkElement.setAttribute("href", link);
-        linkElement.textContent = linkTitle;
-        listItemElement.appendChild(linkElement);
-        listElement.appendChild(listItemElement);
-    });
-    linksParent.appendChild(listElement);
-    emergencyNewsBody.appendChild(linksParent);
-
-    let emergencyNewsContent = document.createElement("div");
-    emergencyNewsContent.appendChild(emergencyNewsHeader);
-    emergencyNewsContent.appendChild(emergencyNewsBody);
-
     tippy('.emergency_news_item' + +tooltipCount, {
-        content: emergencyNewsContent,
+        content: () => {
+            let emergencyNewsHeader = document.createElement("div");
+            emergencyNewsHeader.classList.add("emergency_news_header");
+            appendLinkElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", logoNews, "emergency_news_logo");
+            appendLinkElement(emergencyNewsHeader, "https://code4.ro/", logoCode4Ro, "emergency_news_code4ro_logo");
+            appendLinkElement(emergencyNewsHeader, "http://adr.gov.ro/", logoGov, "emergency_news_gov_logo");
+
+            let emergencyNewsBody = document.createElement("div");
+            emergencyNewsBody.classList.add("emergency_news_body");
+            appendTitleElement(emergencyNewsBody, termData.title);
+            let paragraphsParent = document.createElement("div");
+            termData.paragraphs.forEach((paragraphData) => {
+                let paragraph = document.createElement("p");
+                paragraph.textContent = paragraphData;
+                paragraphsParent.appendChild(paragraph);
+            });
+            emergencyNewsBody.appendChild(paragraphsParent);
+
+            let linksParent = document.createElement("div");
+            let listElement = document.createElement("ol");
+            termData.links.forEach((link) => {
+                let listItemElement = document.createElement("li");
+                let linkElement = document.createElement("a");
+                let linkTitle;
+                if (!!emergencyNewsConfig.links[link]) {
+                    linkTitle = emergencyNewsConfig.links[link]
+                } else {
+                    linkTitle = link;
+                }
+                linkElement.setAttribute("target", "_blank");
+                linkElement.setAttribute("href", link);
+                linkElement.textContent = linkTitle;
+                listItemElement.appendChild(linkElement);
+                listElement.appendChild(listItemElement);
+            });
+            linksParent.appendChild(listElement);
+            emergencyNewsBody.appendChild(linksParent);
+
+            let emergencyNewsContent = document.createElement("div");
+            emergencyNewsContent.appendChild(emergencyNewsHeader);
+            emergencyNewsContent.appendChild(emergencyNewsBody);
+            return emergencyNewsContent;
+        },
         interactive: true,
         theme: 'light'
     });
