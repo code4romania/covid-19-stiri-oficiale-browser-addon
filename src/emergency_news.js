@@ -150,11 +150,13 @@ function splitTextByTerm(fullString, term) {
     }
 }
 
-function appendLinkElement(parent, href, imgSrc, imgClass) {
+function appendLinkImgElement(parent, href, imgSrc, imgClass) {
     const imgUrl = browser.runtime.getURL(imgSrc);
     let linkElement = document.createElement("a");
     linkElement.setAttribute("target", "_blank");
-    linkElement.setAttribute("href", href);
+    if (href.startsWith("http")) {
+        linkElement.setAttribute("href", href);
+    }
     let imgElement = document.createElement("img");
     imgElement.setAttribute("src", imgUrl);
     imgElement.classList.add(imgClass);
@@ -170,7 +172,7 @@ function appendTitleElement(parent, titleText) {
     parent.appendChild(div);
 }
 
-function appendParagraphElements(parent, paragraphs){
+function appendParagraphElements(parent, paragraphs) {
     let paragraphsParent = document.createElement("div");
     paragraphs.forEach((paragraphData) => {
         let paragraph = document.createElement("p");
@@ -180,7 +182,7 @@ function appendParagraphElements(parent, paragraphs){
     parent.appendChild(paragraphsParent);
 }
 
-function appendLinkElements(parent, links){
+function appendLinkElements(parent, links) {
     let linksParent = document.createElement("div");
     let listElement = document.createElement("ol");
     links.forEach((link) => {
@@ -193,7 +195,9 @@ function appendLinkElements(parent, links){
             linkTitle = link;
         }
         linkElement.setAttribute("target", "_blank");
-        linkElement.setAttribute("href", link);
+        if (link.startsWith("http")) {
+            linkElement.setAttribute("href", link);
+        }
         linkElement.textContent = linkTitle;
         listItemElement.appendChild(linkElement);
         listElement.appendChild(listItemElement);
@@ -207,9 +211,9 @@ function createTooltip(termData, tooltipCount) {
         content: () => {
             let emergencyNewsHeader = document.createElement("div");
             emergencyNewsHeader.classList.add("emergency_news_header");
-            appendLinkElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
-            appendLinkElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
-            appendLinkElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
+            appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
+            appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
+            appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
 
             let emergencyNewsBody = document.createElement("div");
             emergencyNewsBody.classList.add("emergency_news_body");
