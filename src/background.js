@@ -42,3 +42,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 loadData();
+
+async function onComplete(e) {
+    if (e.frameId === 0) {
+        await browser.tabs.insertCSS(e.tabId, { file: "dependencies/light.css" });
+        await browser.tabs.insertCSS(e.tabId, { file: "emergency_news.css" });
+        await browser.tabs.executeScript(e.tabId, { file: 'dependencies/popper.js' });
+        await browser.tabs.executeScript(e.tabId, { file: 'dependencies/tippy-bundle.umd.js' });
+        await browser.tabs.executeScript(e.tabId, { file: 'emergency_news.js' });
+    }
+}
+
+browser.webNavigation.onCompleted.addListener(onComplete,
+    { url: [{ schemes: ["http", "https"] }] }
+);

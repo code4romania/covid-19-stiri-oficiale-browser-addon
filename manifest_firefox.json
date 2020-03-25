@@ -5,23 +5,9 @@
     "description": "Extensia ajută la identificarea expresiilor legate de coronavirus și adaugă peste acestea un infobox cu surse oficiale de informare.",
     "permissions": [
         "https://raw.githubusercontent.com/",
-        "activeTab"
+        "<all_urls>",
+        "webNavigation"
     ],
-    "content_scripts": [{
-        "matches": [
-            "*://*/*"
-        ],
-        "js": [
-            "dependencies/popper.js",
-            "dependencies/tippy-bundle.umd.js",
-            "emergency_news.js"
-        ],
-        "css": [
-            "dependencies/light.css",
-            "emergency_news.css"
-        ],
-        "run_at": "document_end"
-    }],
     "background": {
         "scripts": [
             "background.js"
