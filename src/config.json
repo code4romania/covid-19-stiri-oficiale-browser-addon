@@ -144,6 +144,7 @@
     ],
     "disabledOn":[
         "https://cemafac.ro",
-        "https://test.cemafac.ro"
+        "https://test.cemafac.ro",
+        "https://cetrebuiesafac.ro"
     ]
 }
