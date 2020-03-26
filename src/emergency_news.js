@@ -62,10 +62,10 @@ function simplifyText(input) {
         .split('ă').join('a')
         .split('â').join('a')
         .split('î').join('i');
-    const noCedila = noComas.toLowerCase()
+    const noCedila = noComas
         .split('ş').join('s')
         .split('ţ').join('t');
-    const noSpecialCharacters = noCedila.toLowerCase()
+    const noSpecialCharacters = noCedila
         .split('-').join(' ')
         .split('_').join(' ');
     return noSpecialCharacters;
