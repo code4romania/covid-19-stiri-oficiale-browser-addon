@@ -71,34 +71,48 @@
         {
             "title": "Perioada de incubație Coronavirus",
             "aliases": [
+                "durata incubație coronavirus",
+                "durata incubație covid-19",
                 "incubație",
+                "incubație coronavirus",
+                "incubație covid-19",
+                "manifestare coronavirus",
+                "Perioada de incubație a noului coronavirus",
                 "Perioada de incubație coronavirus",
-                "Perioada de incubație a noului coronavirus"
+                "timp incubație covid-19",
+                "timp incubație covid-19"
             ],
             "paragraphs": [
-                "Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date.",
-                "Mai multe informații găsiți aici:"
+                "Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie entru 2019-nCoV variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date."
             ],
             "links": [
-                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus"
+                "https://cetrebuiesafac.ro/intrebari-frecvente",
+                "http://www.cnscbt.ro/index.php"
             ]
         },
         {
             "title": "Transmitere Coronavirus",
             "aliases": [
+                "cum se transmite coronavirus",
+                "mod de transmitere coronavirusului",
+                "mod trasmitere coronaviurs",
+                "transmisibilitate coronavirus",
+                "transmisilibitatea coronavirusului",
+                "transmit coronavirus",
+                "transmit covid-19",
                 "transmitere",
-                "Transmiterea",
                 "Transmitere Coronavirus",
                 "transmitere covid-19",
-                "transmit coronavirus",
-                "transmit covid-19"
+                "Transmiterea"
             ],
             "paragraphs": [
-                "Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact strâns cu o persoană infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și gură, astfel eviați atingerea dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit coronavirus.",
+                "Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact apropiat ( < 2m)  cu o persoană infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și gură, eviați atingerea acestor zone dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit coronavirus.",
                 "Mai multe informații găsiți aici:"
             ],
             "links": [
-                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus"
+                "https://cetrebuiesafac.ro",
+                "http://www.cnscbt.ro/index.php/informatii-pentru-populatie",
+                "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php"
             ]
         },
         {
@@ -141,12 +155,24 @@
             "href": "https://www.presidency.ro/ro/media/comunicate-de-presa/decret-semnat-de-presedintele-romaniei-domnul-klaus-iohannis-privind-instituirea-starii-de-urgenta-pe-teritoriul-romaniei"
         },
         {
-            "title": "http://www.cnscbt.ro/index.php/ncov",
-            "href": "SARS-CoV-2: legislație și informații utile"
+            "title": "SARS-CoV-2: legislație și informații utile",
+            "href": "http://www.cnscbt.ro/index.php/ncov"
         },
         {
-            "title": "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php",
-            "href": "SARS-CoV-2: sfaturi generale"
+            "title": "SARS-CoV-2: sfaturi generale",
+            "href": "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php"
+        },
+        {
+            "title": "Află ce ai de făcut în orice situație",
+            "href": "https://cetrebuiesafac.ro/intrebari-frecvente"
+        },
+        {
+            "title": "Află ce ai de făcut în orice situație",
+            "href": "https://cetrebuiesafac.ro"
+        },
+        {
+            "title": "http://www.cnscbt.ro/index.php/informatii-pentru-populatie",
+            "href": ""
         }
     ],
     "pageEnablingTerms": [
