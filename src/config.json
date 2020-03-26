@@ -118,14 +118,61 @@
         {
             "title": "Stare de urgență începând cu 16 martie",
             "aliases": [
-                "stare de urgență"
+                "decret stare de urgență",
+                "decret stare urgență",
+                "stare de urgență",
+                "stare urgență",
+                "starea de urgență"
             ],
             "paragraphs": [
-                "Această stare de urgență va face posibilă alocarea de noi resurse importante pentru gestionarea crizei. În acest fel, Guvernul va avea posibilitatea să aloce mai mulți bani domeniului sănătății, mai mulți bani pentru medicamente, mai mulți bani pentru aparatura medicală absolut necesară.",
-                "Mai multe informații găsiți aici:"
+                "Această stare de urgență va face posibilă alocarea de noi resurse importante pentru gestionarea crizei. În acest fel, Guvernul va avea posibilitatea să aloce mai mulți bani domeniului sănătății, mai mulți bani pentru medicamente, mai mulți bani pentru aparatura medicală absolut necesară"
             ],
             "links": [
-                "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636"
+                "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636",
+                "https://stirioficiale.ro/hotarari"
+            ]
+        },
+        {
+            "title": "Revenit în românia",
+            "aliases": [
+                "intors acasă",
+                "intors din Italia",
+                "intors in romania",
+                "întors în românia",
+                "întors în țară",
+                "revenit din italia",
+                "revenit din Spania",
+                "revenit în românia"
+            ],
+            "paragraphs": [
+                "Este foarte important, pentru sănătatea noastră și a celor din jur să respectăm întocmai procedurile medicale și organizaționale transmise de autorițăți. Dacă v-ați întors din zone cu risc ridicat declarați acest fapt organelor și urmați indicațiile de autocarantină. Nerespectarea acestor reguli vă expune și pe dvs și pe cei dragi la pericole mari, dar care pot fi evitate."
+            ],
+            "links": [
+                "https://www.mai.gov.ro/15-recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus-covid-19/",
+                "https://www.mai.gov.ro/recomandari-emise-de-grupul-de-analiza-fata-de-urmatoarele-5-situatii-intalnite-sau-care-pot-aparea-in-urma-evolutiei-situatiei-generate-de-infectarea-cu-virusul-covid-19-coronavirus/"
+            ]
+        },
+        {
+            "title": "Teste 2019-nCoV",
+            "aliases": [
+                "test covid-19",
+                "test covid19",
+                "test de coronavirus",
+                "test pentru detectarea coronavirus",
+                "test pentru detectarea covid",
+                "test pentru detectarea covid-19",
+                "testare coronavirus",
+                "teste covid",
+                "teste pentru coronavirus",
+                "teste pentru covid19"
+            ],
+            "paragraphs": [
+                "Există mai multe tipuri de testări și procedee epidemiologice specifice pentru detectarea prezenței a virusului în organism. Conform Ministerului Sănătății nu există probleme cu aprovizionarea centrelor de testare sau a altor unități medicale cu testele necesare și situația este monitorizată în permanență. "
+            ],
+            "links": [
+                "https://stirioficiale.ro/informatii/monitorizare-stocuri-de-teste-pentru-diagnosticare-moleculara",
+                "http://www.ms.ro/2020/03/10/inventar-a-testelor-de-detectare-a-covid-19/",
+                "https://cetrebuiesafac.ro/ai-simptome"
             ]
         }
     ],
