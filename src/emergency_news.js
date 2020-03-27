@@ -159,7 +159,9 @@ function appendLinkImgElement(parent, href, imgSrc, imgClass) {
     }
     let imgElement = document.createElement("img");
     imgElement.setAttribute("src", imgUrl);
-    imgElement.classList.add(imgClass);
+    if (imgClass) {
+        imgElement.classList.add(imgClass);
+    }
     linkElement.appendChild(imgElement);
     parent.appendChild(linkElement);
 }
@@ -180,6 +182,17 @@ function appendParagraphElements(parent, paragraphs) {
         paragraphsParent.appendChild(paragraph);
     });
     parent.appendChild(paragraphsParent);
+}
+
+function appendImageElements(parent, links) {
+    if (links) {
+        let imgParent = document.createElement("div");
+        imgParent.classList.add("emergency_news_body_images");
+        links.forEach((image) => {
+            appendLinkImgElement(imgParent, image.href, image.imgsrc);
+        });
+        parent.appendChild(imgParent);
+    }
 }
 
 function appendLinkElements(parent, links) {
@@ -241,6 +254,7 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         emergencyNewsBody.classList.add("emergency_news_body");
         appendTitleElement(emergencyNewsBody, title);
         appendParagraphElements(emergencyNewsBody, paragraphs);
+        appendImageElements(emergencyNewsBody, termData.images);
         appendLinkElements(emergencyNewsBody, links);
 
         const emergencyNewsContent = document.createElement('div');
