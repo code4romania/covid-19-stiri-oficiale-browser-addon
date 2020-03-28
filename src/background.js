@@ -1,6 +1,7 @@
 let config = {};
 
 const isFirefox = navigator.userAgent.toLocaleLowerCase().indexOf('firefox') !== -1;
+const isAndroid = navigator.userAgent.toLocaleLowerCase().indexOf('android') !== -1;
 const isDevMode = browser.runtime.getManifest().version === '0.0.0';
 
 async function loadData() {
@@ -59,7 +60,9 @@ async function injectContentScriptInTab(tabId) {
 
 async function onComplete(e) {
     if (e.frameId === 0) {
-        const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(getDomain(e.url), { enabledOnPage: true });
+        const currentDomain = getDomain(e.url);
+        const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(currentDomain, { enabledOnPage: true });
+        refreshBrowserAction(e.tabId, domainSettings.enabledOnPage, currentDomain);
         if (domainSettings.enabledOnPage) {
             await injectContentScriptInTab(e.tabId);
         }
@@ -74,6 +77,18 @@ function getDomain(url) {
     return new URL(url).host;
 }
 
+async function refreshBrowserAction(tabId, enabledOnPage, domain) {
+    const actionName = enabledOnPage ? 'Dezactivează' : 'Activează';
+    let title = `${actionName} STIRI OFICIALE`;
+    if (!isAndroid) {
+        title = `${title} pe ${domain}`;
+        browser.contextMenus.update('toggle-on-domain', {
+            title
+        });
+    }
+    browser.browserAction.setTitle({ title, tabId });
+}
+
 async function toggleCurrentDomain() {
     const foundTabs = await browser.tabs.query({
         currentWindow: true,
@@ -84,6 +99,7 @@ async function toggleCurrentDomain() {
     const domain = getDomain(foundTabs[0].url);
     const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
     domainSettings.enabledOnPage = !domainSettings.enabledOnPage;
+    refreshBrowserAction(currentTabId, domainSettings.enabledOnPage, domain);
     LocalOrSyncStorage.save(domain, domainSettings);
     if (!domainSettings.enabledOnPage) {
         browser.tabs.executeScript(
@@ -124,12 +140,29 @@ class LocalOrSyncStorage {
 
 }
 
-if (!!browser.contextMenus) {
+if (!isAndroid) {
     browser.contextMenus.create({
         id: "toggle-on-domain",
         title: "Activează/Dezactivează pe pagină",
         contexts: ["all"]
     });
-
+    if (isFirefox) {
+        browser.contextMenus.onShown.addListener(async (info, tab) => {
+            if (info.pageUrl.startsWith('http')) {
+                const domain = getDomain(info.pageUrl);
+                const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
+                refreshBrowserAction(tab.id, domainSettings.enabledOnPage, domain);
+            }
+        });
+    } else {
+        browser.tabs.onActivated.addListener(async (activeInfo) => {
+            let tabInfo = await browser.tabs.get(activeInfo.tabId);
+            if (tabInfo.url) {
+                const domain = getDomain(tabInfo.url);
+                const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
+                refreshBrowserAction(activeInfo.tabId, domainSettings.enabledOnPage, domain);
+            }
+        });
+    }
     browser.contextMenus.onClicked.addListener(toggleCurrentDomain);
 }
