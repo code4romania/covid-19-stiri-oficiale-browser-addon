@@ -3,7 +3,7 @@
     "version": "1.1.10",
     "description": "Extensie de browser care ajută la identificarea expresiilor cheie legate de COVID-19 (coronavirus) și adaugă peste acestea un infobox care trimite către sursele oficiale de informare. Evidențierea surselor oficiale ajută la diminuarea efectelor 'fake news'. \nConcept dezvoltat ca parte din programul Civic Labs al Code for Romania în parteneriat cu Autoritatea pentru Digitalizarea României.",
     "scripts": {
-        "clean": "rm -rf src/dependencies/ && mkdir -p src/dependencies/",
+        "clean": "./node_modules/gulp/bin/gulp.js clean",
         "copy": "cp node_modules/@popperjs/core/dist/umd/popper.js src/dependencies/popper.js && cp node_modules/tippy.js/dist/tippy-bundle.umd.js src/dependencies/tippy-bundle.umd.js && cp node_modules/tippy.js/themes/light.css src/dependencies/light.css",
         "pre-build": "npm i && npm run clean && npm run copy",
         "pre-build-chrome": "cp node_modules/webextension-polyfill/dist/browser-polyfill.js src/dependencies/browser-polyfill.js && rm -rf src/manifest.json && cp manifest_chrome.json src/manifest.json",
@@ -32,15 +32,16 @@
     },
     "homepage": "https://github.com/code4romania/emergency-news-addon#readme",
     "dependencies": {
-        "tippy.js": "^6.0.3"
+        "tippy.js": "^6.0.3",
+        "webextension-polyfill": "^0.6.0"
     },
     "devDependencies": {
         "del": "^5.1.0",
+        "fs-extra": "^9.0.0",
         "gulp": "^4.0.2",
         "gulp-cli": "^2.2.0",
         "require-dir": "^1.2.0",
         "web-ext": "^4.1.0",
-        "webextension-polyfill": "^0.6.0",
         "yargs": "^15.3.1"
     }
 }

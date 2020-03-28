@@ -3,12 +3,8 @@ const del = require('del');
 var requireDir = require('require-dir');
 const tasks = requireDir('./tasks');
 
-function build(cb) {
-    cb();
-}
-
 Object.keys(tasks).forEach((key) => {
-    exports[key] = tasks[key].default;
+    exports[key] = tasks[key];
 });
-exports.build = build;
-exports.default = series(exports.clean, build);
+
+exports.default = series(exports.clean, exports.copy);

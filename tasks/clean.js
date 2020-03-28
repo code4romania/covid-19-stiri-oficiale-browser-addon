@@ -7,4 +7,4 @@ function clean(cb) {
   cb();
 }
 
-exports.default = clean;
+module.exports = clean;
