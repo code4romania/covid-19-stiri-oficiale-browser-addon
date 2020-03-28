@@ -1,21 +1,5 @@
 {
-    "name": "COVID-19 STIRI OFICIALE",
-    "content_scripts": [{
-        "matches": [
-            "*://*/*"
-        ],
-        "js": [
-            "dependencies/browser-polyfill.js",
-            "dependencies/popper.js",
-            "dependencies/tippy-bundle.umd.js",
-            "emergency_news.js"
-        ],
-        "css": [
-            "dependencies/light.css",
-            "emergency_news.css"
-        ],
-        "run_at": "document_end"
-    }],
+    "name": "COVID-20 STIRI OFICIALE",
     "background": {
         "scripts": [
             "dependencies/browser-polyfill.js",

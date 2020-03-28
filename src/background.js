@@ -1,9 +1,11 @@
 let config = {};
 
+const isFirefox = navigator.userAgent.toLocaleLowerCase().indexOf('firefox') !== -1;
+const isFirefoxProd = browser.runtime.id === "{2164fef6-64f4-4a8b-9a6d-9dd9c500dd88}";
+const isChromeProd = browser.runtime.id === "pdcpkplohipjhdfdchpmgekifmcdbnha";
+
 async function loadData() {
     let configLocation = './config.json';
-    const isFirefoxProd = browser.runtime.id === "{2164fef6-64f4-4a8b-9a6d-9dd9c500dd88}";
-    const isChromeProd = browser.runtime.id === "pdcpkplohipjhdfdchpmgekifmcdbnha";
     if (isFirefoxProd || isChromeProd) {
         configLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json';
     }
@@ -26,7 +28,7 @@ function expandConfig(configInput) {
     });
     newTerms.sort((a, b) => {
         return b.key.length - a.key.length || b.key.localeCompare(a.key);
-    })
+    });
     configInput.terms = newTerms;
 
     let newLinks = {};
@@ -47,6 +49,9 @@ async function onComplete(e) {
     if (e.frameId === 0) {
         await browser.tabs.insertCSS(e.tabId, { file: "dependencies/light.css" });
         await browser.tabs.insertCSS(e.tabId, { file: "emergency_news.css" });
+        if (!isFirefox) {
+            await browser.tabs.executeScript(e.tabId, { file: 'dependencies/browser-polyfill.js' });
+        }
         await browser.tabs.executeScript(e.tabId, { file: 'dependencies/popper.js' });
         await browser.tabs.executeScript(e.tabId, { file: 'dependencies/tippy-bundle.umd.js' });
         await browser.tabs.executeScript(e.tabId, { file: 'emergency_news.js' });
