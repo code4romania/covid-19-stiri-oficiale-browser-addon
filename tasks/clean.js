@@ -1,9 +1,12 @@
 const del = require('del');
 const args = require('./lib/args');
 
-function clean(cb) {
-  return del(`dist/${args.vendor}/**/*`)
-  cb();
+function clean() {
+  const patternToDelete = `dist/${args.vendor}/**/*`;
+  if(args.verbose){
+    console.log(`Deleting ${patternToDelete}`);
+  }
+  return del(patternToDelete);
 }
 
 module.exports = clean;

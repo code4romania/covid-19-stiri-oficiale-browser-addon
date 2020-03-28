@@ -1,6 +1,11 @@
 const yargs = require('yargs');
 
 const args = yargs
+  .option('production', {
+    boolean: true,
+    default: false,
+    describe: 'Use the real version in production'
+  })
   .option('watch', {
     boolean: true,
     default: false,
@@ -17,6 +22,6 @@ const args = yargs
     describe: 'Compile the extension for different vendors',
     choices: ['chrome', 'firefox', 'android']
   })
-  .argv
+  .argv;
 
 module.exports = args;

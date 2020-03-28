@@ -18,12 +18,19 @@ const vendorManifestPath = `src/manifest.${args.vendor}.json`;
 const distManifestPath = `dist/${args.vendor}/manifest.json`;
 function copyManifest(cb) {
   let manifest = fs.readJsonSync('src/manifest.json');
-  let packageJson = fs.readJsonSync('package.json');
   if (fs.existsSync(vendorManifestPath)) {
     const vendorManifest = fs.readJsonSync(vendorManifestPath);
     manifest = Object.assign({}, manifest, vendorManifest);
   }
-  manifest = Object.assign({}, manifest, { version: packageJson.version });
+  if (args.production) {
+    let packageJson = fs.readJsonSync('package.json');
+    manifest = Object.assign({}, manifest, { version: packageJson.version });
+  } else {
+    manifest = Object.assign({}, manifest, { version: '0.0.0' });
+  }
+  if (args.verbose) {
+    console.log(JSON.stringify(manifest, null, 2));
+  }
   fs.writeJsonSync(distManifestPath, manifest, { spaces: 4 });
   if (cb) {
     cb();
@@ -32,7 +39,6 @@ function copyManifest(cb) {
 
 function noManifests(fileName) {
   const include = fileName.indexOf('src/manifest.') === -1;
-  console.log(`include ${fileName}=${include}`);
   return include;
 }
 

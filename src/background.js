@@ -1,12 +1,13 @@
 let config = {};
 
 const isFirefox = navigator.userAgent.toLocaleLowerCase().indexOf('firefox') !== -1;
-const isFirefoxProd = browser.runtime.id === "{2164fef6-64f4-4a8b-9a6d-9dd9c500dd88}";
-const isChromeProd = browser.runtime.id === "pdcpkplohipjhdfdchpmgekifmcdbnha";
+const isDevMode = browser.runtime.getManifest().version === '0.0.0';
 
 async function loadData() {
-    let configLocation = './config.json';
-    if (isFirefoxProd || isChromeProd) {
+    let configLocation;
+    if (isDevMode) {
+        configLocation = './config.json';
+    } else {
         configLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json';
     }
     const httpData = await fetch(configLocation);
