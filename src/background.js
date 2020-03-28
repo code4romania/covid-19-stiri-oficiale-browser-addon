@@ -61,3 +61,20 @@ async function onComplete(e) {
 browser.webNavigation.onCompleted.addListener(onComplete,
     { url: [{ schemes: ["http", "https"] }] }
 );
+
+function getDomain(url) {
+    return new URL(url).host;
+}
+
+function toggleCurrentDomain() {
+    browser.tabs.query({
+        currentWindow: true,
+        active: true
+    }, function (foundTabs) {
+        var currentTabId = foundTabs[0].id;
+        const domain = getDomain(foundTabs[0].url);
+        console.log(`Toggle on domain ${domain}`);
+    });
+}
+
+browser.browserAction.onClicked.addListener(toggleCurrentDomain);
