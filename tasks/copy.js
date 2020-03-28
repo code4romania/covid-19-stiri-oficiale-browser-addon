@@ -1,13 +1,6 @@
 const args = require('./lib/args');
 const fs = require('fs-extra');
-const { watch, series } = require('gulp');
-
-const manifestFiles = {
-  'firefox': 'manifest_firefox.json',
-  'android': 'manifest_firefox.json',
-  'chrome': 'manifest_chrome.json'
-};
-const manifest = manifestFiles[args.vendor];
+const { watch } = require('gulp');
 
 function copyDependencies(cb) {
   fs.ensureDirSync(`dist/${args.vendor}/dependencies/`);
@@ -21,9 +14,15 @@ function copyDependencies(cb) {
     cb();
   }
 }
-
+const vendorManifestPath = `src/manifest.${args.vendor}.json`;
+const distManifestPath = `dist/${args.vendor}/manifest.json`;
 function copyManifest(cb) {
-  fs.copySync(`${manifest}`, `dist/${args.vendor}/manifest.json`);
+  let manifest = fs.readJsonSync('src/manifest.json');
+  if (fs.existsSync(vendorManifestPath)) {
+    const vendorManifest = fs.readJsonSync(vendorManifestPath);
+    manifest = Object.assign({}, manifest, vendorManifest);
+  }
+  fs.writeJsonSync(distManifestPath, manifest, { spaces: 4 });
   if (cb) {
     cb();
   }
@@ -41,9 +40,10 @@ function copy(cb) {
   copyManifest();
   copySrc();
   if (args.watch) {
-    watch('package*.json', copyDependencies);
-    watch(`${manifest}`, copyManifest);
-    watch('src/**/*.*', copySrc);
+    const manifests = ['src/manifest.json', `${vendorManifestPath}`];
+    watch('package.json', copyDependencies);
+    watch('src/**/*.*', { ignored: manifests }, copySrc);
+    watch(manifests, copyManifest);
   }
   cb();
 }
