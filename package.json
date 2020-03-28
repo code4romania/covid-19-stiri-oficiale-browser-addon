@@ -46,5 +46,10 @@
         "require-dir": "^1.2.0",
         "web-ext": "^4.1.0",
         "yargs": "^15.3.1"
+    },
+    "webExt": {
+        "build": {
+            "overwriteDest": true
+        }
     }
 }
