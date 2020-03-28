@@ -8,7 +8,7 @@ webExtTarget['chrome'] = 'chromium';
 
 function watch(cb) {
   const target = webExtTarget[args.vendor];
-  var cmd = spawn('node_modules/web-ext/bin/web-ext', ['run', '-t', `${target}`, '-s', `dist/${args.vendor}`], {stdio: 'inherit'});
+  var cmd = spawn('node_modules/web-ext/bin/web-ext', ['run', '-t', `${target}`, '-s', `dist/${args.vendor}`, '--config', `${args.vendor}.config.js`], {stdio: 'inherit'});
   cmd.on('close', function (code) {
     cb(code);
   });
