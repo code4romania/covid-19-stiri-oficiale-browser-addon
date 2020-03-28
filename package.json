@@ -3,11 +3,11 @@
     "version": "1.1.10",
     "description": "Extensie de browser care ajută la identificarea expresiilor cheie legate de COVID-19 (coronavirus) și adaugă peste acestea un infobox care trimite către sursele oficiale de informare. Evidențierea surselor oficiale ajută la diminuarea efectelor 'fake news'. \nConcept dezvoltat ca parte din programul Civic Labs al Code for Romania în parteneriat cu Autoritatea pentru Digitalizarea României.",
     "scripts": {
-        "build": "npm run build-firefox ; npm run build-chrome ; npm run build-android",
+        "build": "npm ci ; npm run build-firefox ; npm run build-chrome ; npm run build-android",
         "build-firefox": "./node_modules/gulp/bin/gulp.js build --vendor=firefox",
         "build-chrome": "./node_modules/gulp/bin/gulp.js build --vendor=chrome",
         "build-android": "./node_modules/gulp/bin/gulp.js build --vendor=android",
-        "dev": "concurrently \"npm:dev-firefox\" \"npm:dev-chrome\"",
+        "dev": "./node_modules/concurrently/bin/concurrently.js \"npm:dev-firefox\" \"npm:dev-chrome\"",
         "dev-firefox": "./node_modules/gulp/bin/gulp.js --watch --vendor=firefox",
         "dev-chrome": "./node_modules/gulp/bin/gulp.js --watch --vendor=chrome",
         "dev-android": "./node_modules/gulp/bin/gulp.js --watch --vendor=android"
