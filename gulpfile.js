@@ -1,6 +1,15 @@
-function defaultTask(cb) {
-    // place code for your default task here
+const { series } = require('gulp');
+const del = require('del');
+
+function clean(cb) {
+    del(`dist/firefox/**/*`)
     cb();
 }
 
-exports.default = defaultTask
+function build(cb) {
+    cb();
+}
+
+exports.clean = clean;
+exports.build = build;
+exports.default = series(clean, build);
