@@ -40,9 +40,11 @@ function copy(cb) {
   copyDependencies();
   copyManifest();
   copySrc();
-  watch('package*.json', copyDependencies);
-  watch(`${manifest}`, copyManifest);
-  watch('src/**/*.*', copySrc);
+  if (args.watch) {
+    watch('package*.json', copyDependencies);
+    watch(`${manifest}`, copyManifest);
+    watch('src/**/*.*', copySrc);
+  }
   cb();
 }
 

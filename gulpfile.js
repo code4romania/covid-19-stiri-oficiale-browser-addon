@@ -8,4 +8,5 @@ Object.keys(tasks).forEach((key) => {
 });
 
 exports.build = series(exports.clean, exports.copy, exports.pack);
-exports.default = series(exports.clean, exports.copy, exports.watch);
+exports.watch = series(exports.clean, exports.copy, exports.webextrun);
+exports.default = exports.watch;

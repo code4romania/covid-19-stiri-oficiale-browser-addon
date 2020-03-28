@@ -3,18 +3,14 @@
     "version": "1.1.10",
     "description": "Extensie de browser care ajută la identificarea expresiilor cheie legate de COVID-19 (coronavirus) și adaugă peste acestea un infobox care trimite către sursele oficiale de informare. Evidențierea surselor oficiale ajută la diminuarea efectelor 'fake news'. \nConcept dezvoltat ca parte din programul Civic Labs al Code for Romania în parteneriat cu Autoritatea pentru Digitalizarea României.",
     "scripts": {
-        "clean": "./node_modules/gulp/bin/gulp.js clean",
-        "copy": "cp node_modules/@popperjs/core/dist/umd/popper.js src/dependencies/popper.js && cp node_modules/tippy.js/dist/tippy-bundle.umd.js src/dependencies/tippy-bundle.umd.js && cp node_modules/tippy.js/themes/light.css src/dependencies/light.css",
-        "pre-build": "npm i && npm run clean && npm run copy",
-        "pre-build-chrome": "cp node_modules/webextension-polyfill/dist/browser-polyfill.js src/dependencies/browser-polyfill.js && rm -rf src/manifest.json && cp manifest_chrome.json src/manifest.json",
-        "pre-build-firefox": "rm -rf src/dependencies/browser-polyfill.js && rm -rf src/manifest.json && cp manifest_firefox.json src/manifest.json",
-        "web-ext-build": "node_modules/web-ext/bin/web-ext build -s src -a dist -o",
-        "build": "web-ext build -s src -a dist -o",
-        "build-firefox": "npm run pre-build-firefox && npm run web-ext-build",
-        "build-chrome": "npm run pre-build-chrome && npm run web-ext-build",
-        "firefox": "npm run pre-build-firefox && node_modules/web-ext/bin/web-ext run --pref browser.ctrlTab.recentlyUsedOrder=false --url https://bit.ly/2QaGkuj --url https://bit.ly/2vqXa0Q --url https://bit.ly/2WfDV5t --url about:debugging#/runtime/this-firefox -s src",
-        "chrome": "npm run pre-build-chrome && node_modules/web-ext/bin/web-ext run -t chromium --url https://bit.ly/2QaGkuj --url https://bit.ly/2vqXa0Q --url https://bit.ly/2WfDV5t -s src",
-        "android": "npm run pre-build-firefox && node_modules/web-ext/bin/web-ext run --android-device=b0254ffd -t firefox-android --firefox-apk org.mozilla.firefox -s src"
+        "build": "npm run build-firefox ; npm run build-chrome ; npm run build-android",
+        "build-firefox": "./node_modules/gulp/bin/gulp.js build --vendor=firefox",
+        "build-chrome": "./node_modules/gulp/bin/gulp.js build --vendor=chrome",
+        "build-android": "./node_modules/gulp/bin/gulp.js build --vendor=android",
+        "dev": "concurrently \"npm:dev-firefox\" \"npm:dev-chrome\"",
+        "dev-firefox": "./node_modules/gulp/bin/gulp.js --watch --vendor=firefox",
+        "dev-chrome": "./node_modules/gulp/bin/gulp.js --watch --vendor=chrome",
+        "dev-android": "./node_modules/gulp/bin/gulp.js --watch --vendor=android"
     },
     "repository": {
         "type": "git",
@@ -37,6 +33,7 @@
     },
     "devDependencies": {
         "child_process": "^1.0.2",
+        "concurrently": "^5.1.0",
         "del": "^5.1.0",
         "fs-extra": "^9.0.0",
         "gulp": "^4.0.2",

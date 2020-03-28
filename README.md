@@ -25,18 +25,15 @@ Concept dezvoltat ca parte din programul Civic Labs al Code for Romania în part
 
 This project is built by amazing volunteers and you can be one of them! Here's a list of ways in [which you can contribute to this project](.github/CONTRIBUTING.md).
 
-## Firefox Built With
+## Built With
 npm run build-firefox
-
-## Chrome Built With
 npm run build-chrome
+npm run build-android
 
 ## Local debug and test with
-npm run firefox
-npm run chrome
-
-edit your device name in package.json for running on andorid
-npm run android
+npm run dev-firefox
+npm run dev-chrome
+npm run dev-android
 
 ## Deployment
 
