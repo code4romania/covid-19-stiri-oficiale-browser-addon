@@ -45,16 +45,23 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 loadData();
 
+async function injectContentScriptInTab(tabId) {
+    await browser.tabs.insertCSS(tabId, { file: "dependencies/light.css" });
+    await browser.tabs.insertCSS(tabId, { file: "emergency_news.css" });
+    if (!isFirefox) {
+        await browser.tabs.executeScript(tabId, { file: 'dependencies/browser-polyfill.js' });
+    }
+    await browser.tabs.executeScript(tabId, { file: 'dependencies/popper.js' });
+    await browser.tabs.executeScript(tabId, { file: 'dependencies/tippy-bundle.umd.js' });
+    await browser.tabs.executeScript(tabId, { file: 'emergency_news.js' });
+}
+
 async function onComplete(e) {
     if (e.frameId === 0) {
-        await browser.tabs.insertCSS(e.tabId, { file: "dependencies/light.css" });
-        await browser.tabs.insertCSS(e.tabId, { file: "emergency_news.css" });
-        if (!isFirefox) {
-            await browser.tabs.executeScript(e.tabId, { file: 'dependencies/browser-polyfill.js' });
+        const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(getDomain(e.url), { enabledOnPage: true });
+        if (domainSettings.enabledOnPage) {
+            await injectContentScriptInTab(e.tabId);
         }
-        await browser.tabs.executeScript(e.tabId, { file: 'dependencies/popper.js' });
-        await browser.tabs.executeScript(e.tabId, { file: 'dependencies/tippy-bundle.umd.js' });
-        await browser.tabs.executeScript(e.tabId, { file: 'emergency_news.js' });
     }
 }
 
@@ -66,15 +73,52 @@ function getDomain(url) {
     return new URL(url).host;
 }
 
-function toggleCurrentDomain() {
-    browser.tabs.query({
+async function toggleCurrentDomain() {
+    const foundTabs = await browser.tabs.query({
         currentWindow: true,
         active: true
-    }, function (foundTabs) {
-        var currentTabId = foundTabs[0].id;
-        const domain = getDomain(foundTabs[0].url);
-        console.log(`Toggle on domain ${domain}`);
     });
+
+    var currentTabId = foundTabs[0].id;
+    const domain = getDomain(foundTabs[0].url);
+    const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
+    domainSettings.enabledOnPage = !domainSettings.enabledOnPage;
+    LocalOrSyncStorage.save(domain, domainSettings);
+    if (!domainSettings.enabledOnPage) {
+        browser.tabs.executeScript(
+            currentTabId, {
+            code: `window.location = window.location; ""`
+        });
+    } else {
+        injectContentScriptInTab(currentTabId);
+    }
 }
 
 browser.browserAction.onClicked.addListener(toggleCurrentDomain);
+
+class LocalOrSyncStorage {
+    static async getFromCacheStorageOrDefault(key, defaultValue) {
+        let item = await this.getStorage().get(key);
+        item = item[key];
+        if (!item) {
+            item = defaultValue;
+            LocalOrSyncStorage.save(key, item);
+        }
+        return item;
+    }
+
+    static async save(key, value) {
+        let objectToStore = {};
+        objectToStore[key] = value;
+        return this.getStorage().set(objectToStore);
+    }
+
+    static getStorage() {
+        if (!!browser.storage.sync) {
+            return browser.storage.sync;
+        } else {
+            return browser.storage.local;
+        }
+    }
+
+}

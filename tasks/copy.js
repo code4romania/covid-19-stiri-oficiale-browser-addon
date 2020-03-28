@@ -31,8 +31,9 @@ function copyManifest(cb) {
 }
 
 function noManifests(fileName) {
-  return fileName.indexOf('manifest.json') === -1 &&
-    fileName.indexOf(`manifest.${args.vendor}.json`) === -1;
+  const include = fileName.indexOf('src/manifest.') === -1;
+  console.log(`include ${fileName}=${include}`);
+  return include;
 }
 
 function copySrc(cb) {
