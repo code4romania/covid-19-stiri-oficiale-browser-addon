@@ -1,15 +1,12 @@
 const { series } = require('gulp');
 const del = require('del');
-
-function clean(cb) {
-    del(`dist/firefox/**/*`)
-    cb();
-}
+var requireDir = require('require-dir');
+const tasks = requireDir('./tasks');
 
 function build(cb) {
     cb();
 }
 
-exports.clean = clean;
+exports.clean = tasks.clean.clean;
 exports.build = build;
-exports.default = series(clean, build);
+exports.default = series(tasks.clean.clean, build);
