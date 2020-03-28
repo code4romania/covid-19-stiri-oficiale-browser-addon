@@ -122,3 +122,13 @@ class LocalOrSyncStorage {
     }
 
 }
+
+if (!!browser.contextMenus) {
+    browser.contextMenus.create({
+        id: "toggle-on-domain",
+        title: "Activează/Dezactivează pe pagină",
+        contexts: ["all"]
+    });
+
+    browser.contextMenus.onClicked.addListener(toggleCurrentDomain);
+}

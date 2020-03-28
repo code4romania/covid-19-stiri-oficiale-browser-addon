@@ -1,0 +1,13 @@
+{
+    "permissions": [
+        "<all_urls>",
+        "webNavigation",
+        "activeTab",
+        "storage"
+    ],
+    "applications": {
+        "gecko": {
+            "id": "{2164fef6-64f4-4a8b-9a6d-9dd9c500dd88}"
+        }
+    }
+}

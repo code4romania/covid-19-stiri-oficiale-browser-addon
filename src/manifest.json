@@ -6,7 +6,8 @@
         "<all_urls>",
         "webNavigation",
         "activeTab",
-        "storage"
+        "storage",
+        "contextMenus"
     ],
     "background": {
         "scripts": [
