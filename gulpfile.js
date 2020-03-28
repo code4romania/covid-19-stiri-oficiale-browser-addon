@@ -7,6 +7,8 @@ function build(cb) {
     cb();
 }
 
-exports.clean = tasks.clean.clean;
+Object.keys(tasks).forEach((key) => {
+    exports[key] = tasks[key].default;
+});
 exports.build = build;
-exports.default = series(tasks.clean.clean, build);
+exports.default = series(exports.clean, build);
