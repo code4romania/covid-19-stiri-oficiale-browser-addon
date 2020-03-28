@@ -36,10 +36,12 @@
         "webextension-polyfill": "^0.6.0"
     },
     "devDependencies": {
+        "child_process": "^1.0.2",
         "del": "^5.1.0",
         "fs-extra": "^9.0.0",
         "gulp": "^4.0.2",
         "gulp-cli": "^2.2.0",
+        "gulp-shell": "^0.8.0",
         "require-dir": "^1.2.0",
         "web-ext": "^4.1.0",
         "yargs": "^15.3.1"

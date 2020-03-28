@@ -7,4 +7,4 @@ Object.keys(tasks).forEach((key) => {
     exports[key] = tasks[key];
 });
 
-exports.default = series(exports.clean, exports.copy);
+exports.default = series(exports.clean, exports.copy, exports.watch);

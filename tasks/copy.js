@@ -1,5 +1,4 @@
 const args = require('./lib/args');
-const cp = require('cp');
 const fs = require('fs-extra')
 
 function copy(cb) {
