@@ -51,12 +51,19 @@ loadData();
 async function injectContentScriptInTab(tabId) {
     await browser.tabs.insertCSS(tabId, { file: "dependencies/light.css" });
     await browser.tabs.insertCSS(tabId, { file: "emergency_news.css" });
+    const scripts = [];
     if (!isFirefox) {
-        await browser.tabs.executeScript(tabId, { file: 'dependencies/browser-polyfill.js' });
+        scripts.push('dependencies/browser-polyfill.js');
     }
-    await browser.tabs.executeScript(tabId, { file: 'dependencies/popper.js' });
-    await browser.tabs.executeScript(tabId, { file: 'dependencies/tippy-bundle.umd.js' });
-    await browser.tabs.executeScript(tabId, { file: 'emergency_news.js' });
+    scripts.push('dependencies/popper.js');
+    scripts.push('dependencies/tippy-bundle.umd.js');
+    scripts.push('emergency_news.js');
+    scripts.forEach(async (file) => {
+        await browser.tabs.executeScript(tabId, { file })
+            .then(() => { }, (error) => {
+                console.error(`Error while loading file ${file}: ${error}`);
+            });
+    });
 }
 
 async function onComplete(e) {

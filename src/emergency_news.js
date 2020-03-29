@@ -209,27 +209,30 @@ function appendLinkElements(parent, links) {
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
-            const newBody = new App();
-            let emergencyNewsHeader = document.createElement("div");
-            emergencyNewsHeader.classList.add("emergency_news_header");
-            appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
-            appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
-            appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
+            // const newBody = new EmergencyNewsTooltip();
+            // let emergencyNewsHeader = document.createElement("div");
+            // emergencyNewsHeader.classList.add("emergency_news_header");
+            // appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
+            // appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
+            // appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
 
-            let emergencyNewsBody = document.createElement("div");
-            emergencyNewsBody.classList.add("emergency_news_body");
-            appendTitleElement(emergencyNewsBody, termData.title);
-            appendParagraphElements(emergencyNewsBody, termData.paragraphs);
-            appendLinkElements(emergencyNewsBody, termData.links);
+            // let emergencyNewsBody = document.createElement("div");
+            // emergencyNewsBody.classList.add("emergency_news_body");
+            // appendTitleElement(emergencyNewsBody, termData.title);
+            // appendParagraphElements(emergencyNewsBody, termData.paragraphs);
+            // appendLinkElements(emergencyNewsBody, termData.links);
 
-            let emergencyNewsContent = document.createElement("div");
-            emergencyNewsContent.appendChild(emergencyNewsHeader);
-            emergencyNewsContent.appendChild(emergencyNewsBody);
-            newBody.appendChild(emergencyNewsContent);
-            return newBody;
+            // let emergencyNewsContent = document.createElement("div");
+            // emergencyNewsContent.appendChild(emergencyNewsHeader);
+            // emergencyNewsContent.appendChild(emergencyNewsBody);
+            // newBody.appendChild(emergencyNewsContent);
+            // return newBody;
             // return emergencyNewsContent;
+            let tippyDiv = document.createElement("div");
+            tippyDiv.appendChild(new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links));
+            return tippyDiv;
         },
-        interactive: true,
+        interactive: false,
         maxWidth: 600,
         theme: 'light'
     };
@@ -314,30 +317,23 @@ template.innerHTML = `
       </a>
   </div>
   <div class="emergency_news_body">
-      <div><b>Transmitere Coronavirus</b></div>
-      <div>
-          <p>Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact strâns cu o persoană
-              infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și
-              gură, astfel eviați atingerea dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit
-              coronavirus.</p>
-          <p>Mai multe informații găsiți aici:</p>
-      </div>
-      <div>
-          <ol>
-              <li><a target="_blank"
-                      href="https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus">Instituțiile
-                      prefectului Portalul instituțiilor prefectului din Romania</a></li>
-          </ol>
-      </div>
   </div>
 </div>`;
 
-class App extends HTMLElement {
-    constructor() {
+class EmergencyNewsTooltipContent extends HTMLElement {
+    constructor(title, paragraphs, links) {
         super();
         const shadow = this.attachShadow({ mode: "open" });
-        shadow.appendChild(template.content.cloneNode(true));
+
+        const tempalteContent = template.content.cloneNode(true);
+        const emergencyNewsBody = tempalteContent.querySelector('.emergency_news_body');
+
+        appendTitleElement(emergencyNewsBody, title);
+        appendParagraphElements(emergencyNewsBody, paragraphs);
+        appendLinkElements(emergencyNewsBody, links);
+
+        shadow.appendChild(tempalteContent);
     }
 }
 
-customElements.define("extension-app", App);
+customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
