@@ -1,0 +1,9 @@
+{
+    "name": "COVID-20 STIRI OFICIALE",
+    "background": {
+        "scripts": [
+            "dependencies/browser-polyfill.js",
+            "background.js"
+        ]
+    }
+}

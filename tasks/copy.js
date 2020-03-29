@@ -2,13 +2,6 @@ const args = require('./lib/args');
 const fs = require('fs-extra');
 const { watch, series } = require('gulp');
 
-const manifestFiles = {
-  'firefox': 'manifest_firefox.json',
-  'android': 'manifest_firefox.json',
-  'chrome': 'manifest_chrome.json'
-};
-const manifest = manifestFiles[args.vendor];
-
 function copyDependencies(cb) {
   fs.ensureDirSync(`dist/${args.vendor}/dependencies/`);
   fs.copySync('node_modules/@popperjs/core/dist/umd/popper.js', `dist/${args.vendor}/dependencies/popper.js`);
@@ -21,16 +14,37 @@ function copyDependencies(cb) {
     cb();
   }
 }
-
+const vendorManifestPath = `src/manifest.${args.vendor}.json`;
+const distManifestPath = `dist/${args.vendor}/manifest.json`;
 function copyManifest(cb) {
-  fs.copySync(`${manifest}`, `dist/${args.vendor}/manifest.json`);
+  let manifest = fs.readJsonSync('src/manifest.json');
+  if (fs.existsSync(vendorManifestPath)) {
+    const vendorManifest = fs.readJsonSync(vendorManifestPath);
+    manifest = Object.assign({}, manifest, vendorManifest);
+  }
+  if (args.production) {
+    let packageJson = fs.readJsonSync('package.json');
+    manifest = Object.assign({}, manifest, { version: packageJson.version });
+  } else {
+    manifest = Object.assign({}, manifest, { version: '0.0.0' });
+  }
+  if (args.verbose) {
+    console.log(JSON.stringify(manifest, null, 2));
+  }
+  fs.writeJsonSync(distManifestPath, manifest, { spaces: 4 });
   if (cb) {
     cb();
   }
 }
 
+function noManifests(fileName) {
+  const include = fileName.indexOf('src/manifest.') === -1;
+  return include;
+}
+
 function copySrc(cb) {
-  fs.copySync('src', `dist/${args.vendor}/`);
+  fs.copySync('src', `dist/${args.vendor}/`,
+    { filter: noManifests });
   if (cb) {
     cb();
   }
@@ -41,9 +55,8 @@ function copy(cb) {
   copyManifest();
   copySrc();
   if (args.watch) {
-    watch('package*.json', copyDependencies);
-    watch(`${manifest}`, copyManifest);
-    watch('src/**/*.*', copySrc);
+    watch(['package.json', 'src/**/*.*'],
+      series(copyDependencies, copySrc, copyManifest));
   }
   cb();
 }
