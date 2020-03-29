@@ -209,28 +209,7 @@ function appendLinkElements(parent, links) {
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
-            // const newBody = new EmergencyNewsTooltip();
-            // let emergencyNewsHeader = document.createElement("div");
-            // emergencyNewsHeader.classList.add("emergency_news_header");
-            // appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
-            // appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
-            // appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
-
-            // let emergencyNewsBody = document.createElement("div");
-            // emergencyNewsBody.classList.add("emergency_news_body");
-            // appendTitleElement(emergencyNewsBody, termData.title);
-            // appendParagraphElements(emergencyNewsBody, termData.paragraphs);
-            // appendLinkElements(emergencyNewsBody, termData.links);
-
-            // let emergencyNewsContent = document.createElement("div");
-            // emergencyNewsContent.appendChild(emergencyNewsHeader);
-            // emergencyNewsContent.appendChild(emergencyNewsBody);
-            // newBody.appendChild(emergencyNewsContent);
-            // return newBody;
-            // return emergencyNewsContent;
-            let tippyDiv = document.createElement("div");
-            tippyDiv.appendChild(new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links));
-            return tippyDiv;
+            return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
         },
         interactive: false,
         maxWidth: 600,
@@ -302,22 +281,6 @@ template.innerHTML = `
 }
 </style>
 <div>
-  <div class="emergency_news_header">
-      <a target="_blank" href="https://code4.ro/ro/apps/stiri-oficiale/">
-          <img src="moz-extension://7e5890dc-5f27-45d7-bd80-9764b1f0dd45/images/logo-news-full.png"
-              class="emergency_news_logo">
-      </a>
-      <a target="_blank" href="https://code4.ro/">
-          <img src="moz-extension://7e5890dc-5f27-45d7-bd80-9764b1f0dd45/images/logo-code4ro.svg"
-              class="emergency_news_code4ro_logo">
-      </a>
-      <a target="_blank" href="http://adr.gov.ro/">
-          <img src="moz-extension://7e5890dc-5f27-45d7-bd80-9764b1f0dd45/images/logo-gov.png"
-              class="emergency_news_gov_logo">
-      </a>
-  </div>
-  <div class="emergency_news_body">
-  </div>
 </div>`;
 
 class EmergencyNewsTooltipContent extends HTMLElement {
@@ -325,14 +288,22 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: "open" });
 
-        const tempalteContent = template.content.cloneNode(true);
-        const emergencyNewsBody = tempalteContent.querySelector('.emergency_news_body');
+        let emergencyNewsHeader = document.createElement("div");
+        emergencyNewsHeader.classList.add("emergency_news_header");
+        appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
+        appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
+        appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
 
+        let emergencyNewsBody = document.createElement("div");
+        emergencyNewsBody.classList.add("emergency_news_body");
         appendTitleElement(emergencyNewsBody, title);
         appendParagraphElements(emergencyNewsBody, paragraphs);
         appendLinkElements(emergencyNewsBody, links);
 
-        shadow.appendChild(tempalteContent);
+        const emergencyNewsContent = template.content.cloneNode(true);
+        emergencyNewsContent.appendChild(emergencyNewsHeader);
+        emergencyNewsContent.appendChild(emergencyNewsBody);
+        shadow.appendChild(emergencyNewsContent);
     }
 }
 
