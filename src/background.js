@@ -54,6 +54,7 @@ async function injectContentScriptInTab(tabId) {
     const scripts = [];
     if (!isFirefox) {
         scripts.push('dependencies/browser-polyfill.js');
+        scripts.push('dependencies/webcomponents-bundle.js');
     }
     scripts.push('dependencies/popper.js');
     scripts.push('dependencies/tippy-bundle.umd.js');

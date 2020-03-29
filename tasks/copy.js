@@ -9,6 +9,7 @@ function copyDependencies(cb) {
   fs.copySync('node_modules/tippy.js/themes/light.css', `dist/${args.vendor}/dependencies/light.css`);
   if (args.vendor === 'chrome') {
     fs.copySync('node_modules/webextension-polyfill/dist/browser-polyfill.js', `dist/${args.vendor}/dependencies/browser-polyfill.js`);
+    fs.copySync('node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js', `dist/${args.vendor}/dependencies/webcomponents-bundle.js`);
   }
   if (cb) {
     cb();

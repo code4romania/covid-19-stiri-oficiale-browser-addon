@@ -250,4 +250,6 @@ class EmergencyNewsTooltipContent extends HTMLElement {
     }
 }
 
-customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
+if (customElements.define) {
+    customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
+}
