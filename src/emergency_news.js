@@ -147,7 +147,7 @@ function splitTextByTerm(fullString, term) {
         end,
         matchType,
         originalTerm
-    }
+    };
 }
 
 function appendLinkImgElement(parent, href, imgSrc, imgClass) {
@@ -207,26 +207,49 @@ function appendLinkElements(parent, links) {
 }
 
 function createTooltip(termData, tooltipCount) {
-    tippy('.emergency_news_item' + +tooltipCount, {
+    const tippyData = {
         content: () => {
-            let emergencyNewsHeader = document.createElement("div");
-            emergencyNewsHeader.classList.add("emergency_news_header");
-            appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
-            appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
-            appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
-
-            let emergencyNewsBody = document.createElement("div");
-            emergencyNewsBody.classList.add("emergency_news_body");
-            appendTitleElement(emergencyNewsBody, termData.title);
-            appendParagraphElements(emergencyNewsBody, termData.paragraphs);
-            appendLinkElements(emergencyNewsBody, termData.links);
-
-            let emergencyNewsContent = document.createElement("div");
-            emergencyNewsContent.appendChild(emergencyNewsHeader);
-            emergencyNewsContent.appendChild(emergencyNewsBody);
-            return emergencyNewsContent;
+            return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
         },
-        interactive: true,
+        interactive: false,
+        maxWidth: 600,
         theme: 'light'
-    });
+    };
+    if (emergencyNewsConfig.isDevMode) {
+        tippyData.trigger = 'click';
+    }
+    tippy('.emergency_news_item' + (+tooltipCount), tippyData);
+}
+
+class EmergencyNewsTooltipContent extends HTMLElement {
+    constructor(title, paragraphs, links) {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        const tooltipStyle = browser.runtime.getURL("emergency_news_tooltip.css");
+        var style = document.createElement('link');
+        style.type = "text/css";
+        style.rel = "stylesheet";
+        style.href = tooltipStyle;
+        shadow.appendChild(style);
+        let emergencyNewsHeader = document.createElement("div");
+        emergencyNewsHeader.classList.add("emergency_news_header");
+        appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
+        appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/", "images/logo-code4ro.svg", "emergency_news_code4ro_logo");
+        appendLinkImgElement(emergencyNewsHeader, "http://adr.gov.ro/", "images/logo-gov.png", "emergency_news_gov_logo");
+
+        let emergencyNewsBody = document.createElement("div");
+        emergencyNewsBody.classList.add("emergency_news_body");
+        appendTitleElement(emergencyNewsBody, title);
+        appendParagraphElements(emergencyNewsBody, paragraphs);
+        appendLinkElements(emergencyNewsBody, links);
+
+        const emergencyNewsContent = document.createElement('div');
+        emergencyNewsContent.appendChild(emergencyNewsHeader);
+        emergencyNewsContent.appendChild(emergencyNewsBody);
+        shadow.appendChild(emergencyNewsContent);
+    }
+}
+
+if (customElements.define) {
+    customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
 }
