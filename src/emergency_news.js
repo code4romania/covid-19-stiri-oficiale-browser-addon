@@ -207,7 +207,7 @@ function appendLinkElements(parent, links) {
 }
 
 function createTooltip(termData, tooltipCount) {
-    tippy('.emergency_news_item' + +tooltipCount, {
+    const tippyData = {
         content: () => {
             let emergencyNewsHeader = document.createElement("div");
             emergencyNewsHeader.classList.add("emergency_news_header");
@@ -227,6 +227,11 @@ function createTooltip(termData, tooltipCount) {
             return emergencyNewsContent;
         },
         interactive: true,
+        maxWidth: 600,
         theme: 'light'
-    });
+    };
+    if(emergencyNewsConfig.isDevMode){
+        tippyData.trigger = 'click';
+    }
+    tippy('.emergency_news_item' + (+tooltipCount), tippyData);
 }

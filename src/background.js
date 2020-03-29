@@ -13,6 +13,7 @@ async function loadData() {
     }
     const httpData = await fetch(configLocation);
     config = expandConfig(await httpData.json());
+    config.isDevMode = isDevMode;
     setTimeout(loadData, 1000 * 60 * 60);
 }
 

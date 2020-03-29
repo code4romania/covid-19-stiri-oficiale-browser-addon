@@ -2,12 +2,6 @@
     font-weight: normal !important;
 }
 
-@media (min-width: 800px) {
-    .tippy-content {
-        width: 600px;
-    }
-}
-
 .emergency_news {
     background-color: #06d6c7;
     color: black;
