@@ -209,6 +209,7 @@ function appendLinkElements(parent, links) {
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
+            const newBody = new App();
             let emergencyNewsHeader = document.createElement("div");
             emergencyNewsHeader.classList.add("emergency_news_header");
             appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
@@ -224,14 +225,119 @@ function createTooltip(termData, tooltipCount) {
             let emergencyNewsContent = document.createElement("div");
             emergencyNewsContent.appendChild(emergencyNewsHeader);
             emergencyNewsContent.appendChild(emergencyNewsBody);
-            return emergencyNewsContent;
+            newBody.appendChild(emergencyNewsContent);
+            return newBody;
+            // return emergencyNewsContent;
         },
         interactive: true,
         maxWidth: 600,
         theme: 'light'
     };
-    if(emergencyNewsConfig.isDevMode){
+    if (emergencyNewsConfig.isDevMode) {
         tippyData.trigger = 'click';
     }
     tippy('.emergency_news_item' + (+tooltipCount), tippyData);
 }
+
+const template = document.createElement("template");
+template.innerHTML = `
+<style>
+:host {
+    display: block;
+    all: unset;
+    font-weight: normal !important;
+}
+:host {
+    background-color: #f9f9f9;
+    padding: 0px 0px;
+}
+
+:host .emergency_news_header {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+:host .emergency_news_header div {
+    font-size: 12px !important;
+}
+
+@media (max-width: 800px) {
+    :host .emergency_news_header div {
+        display: none;
+    }
+}
+
+:host .emergency_news_body {
+    padding: 10px;
+}
+
+:host .tippy-box .emergency_news_body a {
+    color: #1c1080;
+}
+
+:host .emergency_news_body div {
+    padding-top: 3px;
+}
+
+:host img.emergency_news_logo {
+    height: 35px !important;
+    padding: 5px 60px 5px 5px;
+}
+
+:host img.emergency_news_code4ro_logo {
+    height: 35px !important;
+    padding: 5px 10px 5px 5px;
+}
+
+:host img.emergency_news_gov_logo {
+    height: 35px !important;
+    padding: 5px;
+}
+</style>
+<div>
+  <div class="emergency_news_header">
+      <a target="_blank" href="https://code4.ro/ro/apps/stiri-oficiale/">
+          <img src="moz-extension://7e5890dc-5f27-45d7-bd80-9764b1f0dd45/images/logo-news-full.png"
+              class="emergency_news_logo">
+      </a>
+      <a target="_blank" href="https://code4.ro/">
+          <img src="moz-extension://7e5890dc-5f27-45d7-bd80-9764b1f0dd45/images/logo-code4ro.svg"
+              class="emergency_news_code4ro_logo">
+      </a>
+      <a target="_blank" href="http://adr.gov.ro/">
+          <img src="moz-extension://7e5890dc-5f27-45d7-bd80-9764b1f0dd45/images/logo-gov.png"
+              class="emergency_news_gov_logo">
+      </a>
+  </div>
+  <div class="emergency_news_body">
+      <div><b>Transmitere Coronavirus</b></div>
+      <div>
+          <p>Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact strâns cu o persoană
+              infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și
+              gură, astfel eviați atingerea dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit
+              coronavirus.</p>
+          <p>Mai multe informații găsiți aici:</p>
+      </div>
+      <div>
+          <ol>
+              <li><a target="_blank"
+                      href="https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus">Instituțiile
+                      prefectului Portalul instituțiilor prefectului din Romania</a></li>
+          </ol>
+      </div>
+  </div>
+</div>`;
+
+class App extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        shadow.appendChild(template.content.cloneNode(true));
+    }
+}
+
+customElements.define("extension-app", App);
