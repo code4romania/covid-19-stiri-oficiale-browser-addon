@@ -147,7 +147,7 @@ function splitTextByTerm(fullString, term) {
         end,
         matchType,
         originalTerm
-    }
+    };
 }
 
 function appendLinkImgElement(parent, href, imgSrc, imgClass) {
@@ -221,73 +221,16 @@ function createTooltip(termData, tooltipCount) {
     tippy('.emergency_news_item' + (+tooltipCount), tippyData);
 }
 
-const template = document.createElement("template");
-template.innerHTML = `
-<style>
-:host {
-    display: block;
-    all: unset;
-    font-weight: normal !important;
-}
-:host {
-    background-color: #f9f9f9;
-    padding: 0px 0px;
-}
-
-:host .emergency_news_header {
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 5px;
-}
-
-:host .emergency_news_header div {
-    font-size: 12px !important;
-}
-
-@media (max-width: 800px) {
-    :host .emergency_news_header div {
-        display: none;
-    }
-}
-
-:host .emergency_news_body {
-    padding: 10px;
-}
-
-:host .tippy-box .emergency_news_body a {
-    color: #1c1080;
-}
-
-:host .emergency_news_body div {
-    padding-top: 3px;
-}
-
-:host img.emergency_news_logo {
-    height: 35px !important;
-    padding: 5px 60px 5px 5px;
-}
-
-:host img.emergency_news_code4ro_logo {
-    height: 35px !important;
-    padding: 5px 10px 5px 5px;
-}
-
-:host img.emergency_news_gov_logo {
-    height: 35px !important;
-    padding: 5px;
-}
-</style>
-<div>
-</div>`;
-
 class EmergencyNewsTooltipContent extends HTMLElement {
     constructor(title, paragraphs, links) {
         super();
         const shadow = this.attachShadow({ mode: "open" });
-
+        const tooltipStyle = browser.runtime.getURL("emergency_news_tooltip.css");
+        var style = document.createElement('link');
+        style.type = "text/css";
+        style.rel = "stylesheet";
+        style.href = tooltipStyle;
+        shadow.appendChild(style);
         let emergencyNewsHeader = document.createElement("div");
         emergencyNewsHeader.classList.add("emergency_news_header");
         appendLinkImgElement(emergencyNewsHeader, "https://code4.ro/ro/apps/stiri-oficiale/", "images/logo-news-full.png", "emergency_news_logo");
@@ -300,7 +243,7 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         appendParagraphElements(emergencyNewsBody, paragraphs);
         appendLinkElements(emergencyNewsBody, links);
 
-        const emergencyNewsContent = template.content.cloneNode(true);
+        const emergencyNewsContent = document.createElement('div');
         emergencyNewsContent.appendChild(emergencyNewsHeader);
         emergencyNewsContent.appendChild(emergencyNewsBody);
         shadow.appendChild(emergencyNewsContent);

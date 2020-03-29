@@ -1,0 +1,53 @@
+:host {
+    display: block;
+    all: unset;
+    font-weight: normal !important;
+    background-color: #f9f9f9;
+    padding: 0px 0px;
+}
+
+:host .emergency_news_header {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+:host .emergency_news_header div {
+    font-size: 12px !important;
+}
+
+@media (max-width: 800px) {
+    :host .emergency_news_header div {
+        display: none;
+    }
+}
+
+:host .emergency_news_body {
+    padding: 10px;
+}
+
+:host .tippy-box .emergency_news_body a {
+    color: #1c1080;
+}
+
+:host .emergency_news_body div {
+    padding-top: 3px;
+}
+
+:host img.emergency_news_logo {
+    height: 35px !important;
+    padding: 5px 60px 5px 5px;
+}
+
+:host img.emergency_news_code4ro_logo {
+    height: 35px !important;
+    padding: 5px 10px 5px 5px;
+}
+
+:host img.emergency_news_gov_logo {
+    height: 35px !important;
+    padding: 5px;
+}
