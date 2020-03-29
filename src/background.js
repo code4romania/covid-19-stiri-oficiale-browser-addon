@@ -79,7 +79,7 @@ function getDomain(url) {
 
 async function refreshBrowserAction(tabId, enabledOnPage, domain) {
     const actionName = enabledOnPage ? 'Dezactivează' : 'Activează';
-    let title = `${actionName} STIRI OFICIALE`;
+    let title = `${actionName} ȘTIRI OFICIALE`;
     if (!isAndroid) {
         title = `${title} pe ${domain}`;
         browser.contextMenus.update('toggle-on-domain', {
