@@ -1,61 +1,6 @@
-.tippy-box {
-    font-weight: normal !important;
-}
-
 .emergency_news {
     background-color: #06d6c7;
     color: black;
     margin-right: 0.25em;
     margin-left: 0.25em;
-}
-
-.tippy-content {
-    background-color: #f9f9f9;
-    padding: 0px 0px;
-}
-
-.tippy-content .emergency_news_header {
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    padding: 5px;
-}
-
-.tippy-content .emergency_news_header div {
-    font-size: 12px !important;
-}
-
-@media (max-width: 800px) {
-    .tippy-content .emergency_news_header div {
-        display: none;
-    }
-}
-
-.tippy-content .emergency_news_body {
-    padding: 10px;
-}
-
-.tippy-box .emergency_news_body a {
-    color: #1c1080;
-}
-
-.tippy-content .emergency_news_body div {
-    padding-top: 3px;
-}
-
-.tippy-content img.emergency_news_logo {
-    height: 35px !important;
-    padding: 5px 60px 5px 5px;
-}
-
-.tippy-content img.emergency_news_code4ro_logo {
-    height: 35px !important;
-    padding: 5px 10px 5px 5px;
-}
-
-.tippy-content img.emergency_news_gov_logo {
-    height: 35px !important;
-    padding: 5px;
 }
