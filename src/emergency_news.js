@@ -262,6 +262,14 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         emergencyNewsContent.appendChild(emergencyNewsBody);
         shadow.appendChild(emergencyNewsContent);
     }
+            let emergencyNewsContent = document.createElement("div");
+            emergencyNewsContent.appendChild(emergencyNewsHeader);
+            emergencyNewsContent.appendChild(emergencyNewsBody);
+            return emergencyNewsContent;
+        },
+        interactive: true,
+        theme: 'light'
+    });
 }
 
 if (customElements.define) {
