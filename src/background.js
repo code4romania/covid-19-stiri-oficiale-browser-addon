@@ -77,7 +77,7 @@ async function onComplete(e) {
     }
 }
 
-browser.webNavigation.onCompleted.addListener(onComplete,
+browser.webNavigation.onDOMContentLoaded.addListener(onComplete,
     { url: [{ schemes: ["http", "https"] }] }
 );
 
