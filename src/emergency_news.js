@@ -184,11 +184,11 @@ function appendParagraphElements(parent, paragraphs) {
     parent.appendChild(paragraphsParent);
 }
 
-function appendImageElements(parent, links) {
-    if (links) {
+function appendImageElements(parent, images) {
+    if (images) {
         let imgParent = document.createElement("div");
         imgParent.classList.add("emergency_news_body_images");
-        links.forEach((image) => {
+        images.forEach((image) => {
             appendLinkImgElement(imgParent, image.href, image.imgsrc);
         });
         parent.appendChild(imgParent);
@@ -225,7 +225,7 @@ function createTooltip(termData, tooltipCount) {
             return new EmergencyNewsTooltipContent(
                 termData.title, termData.paragraphs, termData.links, termData.images);
         },
-        interactive: false,
+        interactive: true,
         maxWidth: 600,
         theme: 'light'
     };

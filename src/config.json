@@ -4,53 +4,42 @@
         {
             "title": "Simptome Coronavirus",
             "aliases": [
-                "am simptome coronavirus",
-                "am simptome de corona",
-                "am simptome de covid-19",
-                "care sunt simptomele coronaviurs",
-                "coronavirus prezinta simptome",
-                "prezintă simptome",
                 "simptome",
-                "simptomele coronavirus",
-                "simptomele covid-19"
+                "simptomele covid-19",
+                "coronavirus prezinta simptome",
+                "simptomele covid-19",
+                "simptomele coronavirus"
             ],
             "paragraphs": [
-                "Persoanele infectate cu 2019-nCoV sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus."
+                "Persoanele infectate cu SARS-CoV-2 sau persoanele răcite sau gripate, dezvoltă de obicei simptome respiratorii precum tusea, febra, secreţii nazale. Chiar dacă multe dintre simptome sunt asemănătoare, acestea sunt cauzate de viruşi diferiţi. Este dificil să se identifice boala doar pe baza simptomelor. De aceea testele de laborator sunt necesare pentru a confirma dacă cineva este infectat cu acest nou tip de virus.",
+                "Mai multe informații găsiți aici:"
             ],
             "links": [
-                "https://cetrebuiesafac.ro",
-                "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php"
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus"
             ]
         },
         {
             "title": "Coronavirus",
             "aliases": [
-                "2019-nCoV",
                 "coronavirus",
-                "coronaviruses",
+                "covid-19",
                 "Coronavirusul",
                 "Coronavirusului",
-                "coronavirusuri",
-                "coronavirusurilor",
-                "covid-19",
+                "coronaviruses",
                 "covid19",
+                "2019-nCoV",
                 "SARS-CoV-2",
-                "coronavirus 2019",
-                "coronavirus 2020",
-                "coronavirusi",
-                "virus wuhan",
-                "virus wuhan 2019",
-                "virus wuhan 2020"
+                "coronavirusuri",
+                "coronavirusurilor"
             ],
             "paragraphs": [
-                "Informează-te din surse oficiale. Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale.",
+                "Informează-te din surse oficiale.Nu toate știrile care circulă pe internet sunt și corecte. Când citești informații despre subiectul pandemiei verifică informația cu sursele oficiale. ",
                 "Acestea sunt disponibile aici:"
             ],
             "links": [
+                "https://stirioficiale.ro",
                 "http://www.dsu.mai.gov.ro/category/http10-1-100-213dsuindex-phpcategoryuncategorized",
-                "http://www.ms.ro/coronavirus-covid-19",
-                "http://www.cnscbt.ro/index.php/ncov",
-                "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php"
+                "http://www.ms.ro/coronavirus-covid-19"
             ]
         },
         {
@@ -71,108 +60,47 @@
         {
             "title": "Perioada de incubație Coronavirus",
             "aliases": [
-                "durata incubație coronavirus",
-                "durata incubație covid-19",
                 "incubație",
-                "incubație coronavirus",
-                "incubație covid-19",
-                "manifestare coronavirus",
-                "Perioada de incubație a noului coronavirus",
                 "Perioada de incubație coronavirus",
-                "timp incubație covid-19",
-                "timp incubație covid-19"
+                "Perioada de incubație a noului coronavirus"
             ],
             "paragraphs": [
-                "Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie entru 2019-nCoV variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date."
+                "Perioada de incubaţie este perioada dintre momentul infectării şi debutul simptomelor clinice ale bolii. Estimările curente ale perioadei de incubaţie variază între 1-12.5 zile, cu estimări mediane de 5-6 zile. Aceste estimări vor fi perfecţionate pe măsură ce vor fi disponibile mai multe date.",
+                "Mai multe informații găsiți aici:"
             ],
             "links": [
-                "https://cetrebuiesafac.ro/intrebari-frecvente",
-                "http://www.cnscbt.ro/index.php"
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus"
             ]
         },
         {
             "title": "Transmitere Coronavirus",
             "aliases": [
-                "cum se transmite coronavirus",
-                "mod de transmitere coronavirusului",
-                "mod trasmitere coronaviurs",
-                "transmisibilitate coronavirus",
-                "transmisilibitatea coronavirusului",
-                "transmit coronavirus",
-                "transmit covid-19",
                 "transmitere",
+                "Transmiterea",
                 "Transmitere Coronavirus",
                 "transmitere covid-19",
-                "Transmiterea"
+                "transmit coronavirus",
+                "transmit covid-19"
             ],
             "paragraphs": [
-                "Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact apropiat ( < 2m)  cu o persoană infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și gură, eviați atingerea acestor zone dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit coronavirus.",
+                "Coronavirus poate fi transmis de la o persoană la alta, de obicei după un contact strâns cu o persoană infectată. Virusul se transmite mai ales pe cale respiratorie, dar poate intra în corp prin ochi, nas și gură, astfel eviați atingerea dacă nu v-ați spălat bine mâinile. Animalele de companie nu transmit coronavirus.",
                 "Mai multe informații găsiți aici:"
             ],
             "links": [
-                "https://cetrebuiesafac.ro",
-                "http://www.cnscbt.ro/index.php/informatii-pentru-populatie",
-                "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php"
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus"
             ]
         },
         {
             "title": "Stare de urgență începând cu 16 martie",
             "aliases": [
-                "decret stare de urgență",
-                "decret stare urgență",
-                "stare de urgență",
-                "stare urgență",
-                "starea de urgență"
+                "stare de urgență"
             ],
             "paragraphs": [
-                "Această stare de urgență va face posibilă alocarea de noi resurse importante pentru gestionarea crizei. În acest fel, Guvernul va avea posibilitatea să aloce mai mulți bani domeniului sănătății, mai mulți bani pentru medicamente, mai mulți bani pentru aparatura medicală absolut necesară"
+                "Această stare de urgență va face posibilă alocarea de noi resurse importante pentru gestionarea crizei. În acest fel, Guvernul va avea posibilitatea să aloce mai mulți bani domeniului sănătății, mai mulți bani pentru medicamente, mai mulți bani pentru aparatura medicală absolut necesară.",
+                "Mai multe informații găsiți aici:"
             ],
             "links": [
-                "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636",
-                "https://stirioficiale.ro/hotarari"
-            ]
-        },
-        {
-            "title": "Revenit în românia",
-            "aliases": [
-                "intors acasă",
-                "intors din Italia",
-                "intors in romania",
-                "întors în românia",
-                "întors în țară",
-                "revenit din italia",
-                "revenit din Spania",
-                "revenit în românia"
-            ],
-            "paragraphs": [
-                "Este foarte important, pentru sănătatea noastră și a celor din jur să respectăm întocmai procedurile medicale și organizaționale transmise de autorițăți. Dacă v-ați întors din zone cu risc ridicat declarați acest fapt organelor și urmați indicațiile de autocarantină. Nerespectarea acestor reguli vă expune și pe dvs și pe cei dragi la pericole mari, dar care pot fi evitate."
-            ],
-            "links": [
-                "https://www.mai.gov.ro/15-recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus-covid-19/",
-                "https://www.mai.gov.ro/recomandari-emise-de-grupul-de-analiza-fata-de-urmatoarele-5-situatii-intalnite-sau-care-pot-aparea-in-urma-evolutiei-situatiei-generate-de-infectarea-cu-virusul-covid-19-coronavirus/"
-            ]
-        },
-        {
-            "title": "Teste 2019-nCoV",
-            "aliases": [
-                "test covid-19",
-                "test covid19",
-                "test de coronavirus",
-                "test pentru detectarea coronavirus",
-                "test pentru detectarea covid",
-                "test pentru detectarea covid-19",
-                "testare coronavirus",
-                "teste covid",
-                "teste pentru coronavirus",
-                "teste pentru covid19"
-            ],
-            "paragraphs": [
-                "Există mai multe tipuri de testări și procedee epidemiologice specifice pentru detectarea prezenței a virusului în organism. Conform Ministerului Sănătății nu există probleme cu aprovizionarea centrelor de testare sau a altor unități medicale cu testele necesare și situația este monitorizată în permanență. "
-            ],
-            "links": [
-                "https://stirioficiale.ro/informatii/monitorizare-stocuri-de-teste-pentru-diagnosticare-moleculara",
-                "http://www.ms.ro/2020/03/10/inventar-a-testelor-de-detectare-a-covid-19/",
-                "https://cetrebuiesafac.ro/ai-simptome"
+                "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636"
             ]
         },
         {
@@ -221,26 +149,6 @@
         {
             "title": "Decret semnat de Președintele României",
             "href": "https://www.presidency.ro/ro/media/comunicate-de-presa/decret-semnat-de-presedintele-romaniei-domnul-klaus-iohannis-privind-instituirea-starii-de-urgenta-pe-teritoriul-romaniei"
-        },
-        {
-            "title": "SARS-CoV-2: legislație și informații utile",
-            "href": "http://www.cnscbt.ro/index.php/ncov"
-        },
-        {
-            "title": "SARS-CoV-2: sfaturi generale",
-            "href": "https://www.cdt-babes.ro/articole/coronavirus-infectia-COVID-19.php"
-        },
-        {
-            "title": "Află ce ai de făcut în orice situație",
-            "href": "https://cetrebuiesafac.ro/intrebari-frecvente"
-        },
-        {
-            "title": "Află ce ai de făcut în orice situație",
-            "href": "https://cetrebuiesafac.ro"
-        },
-        {
-            "title": "Informații pentru populație (INSP)",
-            "href": "http://www.cnscbt.ro/index.php/informatii-pentru-populatie"
         }
     ],
     "pageEnablingTerms": [
@@ -255,7 +163,7 @@
         "coronavirusuri",
         "coronavirusurilor"
     ],
-    "disabledOn": [
+    "disabledOn":[
         "https://cemafac.ro",
         "https://test.cemafac.ro",
         "https://cetrebuiesafac.ro"

@@ -49,6 +49,11 @@ img.emergency_news_gov_logo {
     justify-content: center;
 }
 
+.emergency_news_body_images a {
+    display: flex;
+    justify-content: center;
+}
+
 .emergency_news_body_images img {
-    max-width: 100%;
+    width: 50%;
 }
