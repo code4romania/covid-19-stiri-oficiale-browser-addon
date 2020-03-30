@@ -1,5 +1,5 @@
 {
-    "version": "1",
+    "version": "2",
     "terms": [
         {
             "title": "Simptome Coronavirus",
@@ -180,9 +180,9 @@
             "aliases": [
                 "pacienți",
                 "bolnavi",
-                "Numărul deceselor",
                 "pacient",
-                "pacientul"
+                "pacientul",
+                "îmbolnăvire"
             ],
             "paragraphs": [
                 "Infografiile se actualizează periodic și sunt centralizate. Click în graficele de mai jos pentru a le vedea."

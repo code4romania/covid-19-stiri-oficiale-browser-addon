@@ -222,7 +222,8 @@ function appendLinkElements(parent, links) {
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
-            return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
+            return new EmergencyNewsTooltipContent(
+                termData.title, termData.paragraphs, termData.links, termData.images);
         },
         interactive: false,
         maxWidth: 600,
@@ -235,7 +236,7 @@ function createTooltip(termData, tooltipCount) {
 }
 
 class EmergencyNewsTooltipContent extends HTMLElement {
-    constructor(title, paragraphs, links) {
+    constructor(title, paragraphs, links, images) {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         const tooltipStyle = browser.runtime.getURL("emergency_news_tooltip.css");
@@ -254,7 +255,7 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         emergencyNewsBody.classList.add("emergency_news_body");
         appendTitleElement(emergencyNewsBody, title);
         appendParagraphElements(emergencyNewsBody, paragraphs);
-        appendImageElements(emergencyNewsBody, termData.images);
+        appendImageElements(emergencyNewsBody, images);
         appendLinkElements(emergencyNewsBody, links);
 
         const emergencyNewsContent = document.createElement('div');
@@ -262,14 +263,6 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         emergencyNewsContent.appendChild(emergencyNewsBody);
         shadow.appendChild(emergencyNewsContent);
     }
-            let emergencyNewsContent = document.createElement("div");
-            emergencyNewsContent.appendChild(emergencyNewsHeader);
-            emergencyNewsContent.appendChild(emergencyNewsBody);
-            return emergencyNewsContent;
-        },
-        interactive: true,
-        theme: 'light'
-    });
 }
 
 if (customElements.define) {

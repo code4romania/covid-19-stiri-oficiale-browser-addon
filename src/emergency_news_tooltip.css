@@ -43,3 +43,12 @@ img.emergency_news_gov_logo {
     height: 35px !important;
     padding: 5px;
 }
+
+.emergency_news_body_images {
+    display: flex;
+    justify-content: center;
+}
+
+.emergency_news_body_images img {
+    max-width: 100%;
+}
