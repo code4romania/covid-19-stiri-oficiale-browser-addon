@@ -150,16 +150,17 @@ function splitTextByTerm(fullString, term) {
     };
 }
 
-function appendLinkImgElement(parent, href, imgSrc, imgClass) {
+function appendLinkImgElement(parent, href, imgSrc, itemClass) {
     const imgUrl = browser.runtime.getURL(imgSrc);
     let linkElement = document.createElement("a");
     linkElement.setAttribute("target", "_blank");
+    linkElement.classList.add(itemClass);
     if (href.startsWith("http")) {
         linkElement.setAttribute("href", href);
     }
     let imgElement = document.createElement("img");
     imgElement.setAttribute("src", imgUrl);
-    imgElement.classList.add(imgClass);
+    imgElement.classList.add(itemClass);
     linkElement.appendChild(imgElement);
     parent.appendChild(linkElement);
 }
@@ -183,7 +184,6 @@ function appendParagraphElements(parent, paragraphs) {
 }
 
 function appendLinkElements(parent, links) {
-    let linksParent = document.createElement("div");
     let listElement = document.createElement("ol");
     links.forEach((link) => {
         let listItemElement = document.createElement("li");
@@ -202,8 +202,7 @@ function appendLinkElements(parent, links) {
         listItemElement.appendChild(linkElement);
         listElement.appendChild(listItemElement);
     });
-    linksParent.appendChild(listElement);
-    parent.appendChild(linksParent);
+    parent.appendChild(listElement);
 }
 
 function createTooltip(termData, tooltipCount) {
@@ -211,7 +210,7 @@ function createTooltip(termData, tooltipCount) {
         content: () => {
             return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
         },
-        interactive: false,
+        interactive: true,
         maxWidth: 600,
         theme: 'light'
     };
@@ -250,6 +249,4 @@ class EmergencyNewsTooltipContent extends HTMLElement {
     }
 }
 
-if (customElements.define) {
-    customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
-}
+customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
