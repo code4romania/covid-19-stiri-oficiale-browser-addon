@@ -57,13 +57,15 @@ async function injectContentScriptInTab(tabId) {
         scripts.push('dependencies/webcomponents-bundle.js');
     }
     scripts.push('dependencies/popper.js');
+    scripts.push('dependencies/echarts.min.js');
     scripts.push('dependencies/tippy-bundle.umd.js');
     scripts.push('emergency_news.js');
     scripts.forEach(async (file) => {
-        await browser.tabs.executeScript(tabId, { file })
-            .then(() => { }, (error) => {
-                console.error(`Error while loading file ${file}: ${error}`);
-            });
+        try {
+            await browser.tabs.executeScript(tabId, { file });
+        } catch (error) {
+            console.error(`Error while loading file ${file}`);
+        }
     });
 }
 

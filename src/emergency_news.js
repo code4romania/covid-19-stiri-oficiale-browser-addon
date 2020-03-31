@@ -205,13 +205,24 @@ function appendLinkElements(parent, links) {
     parent.appendChild(listElement);
 }
 
+var myScript = document.createElement("script");
+myScript.type="text/javascript";
+myScript.src=browser.runtime.getURL('dependencies/echarts.min.js');
+document.head.appendChild(myScript);
+
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
-            return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
+            try {
+                return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
+            } catch (error) {
+                console.error(error);
+                return document.createElement('div');
+            }
         },
         interactive: true,
         maxWidth: 600,
+        appendTo: document.body,
         theme: 'light'
     };
     if (emergencyNewsConfig.isDevMode) {
@@ -219,6 +230,8 @@ function createTooltip(termData, tooltipCount) {
     }
     tippy('.emergency_news_item' + (+tooltipCount), tippyData);
 }
+
+var count = 1;
 
 class EmergencyNewsTooltipContent extends HTMLElement {
     constructor(title, paragraphs, links) {
@@ -240,6 +253,35 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         emergencyNewsBody.classList.add("emergency_news_body");
         appendTitleElement(emergencyNewsBody, title);
         appendParagraphElements(emergencyNewsBody, paragraphs);
+        let chart = document.createElement("div");
+        count++;
+        emergencyNewsBody.appendChild(chart);
+        chart.id = `main${count}`;
+        chart.style = "width:600px; height:400px;";
+        var myChart = echarts.init(chart);
+        // specify chart configuration item and data
+        var option = {
+            title: {
+                text: 'ECharts entry example'
+            },
+            tooltip: {},
+            legend: {
+                data: ['Sales']
+            },
+            xAxis: {
+                data: ["shirt", "cardign", "chiffon shirt", "pants", "heels", "socks"]
+            },
+            yAxis: {},
+            series: [{
+                name: 'Sales',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // use configuration item and data specified to show chart
+        myChart.setOption(option);
+
         appendLinkElements(emergencyNewsBody, links);
 
         const emergencyNewsContent = document.createElement('div');

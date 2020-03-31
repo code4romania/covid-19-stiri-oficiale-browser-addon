@@ -19,7 +19,8 @@
         "images/logo-code4ro.svg",
         "images/logo-news-full.png",
         "images/logo-gov.png",
-        "emergency_news_tooltip.css"
+        "emergency_news_tooltip.css",
+        "dependencies/echarts.min.js"
     ],
     "icons": {
         "16": "images/icon-16.png",

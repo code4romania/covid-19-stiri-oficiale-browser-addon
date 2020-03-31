@@ -29,6 +29,7 @@
     "homepage": "https://github.com/code4romania/emergency-news-addon#readme",
     "dependencies": {
         "@webcomponents/webcomponentsjs": "^2.4.3",
+        "echarts": "^4.7.0",
         "tippy.js": "^6.0.3",
         "webextension-polyfill": "^0.6.0"
     },
