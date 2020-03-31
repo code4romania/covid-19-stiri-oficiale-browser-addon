@@ -4,3 +4,7 @@
     margin-right: 0.25em;
     margin-left: 0.25em;
 }
+
+.tippy-content {
+    padding: 0px 0px !important;
+}

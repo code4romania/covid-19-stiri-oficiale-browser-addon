@@ -5,15 +5,14 @@ const isAndroid = navigator.userAgent.toLocaleLowerCase().indexOf('android') !==
 const isDevMode = browser.runtime.getManifest().version === '0.0.0';
 
 async function loadData() {
-    let configLocation;
-    if (isDevMode) {
-        configLocation = './config.json';
-    } else {
-        configLocation = 'https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json';
+    let localConfig = await (await fetch('./config.json')).json();
+    if (!isDevMode) {
+        let remoteConfig = await (await fetch('https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json')).json();
+        if (remoteConfig.version === localConfig.version) {
+            localConfig = remoteConfig;
+        }
     }
-    const httpData = await fetch(configLocation);
-    config = expandConfig(await httpData.json());
-    config.isDevMode = isDevMode;
+    config = expandConfig(localConfig);
     setTimeout(loadData, 1000 * 60 * 60);
 }
 
@@ -39,6 +38,7 @@ function expandConfig(configInput) {
         newLinks[link.href] = link.title;
     });
     configInput.links = newLinks;
+    configInput.isDevMode = isDevMode;
     return configInput;
 }
 
@@ -155,23 +155,14 @@ if (!isAndroid) {
         title: "Activează/Dezactivează pe pagină",
         contexts: ["all"]
     });
-    if (isFirefox) {
-        browser.contextMenus.onShown.addListener(async (info, tab) => {
-            if (info.pageUrl.startsWith('http')) {
-                const domain = getDomain(info.pageUrl);
-                const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
-                refreshBrowserAction(tab.id, domainSettings.enabledOnPage, domain);
-            }
-        });
-    } else {
-        browser.tabs.onActivated.addListener(async (activeInfo) => {
-            let tabInfo = await browser.tabs.get(activeInfo.tabId);
-            if (tabInfo.url) {
-                const domain = getDomain(tabInfo.url);
-                const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
-                refreshBrowserAction(activeInfo.tabId, domainSettings.enabledOnPage, domain);
-            }
-        });
-    }
+    browser.tabs.onActivated.addListener(async (activeInfo) => {
+        let tabInfo = await browser.tabs.get(activeInfo.tabId);
+        if (tabInfo.url) {
+            const domain = getDomain(tabInfo.url);
+            const domainSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(domain, { enabledOnPage: true });
+            refreshBrowserAction(activeInfo.tabId, domainSettings.enabledOnPage, domain);
+        }
+    });
+
     browser.contextMenus.onClicked.addListener(toggleCurrentDomain);
 }
