@@ -18,7 +18,7 @@ async function loadData() {
 
 async function expandConfig(configInput) {
     let newTerms = [];
-    const termPromises = await Promise.allSettled(configInput.terms.map(async (term) => {
+    const termPromises = await Promise.all(configInput.terms.map(async (term) => {
         return new Promise((resolve, reject) => {
             if (!!term.chart) {
                 fetch(term.chart.dataSource).then((data) => {
@@ -36,18 +36,16 @@ async function expandConfig(configInput) {
             }
         });
     }));
-    termPromises
-        .map((promise) => promise.value)
-        .forEach((term) => {
-            if (!!term.aliases) {
-                term.aliases.forEach(function (alias) {
-                    newTerms.push({
-                        "key": alias,
-                        "value": term
-                    });
+    termPromises.forEach((term) => {
+        if (!!term.aliases) {
+            term.aliases.forEach(function (alias) {
+                newTerms.push({
+                    "key": alias,
+                    "value": term
                 });
-            }
-        });
+            });
+        }
+    });
     newTerms.sort((a, b) => {
         return b.key.length - a.key.length || b.key.localeCompare(a.key);
     });

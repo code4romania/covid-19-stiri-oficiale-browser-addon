@@ -1,6 +1,7 @@
 const args = require('./lib/args');
 const fs = require('fs-extra');
 const { watch, series } = require('gulp');
+const path = require('path');
 
 function copyDependencies(cb) {
   fs.ensureDirSync(`dist/${args.vendor}/dependencies/`);
@@ -16,8 +17,8 @@ function copyDependencies(cb) {
     cb();
   }
 }
-const vendorManifestPath = `src/manifest.${args.vendor}.json`;
-const distManifestPath = `dist/${args.vendor}/manifest.json`;
+const vendorManifestPath = path.join('src', `manifest.${args.vendor}.json`);
+const distManifestPath = path.join('dist', args.vendor, 'manifest.json');
 function copyManifest(cb) {
   let manifest = fs.readJsonSync('src/manifest.json');
   if (fs.existsSync(vendorManifestPath)) {
@@ -31,6 +32,7 @@ function copyManifest(cb) {
     manifest = Object.assign({}, manifest, { version: '0.0.0' });
   }
   if (args.verbose) {
+    console.log(`Writing ${distManifestPath} with content:`);
     console.log(JSON.stringify(manifest, null, 2));
   }
   fs.writeJsonSync(distManifestPath, manifest, { spaces: 4 });
@@ -40,8 +42,7 @@ function copyManifest(cb) {
 }
 
 function noManifests(fileName) {
-  const include = fileName.indexOf('src/manifest.') === -1;
-  return include;
+  return fileName.indexOf('manifest.') === -1;
 }
 
 function copySrc(cb) {

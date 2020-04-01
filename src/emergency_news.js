@@ -210,17 +210,23 @@ function appendLinkElements(parent, links) {
 }
 
 function appendChartElement(parent, chartData) {
-    let chart = document.createElement("div");
-    chart.classList.add("emergency_news_chart");
-    var myChart = echarts.init(chart);
-    myChart.setOption(convertStateToChartOptions(chartData.state));
-    myChart.on('click', function (params) {
+    let chartWrapper = document.createElement("div");
+    const chart = echarts.init(chartWrapper);
+    const options = convertStateToChartOptions(chartData.state);
+    chart.setOption(options);
+    chart.on('click', function (params) {
         window.open(chartData.href, '_blank');
     });
-    parent.appendChild(chart);
-    new ResizeObserver(() => {
-        myChart.resize();
-    }).observe(parent);
+    parent.appendChild(chartWrapper);
+    chartWrapper.classList.add("emergency_news_chart");
+    if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(() => {
+            chart.resize();
+        }).observe(parent);
+    } else {
+        chartWrapper.style = "width:300px; height:300px";
+        chart.resize();
+    }
 }
 
 function createTooltip(termData, tooltipCount) {
