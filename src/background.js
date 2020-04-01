@@ -64,7 +64,7 @@ async function injectContentScriptInTab(tabId) {
         try {
             await browser.tabs.executeScript(tabId, { file });
         } catch (error) {
-            console.error(`Error while loading file ${file}`);
+            console.error(`Error while loading file ${file}:` + error);
         }
     });
 }

@@ -7,7 +7,7 @@ function copyDependencies(cb) {
   fs.copySync('node_modules/@popperjs/core/dist/umd/popper.js', `dist/${args.vendor}/dependencies/popper.js`);
   fs.copySync('node_modules/tippy.js/dist/tippy-bundle.umd.js', `dist/${args.vendor}/dependencies/tippy-bundle.umd.js`);
   fs.copySync('node_modules/tippy.js/themes/light.css', `dist/${args.vendor}/dependencies/light.css`);
-  fs.copySync('node_modules/echarts/dist/echarts.js', `dist/${args.vendor}/dependencies/echarts.min.js`);
+  fs.copySync('node_modules/echarts/dist/echarts.min.js', `dist/${args.vendor}/dependencies/echarts.min.js`);
   if (args.vendor === 'chrome') {
     fs.copySync('node_modules/webextension-polyfill/dist/browser-polyfill.js', `dist/${args.vendor}/dependencies/browser-polyfill.js`);
     fs.copySync('node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js', `dist/${args.vendor}/dependencies/webcomponents-bundle.js`);
