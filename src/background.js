@@ -5,9 +5,10 @@ const isAndroid = navigator.userAgent.toLocaleLowerCase().indexOf('android') !==
 const isDevMode = browser.runtime.getManifest().version === '0.0.0';
 
 async function loadData() {
-    let localConfig = await (await fetch('./config.json')).json();
+    const version = 2;
+    let localConfig = await (await fetch(`./config-v${version}.json`)).json();
     if (!isDevMode) {
-        let remoteConfig = await (await fetch('https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json')).json();
+        let remoteConfig = await (await fetch(`https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config-v${version}.json`)).json();
         if (remoteConfig.version === localConfig.version) {
             localConfig = remoteConfig;
         }
