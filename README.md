@@ -25,15 +25,13 @@ Concept dezvoltat ca parte din programul Civic Labs al Code for Romania în part
 
 This project is built by amazing volunteers and you can be one of them! Here's a list of ways in [which you can contribute to this project](.github/CONTRIBUTING.md).
 
+## Local debug and test with
+npm start
+
 ## Built With
 npm run build-firefox
 npm run build-chrome
 npm run build-android
-
-## Local debug and test with
-npm run dev-firefox
-npm run dev-chrome
-npm run dev-android
 
 ## Deployment
 

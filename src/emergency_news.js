@@ -50,7 +50,9 @@ function walk(node) {
         case 3: // Text node
             try {
                 handleText(node);
-            } catch { }
+            } catch (error) {
+                console.error(error);
+            }
             break;
     }
 }
@@ -109,8 +111,10 @@ function handleText(textNode) {
                 textNode.parentNode.insertBefore(divWithTooltip, after);
                 createTooltip(termData, tooltipCount);
             }
-        } catch { }
-    })
+        } catch (error) {
+            console.error(error);
+        }
+    });
 }
 
 
@@ -190,7 +194,7 @@ function appendLinkElements(parent, links) {
         let linkElement = document.createElement("a");
         let linkTitle;
         if (!!emergencyNewsConfig.links[link]) {
-            linkTitle = emergencyNewsConfig.links[link]
+            linkTitle = emergencyNewsConfig.links[link];
         } else {
             linkTitle = link;
         }
@@ -205,13 +209,39 @@ function appendLinkElements(parent, links) {
     parent.appendChild(listElement);
 }
 
+function appendChartElement(parent, chartData) {
+    let chartWrapper = document.createElement("div");
+    const chart = echarts.init(chartWrapper);
+    const options = convertStateToChartOptions(chartData.state);
+    chart.setOption(options);
+    chart.on('click', function (params) {
+        window.open(chartData.href, '_blank');
+    });
+    parent.appendChild(chartWrapper);
+    chartWrapper.classList.add("emergency_news_chart");
+    if (typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(() => {
+            chart.resize();
+        }).observe(parent);
+    } else {
+        chartWrapper.style = "width:300px; height:300px";
+        chart.resize();
+    }
+}
+
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
-            return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
+            try {
+                return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links, termData.chart);
+            } catch (error) {
+                console.error(error);
+                return document.createElement('div');
+            }
         },
         interactive: true,
         maxWidth: 600,
+        appendTo: document.body,
         theme: 'light'
     };
     if (emergencyNewsConfig.isDevMode) {
@@ -221,7 +251,7 @@ function createTooltip(termData, tooltipCount) {
 }
 
 class EmergencyNewsTooltipContent extends HTMLElement {
-    constructor(title, paragraphs, links) {
+    constructor(title, paragraphs, links, chart) {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         const tooltipStyle = browser.runtime.getURL("emergency_news_tooltip.css");
@@ -240,6 +270,9 @@ class EmergencyNewsTooltipContent extends HTMLElement {
         emergencyNewsBody.classList.add("emergency_news_body");
         appendTitleElement(emergencyNewsBody, title);
         appendParagraphElements(emergencyNewsBody, paragraphs);
+        if (chart) {
+            appendChartElement(emergencyNewsBody, chart);
+        }
         appendLinkElements(emergencyNewsBody, links);
 
         const emergencyNewsContent = document.createElement('div');
@@ -250,3 +283,103 @@ class EmergencyNewsTooltipContent extends HTMLElement {
 }
 
 customElements.define("emergency-news-tooltip-content", EmergencyNewsTooltipContent);
+
+var Constants = {
+    confirmedColor: '#66A4FB',
+    curedColor: '#65E0E0',
+    deathColor: 'black'
+};
+function dateFromTimestamp(timestamp) {
+    return new Date(timestamp * 1000);
+}
+function formattedShortDateString(date) {
+    const months = [
+        'Ian',
+        'Feb',
+        'Mar',
+        'Apr',
+        'Mai',
+        'Iun',
+        'Iul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec'
+    ];
+    return date.getDate() + ' ' + months[date.getMonth()];
+}
+
+function convertStateToChartOptions(state) {
+    const history = state.dailyStats.history;
+    const confirmedCasesHistory = history.flatMap((entry) => {
+        return entry.complete === false ? [] : Math.max(entry.infected, 0);
+    });
+    const curedCasesHistory = history.flatMap((entry) => {
+        return entry.complete === false ? [] : Math.max(entry.cured, 0);
+    });
+    const deathCasesHistory = history.flatMap((entry) => {
+        return entry.complete === false ? [] : Math.max(entry.deaths, 0);
+    });
+    const dateStrings = history.flatMap((entry) => {
+        return entry.complete === false ? [] : this.formattedShortDateString(this.dateFromTimestamp(entry.datePublished));
+    });
+
+    var labels = ['Confirmați', 'Vindecați', 'Decedaţi'];
+    return {
+        xAxis: {
+            type: 'category',
+            data: dateStrings,
+            axisLabel: {
+                color: 'gray'
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                color: 'gray'
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                axis: 'x'
+            },
+            formatter: '<h4 style="color: white">{b}</h4><span>{a2}: {c2}<br />{a1}: {c1}<br />{a0}: {c0}</span>'
+        },
+        legend: {
+            data: labels,
+            bottom: '0px',
+            icon: 'circle',
+        },
+        grid: {
+            left: '1%',
+            right: 0,
+            bottom: '50px',
+            top: '20%',
+            containLabel: true
+        }, series: [
+            {
+                data: confirmedCasesHistory,
+                name: labels[0],
+                stack: 'one',
+                type: 'bar',
+                color: Constants.confirmedColor
+            },
+            {
+                data: curedCasesHistory,
+                name: labels[1],
+                stack: 'one',
+                type: 'bar',
+                color: Constants.curedColor
+            },
+            {
+                data: deathCasesHistory,
+                name: labels[2],
+                stack: 'one',
+                type: 'bar',
+                color: Constants.deathColor
+            }
+        ]
+    };
+}

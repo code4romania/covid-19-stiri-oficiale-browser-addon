@@ -5,20 +5,39 @@ const isAndroid = navigator.userAgent.toLocaleLowerCase().indexOf('android') !==
 const isDevMode = browser.runtime.getManifest().version === '0.0.0';
 
 async function loadData() {
-    let localConfig = await (await fetch('./config.json')).json();
+    const version = 2;
+    let localConfig = await (await fetch(`./config-v${version}.json`)).json();
     if (!isDevMode) {
-        let remoteConfig = await (await fetch('https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config.json')).json();
+        let remoteConfig = await (await fetch(`https://raw.githubusercontent.com/code4romania/emergency-news-addon/master/src/config-v${version}.json`)).json();
         if (remoteConfig.version === localConfig.version) {
             localConfig = remoteConfig;
         }
     }
-    config = expandConfig(localConfig);
+    config = await expandConfig(localConfig);
     setTimeout(loadData, 1000 * 60 * 60);
 }
 
-function expandConfig(configInput) {
+async function expandConfig(configInput) {
     let newTerms = [];
-    configInput.terms.forEach((term) => {
+    const termPromises = await Promise.all(configInput.terms.map(async (term) => {
+        return new Promise((resolve, reject) => {
+            if (!!term.chart) {
+                fetch(term.chart.dataSource).then((data) => {
+                    data.json().then((json) => {
+                        term.chart.state = json;
+                        resolve(term);
+                    }, (reason) => {
+                        reject(reason);
+                    });
+                }, (reason) => {
+                    reject(reason);
+                });
+            } else {
+                resolve(term);
+            }
+        });
+    }));
+    termPromises.forEach((term) => {
         if (!!term.aliases) {
             term.aliases.forEach(function (alias) {
                 newTerms.push({
@@ -57,13 +76,15 @@ async function injectContentScriptInTab(tabId) {
         scripts.push('dependencies/webcomponents-bundle.js');
     }
     scripts.push('dependencies/popper.js');
+    scripts.push('dependencies/echarts.min.js');
     scripts.push('dependencies/tippy-bundle.umd.js');
     scripts.push('emergency_news.js');
     scripts.forEach(async (file) => {
-        await browser.tabs.executeScript(tabId, { file })
-            .then(() => { }, (error) => {
-                console.error(`Error while loading file ${file}: ${error}`);
-            });
+        try {
+            await browser.tabs.executeScript(tabId, { file });
+        } catch (error) {
+            console.error(`Error while loading file ${file}:` + error);
+        }
     });
 }
 
