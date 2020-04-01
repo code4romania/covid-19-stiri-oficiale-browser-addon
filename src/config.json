@@ -1,5 +1,5 @@
 {
-    "version": "1",
+    "version": "2",
     "terms": [
         {
             "title": "Simptome Coronavirus",
@@ -102,6 +102,30 @@
             "links": [
                 "https://www.presidency.ro/ro/media/declaratii-de-presa/declaratia-de-presa-sustinuta-de-presedintele-romaniei-domnul-klaus-iohannis1584201636"
             ]
+        },
+        {
+            "title": "Date la zi",
+            "aliases": [
+                "pacienți",
+                "paciente",
+                "pacienților",
+                "pacientelor",
+                "bolnavi",
+                "bolnave",
+                "pacient",
+                "pacientul",
+                "pacienta",
+                "îmbolnăvire",
+                "cazuri"
+            ],
+            "paragraphs": [
+                "Infografiile se actualizează periodic și sunt centralizate. Click în graficele de mai jos pentru a le vedea."
+            ],
+            "chart": {
+                "dataSource": "https://api1.datelazi.ro/api/v2/data/ui-data",
+                "href": "https://datelazi.ro"
+            },
+            "links": []
         }
     ],
     "links": [
@@ -142,7 +166,7 @@
         "coronavirusuri",
         "coronavirusurilor"
     ],
-    "disabledOn":[
+    "disabledOn": [
         "https://cemafac.ro",
         "https://test.cemafac.ro",
         "https://cetrebuiesafac.ro"

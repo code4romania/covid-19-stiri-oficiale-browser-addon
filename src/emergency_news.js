@@ -209,11 +209,25 @@ function appendLinkElements(parent, links) {
     parent.appendChild(listElement);
 }
 
+function appendChartElement(parent, chartData) {
+    let chart = document.createElement("div");
+    chart.classList.add("emergency_news_chart");
+    var myChart = echarts.init(chart);
+    myChart.setOption(convertStateToChartOptions(chartData.state));
+    myChart.on('click', function (params) {
+        window.open(chartData.href, '_blank');
+    });
+    parent.appendChild(chart);
+    new ResizeObserver(() => {
+        myChart.resize();
+    }).observe(parent);
+}
+
 function createTooltip(termData, tooltipCount) {
     const tippyData = {
         content: () => {
             try {
-                return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links);
+                return new EmergencyNewsTooltipContent(termData.title, termData.paragraphs, termData.links, termData.chart);
             } catch (error) {
                 console.error(error);
                 return document.createElement('div');
@@ -231,7 +245,7 @@ function createTooltip(termData, tooltipCount) {
 }
 
 class EmergencyNewsTooltipContent extends HTMLElement {
-    constructor(title, paragraphs, links) {
+    constructor(title, paragraphs, links, chart) {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         const tooltipStyle = browser.runtime.getURL("emergency_news_tooltip.css");
@@ -248,20 +262,12 @@ class EmergencyNewsTooltipContent extends HTMLElement {
 
         let emergencyNewsBody = document.createElement("div");
         emergencyNewsBody.classList.add("emergency_news_body");
-        appendTitleElement(emergencyNewsBody, "Date La Zi");
-        // appendTitleElement(emergencyNewsBody, title);
-        // appendParagraphElements(emergencyNewsBody, paragraphs);
-        let chart = document.createElement("div");
-        chart.style = "width:400px; height:400px;";
-        chart.classList.add("emergency_news_chart");
-        emergencyNewsBody.appendChild(chart);
-        var myChart = echarts.init(chart);
-        myChart.setOption(option);
-        myChart.on('click', function (params) {
-            window.open('https://datelazi.ro', '_blank');
-        });
-
-        // appendLinkElements(emergencyNewsBody, links);
+        appendTitleElement(emergencyNewsBody, title);
+        appendParagraphElements(emergencyNewsBody, paragraphs);
+        if (chart) {
+            appendChartElement(emergencyNewsBody, chart);
+        }
+        appendLinkElements(emergencyNewsBody, links);
 
         const emergencyNewsContent = document.createElement('div');
         emergencyNewsContent.appendChild(emergencyNewsHeader);
@@ -277,301 +283,9 @@ var Constants = {
     curedColor: '#65E0E0',
     deathColor: 'black'
 };
-
-var dateLaZiData = {
-    "ageHistogram": {
-        "datePublished": 1585681080,
-        "datePublishedString": "2020-03-31",
-        "last_updated_on": 1585681080,
-        "last_updated_on_string": "31 Martie la 21:58",
-        "histogram": {
-            "0-9": 30,
-            "10-19": 47,
-            "20-29": 165,
-            "30-39": 337,
-            "40-49": 501,
-            "50-59": 373,
-            "60-69": 228,
-            "70-79": 126,
-            ">80": 29,
-            "în procesare": 116
-        },
-        "total": 1952
-    },
-    "dailyStats": {
-        "last_updated_on": 1585681080,
-        "last_updated_on_string": "31 Martie la 21:58",
-        "currentDay": {
-            "datePublished": 1585681080,
-            "datePublishedString": "2020-03-31",
-            "infected": 2245,
-            "cured": 220,
-            "deaths": 82,
-            "averageAge": "46",
-            "complete": true
-        },
-        "history": [
-            {
-                "datePublished": 1584530100,
-                "datePublishedString": "2020-03-18",
-                "infected": 43,
-                "cured": 0,
-                "deaths": 0,
-                "averageAge": "41",
-                "complete": true
-            },
-            {
-                "datePublished": 1584616500,
-                "datePublishedString": "2020-03-19",
-                "infected": 17,
-                "cured": 6,
-                "deaths": 0,
-                "averageAge": "41",
-                "complete": true
-            },
-            {
-                "datePublished": 1584702900,
-                "datePublishedString": "2020-03-20",
-                "infected": 31,
-                "cured": 6,
-                "deaths": 0,
-                "averageAge": "41",
-                "complete": true
-            },
-            {
-                "datePublished": 1584789300,
-                "datePublishedString": "2020-03-21",
-                "infected": 59,
-                "cured": 21,
-                "deaths": 0,
-                "averageAge": "41",
-                "complete": true
-            },
-            {
-                "datePublished": 1584875700,
-                "datePublishedString": "2020-03-22",
-                "infected": 66,
-                "cured": 12,
-                "deaths": 2,
-                "averageAge": "41",
-                "complete": true
-            },
-            {
-                "datePublished": 1584962100,
-                "datePublishedString": "2020-03-23",
-                "infected": 143,
-                "cured": 9,
-                "deaths": 2,
-                "averageAge": "42",
-                "complete": true
-            },
-            {
-                "datePublished": 1585048500,
-                "datePublishedString": "2020-03-24",
-                "infected": 186,
-                "cured": 6,
-                "deaths": 4,
-                "averageAge": "43",
-                "complete": true
-            },
-            {
-                "datePublished": 1585134900,
-                "datePublishedString": "2020-03-25",
-                "infected": 144,
-                "cured": 7,
-                "deaths": 9,
-                "averageAge": "43",
-                "complete": true
-            },
-            {
-                "datePublished": 1585256040,
-                "datePublishedString": "2020-03-26",
-                "infected": 123,
-                "cured": 8,
-                "deaths": 6,
-                "averageAge": "45",
-                "complete": true
-            },
-            {
-                "datePublished": 1585333080,
-                "datePublishedString": "2020-03-27",
-                "infected": 263,
-                "cured": 21,
-                "deaths": 3,
-                "averageAge": "45",
-                "complete": true
-            },
-            {
-                "datePublished": 1585432140,
-                "datePublishedString": "2020-03-28",
-                "infected": 160,
-                "cured": 24,
-                "deaths": 11,
-                "averageAge": "46",
-                "complete": true
-            },
-            {
-                "datePublished": 1585506480,
-                "datePublishedString": "2020-03-29",
-                "infected": 308,
-                "cured": 30,
-                "deaths": 6,
-                "averageAge": "46",
-                "complete": true
-            },
-            {
-                "datePublished": 1585595280,
-                "datePublishedString": "2020-03-30",
-                "infected": 192,
-                "cured": 11,
-                "deaths": 22,
-                "averageAge": "46",
-                "complete": true
-            },
-            {
-                "datePublished": 1585681080,
-                "datePublishedString": "2020-03-31",
-                "infected": 293,
-                "cured": 40,
-                "deaths": 17,
-                "averageAge": "46",
-                "complete": true
-            }
-        ]
-    },
-    "genderStats": {
-        "datePublished": 1585681080,
-        "datePublishedString": "2020-03-31",
-        "last_updated_on": 1585681080,
-        "last_updated_on_string": "31 Martie la 21:58",
-        "percentageOfMen": 41.0,
-        "percentageOfWomen": 55.0,
-        "percentageOfChildren": 4.0,
-        "totalPercentage": 100.0,
-        "totalNumber": 2245
-    },
-    "lastDataUpdateDetails": {
-        "last_updated_on": 1585681080,
-        "last_updated_on_string": "31 Martie la 21:58"
-    },
-    "quickStats": {
-        "last_updated_on": 1585681080,
-        "last_updated_on_string": "31 Martie la 21:58",
-        "date": 0,
-        "totals": {
-            "date": 1585681080,
-            "date_string": "2020-03-31",
-            "confirmed": 2245,
-            "cured": 220,
-            "deaths": 82
-        },
-        "history": [
-            {
-                "date": 1584530100,
-                "date_string": "2020-03-18",
-                "confirmed": 260,
-                "cured": 19,
-                "deaths": 0
-            },
-            {
-                "date": 1584616500,
-                "date_string": "2020-03-19",
-                "confirmed": 277,
-                "cured": 25,
-                "deaths": 0
-            },
-            {
-                "date": 1584702900,
-                "date_string": "2020-03-20",
-                "confirmed": 308,
-                "cured": 31,
-                "deaths": 0
-            },
-            {
-                "date": 1584789300,
-                "date_string": "2020-03-21",
-                "confirmed": 367,
-                "cured": 52,
-                "deaths": 0
-            },
-            {
-                "date": 1584875700,
-                "date_string": "2020-03-22",
-                "confirmed": 433,
-                "cured": 64,
-                "deaths": 2
-            },
-            {
-                "date": 1584962100,
-                "date_string": "2020-03-23",
-                "confirmed": 576,
-                "cured": 73,
-                "deaths": 4
-            },
-            {
-                "date": 1585048500,
-                "date_string": "2020-03-24",
-                "confirmed": 762,
-                "cured": 79,
-                "deaths": 8
-            },
-            {
-                "date": 1585134900,
-                "date_string": "2020-03-25",
-                "confirmed": 906,
-                "cured": 86,
-                "deaths": 17
-            },
-            {
-                "date": 1585256040,
-                "date_string": "2020-03-26",
-                "confirmed": 1029,
-                "cured": 94,
-                "deaths": 23
-            },
-            {
-                "date": 1585333080,
-                "date_string": "2020-03-27",
-                "confirmed": 1292,
-                "cured": 115,
-                "deaths": 26
-            },
-            {
-                "date": 1585432140,
-                "date_string": "2020-03-28",
-                "confirmed": 1452,
-                "cured": 139,
-                "deaths": 37
-            },
-            {
-                "date": 1585506480,
-                "date_string": "2020-03-29",
-                "confirmed": 1760,
-                "cured": 169,
-                "deaths": 43
-            },
-            {
-                "date": 1585595280,
-                "date_string": "2020-03-30",
-                "confirmed": 1952,
-                "cured": 180,
-                "deaths": 65
-            },
-            {
-                "date": 1585681080,
-                "date_string": "2020-03-31",
-                "confirmed": 2245,
-                "cured": 220,
-                "deaths": 82
-            }
-        ]
-    }
-};
-
 function dateFromTimestamp(timestamp) {
     return new Date(timestamp * 1000);
 }
-
 function formattedShortDateString(date) {
     const months = [
         'Ian',
@@ -590,84 +304,76 @@ function formattedShortDateString(date) {
     return date.getDate() + ' ' + months[date.getMonth()];
 }
 
-const history = dateLaZiData.dailyStats.history;
-const confirmedCasesHistory = history.flatMap((entry) => {
-    return entry.complete === false ? [] : Math.max(entry.infected, 0);
-});
-const curedCasesHistory = history.flatMap((entry) => {
-    return entry.complete === false ? [] : Math.max(entry.cured, 0);
-});
-const deathCasesHistory = history.flatMap((entry) => {
-    return entry.complete === false ? [] : Math.max(entry.deaths, 0);
-});
-const dateStrings = history.flatMap((entry) => {
-    return entry.complete === false ? [] : this.formattedShortDateString(this.dateFromTimestamp(entry.datePublished));
-});
+function convertStateToChartOptions(state) {
+    const history = state.dailyStats.history;
+    const confirmedCasesHistory = history.flatMap((entry) => {
+        return entry.complete === false ? [] : Math.max(entry.infected, 0);
+    });
+    const curedCasesHistory = history.flatMap((entry) => {
+        return entry.complete === false ? [] : Math.max(entry.cured, 0);
+    });
+    const deathCasesHistory = history.flatMap((entry) => {
+        return entry.complete === false ? [] : Math.max(entry.deaths, 0);
+    });
+    const dateStrings = history.flatMap((entry) => {
+        return entry.complete === false ? [] : this.formattedShortDateString(this.dateFromTimestamp(entry.datePublished));
+    });
 
-const state = {
-    // isLoaded: true,
-    // startDate: startDateStr,
-    // endDate: endDateStr,
-    dates: dateStrings,
-    confirmedCasesHistory: confirmedCasesHistory,
-    curedCasesHistory: curedCasesHistory,
-    deathCasesHistory: deathCasesHistory,
-};
-
-var labels = ['Confirmați', 'Vindecați', 'Decedaţi'];
-var option = {
-    xAxis: {
-        type: 'category',
-        data: state.dates,
-        axisLabel: {
-            color: 'gray'
-        }
-    },
-    yAxis: {
-        type: 'value',
-        axisLabel: {
-            color: 'gray'
-        }
-    },
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            axis: 'x'
+    var labels = ['Confirmați', 'Vindecați', 'Decedaţi'];
+    return {
+        xAxis: {
+            type: 'category',
+            data: dateStrings,
+            axisLabel: {
+                color: 'gray'
+            }
         },
-        formatter: '<h4 style="color: white">{b}</h4><span>{a2}: {c2}<br />{a1}: {c1}<br />{a0}: {c0}</span>'
-    },
-    legend: {
-        data: labels,
-        bottom: '0px',
-        icon: 'circle',
-    },
-    grid: {
-        left: '1%',
-        right: 0,
-        bottom: '50px',
-        top: '20%',
-        containLabel: true
-    }, series: [
-        {
-            data: state.confirmedCasesHistory,
-            name: labels[0],
-            stack: 'one',
-            type: 'bar',
-            color: Constants.confirmedColor
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                color: 'gray'
+            }
         },
-        {
-            data: state.curedCasesHistory,
-            name: labels[1],
-            stack: 'one',
-            type: 'bar',
-            color: Constants.curedColor
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                axis: 'x'
+            },
+            formatter: '<h4 style="color: white">{b}</h4><span>{a2}: {c2}<br />{a1}: {c1}<br />{a0}: {c0}</span>'
         },
-        {
-            data: state.deathCasesHistory,
-            name: labels[2],
-            stack: 'one',
-            type: 'bar',
-            color: Constants.deathColor
-        }
-    ]
-};
+        legend: {
+            data: labels,
+            bottom: '0px',
+            icon: 'circle',
+        },
+        grid: {
+            left: '1%',
+            right: 0,
+            bottom: '50px',
+            top: '20%',
+            containLabel: true
+        }, series: [
+            {
+                data: confirmedCasesHistory,
+                name: labels[0],
+                stack: 'one',
+                type: 'bar',
+                color: Constants.confirmedColor
+            },
+            {
+                data: curedCasesHistory,
+                name: labels[1],
+                stack: 'one',
+                type: 'bar',
+                color: Constants.curedColor
+            },
+            {
+                data: deathCasesHistory,
+                name: labels[2],
+                stack: 'one',
+                type: 'bar',
+                color: Constants.deathColor
+            }
+        ]
+    };
+}

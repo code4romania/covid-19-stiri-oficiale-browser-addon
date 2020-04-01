@@ -12,22 +12,42 @@ async function loadData() {
             localConfig = remoteConfig;
         }
     }
-    config = expandConfig(localConfig);
+    config = await expandConfig(localConfig);
     setTimeout(loadData, 1000 * 60 * 60);
 }
 
-function expandConfig(configInput) {
+async function expandConfig(configInput) {
     let newTerms = [];
-    configInput.terms.forEach((term) => {
-        if (!!term.aliases) {
-            term.aliases.forEach(function (alias) {
-                newTerms.push({
-                    "key": alias,
-                    "value": term
+    const termPromises = await Promise.allSettled(configInput.terms.map(async (term) => {
+        return new Promise((resolve, reject) => {
+            if (!!term.chart) {
+                fetch(term.chart.dataSource).then((data) => {
+                    data.json().then((json) => {
+                        term.chart.state = json;
+                        resolve(term);
+                    }, (reason) => {
+                        reject(reason);
+                    });
+                }, (reason) => {
+                    reject(reason);
                 });
-            });
-        }
-    });
+            } else {
+                resolve(term);
+            }
+        });
+    }));
+    termPromises
+        .map((promise) => promise.value)
+        .forEach((term) => {
+            if (!!term.aliases) {
+                term.aliases.forEach(function (alias) {
+                    newTerms.push({
+                        "key": alias,
+                        "value": term
+                    });
+                });
+            }
+        });
     newTerms.sort((a, b) => {
         return b.key.length - a.key.length || b.key.localeCompare(a.key);
     });
