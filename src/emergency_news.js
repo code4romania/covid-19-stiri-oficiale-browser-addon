@@ -21,6 +21,9 @@ browser.runtime.sendMessage({}).then((message) => {
                 return;
             }
             walk(document.body);
+            emergencyNewsConfig.terms.forEach((term)=> { 
+                createTooltip(term.value);
+            });
         }, 500);
     }
 });
@@ -90,30 +93,30 @@ function handleText(textNode) {
         return;
     }
     emergencyNewsConfig.terms.forEach((termKv) => {
-        try {
-            const term = termKv.key;
-            const termData = termKv.value;
-            const splittedText = splitTextByTerm(textNode.nodeValue, term);
-            if (splittedText.matchType !== "MISSING") {
-                const textBefore = splittedText.begin;
-                const textAfter = splittedText.end;
-
-                const before = document.createTextNode(textBefore);
-                const after = textNode;
-                after.nodeValue = textAfter;
-                textNode.parentNode.insertBefore(before, after);
-                let divWithTooltip = document.createElement("span");
-                tooltipCount++;
-                divWithTooltip.classList.add("emergency_news");
-                divWithTooltip.classList.add("emergency_news_item" + tooltipCount);
-                divWithTooltip.textContent = splittedText.originalTerm;
-
-                textNode.parentNode.insertBefore(divWithTooltip, after);
-                createTooltip(termData, tooltipCount);
+        const termData = termKv.value;
+        termData.aliases.forEach((alias) => {
+            try {
+                const splittedText = splitTextByTerm(textNode.nodeValue, alias);
+                if (splittedText.matchType !== "MISSING") {
+                    const textBefore = splittedText.begin;
+                    const textAfter = splittedText.end;
+    
+                    const before = document.createTextNode(textBefore);
+                    const after = textNode;
+                    after.nodeValue = textAfter;
+                    textNode.parentNode.insertBefore(before, after);
+                    let divWithTooltip = document.createElement("span");
+                    tooltipCount++;
+                    divWithTooltip.classList.add("emergency_news");
+                    divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
+                    divWithTooltip.textContent = splittedText.originalTerm;
+    
+                    textNode.parentNode.insertBefore(divWithTooltip, after);
+                }
+            } catch (error) {
+                console.error(error);
             }
-        } catch (error) {
-            console.error(error);
-        }
+        });
     });
 }
 
@@ -242,7 +245,9 @@ function appendChartElement(parent, chartData) {
     }
 }
 
-function createTooltip(termData, tooltipCount) {
+const tippyes = [];
+
+function createTooltip(termData) {
     const tippyData = {
         content: () => {
             try {
@@ -260,7 +265,8 @@ function createTooltip(termData, tooltipCount) {
     if (emergencyNewsConfig.isDevMode) {
         tippyData.trigger = 'click';
     }
-    tippy('.emergency_news_item' + (+tooltipCount), tippyData);
+    // tippyes[termData.id] = 
+    tippy(`.emergency_news_item_${termData.id}`, tippyData);
 }
 
 class EmergencyNewsTooltipContent extends HTMLElement {

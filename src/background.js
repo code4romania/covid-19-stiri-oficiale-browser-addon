@@ -38,17 +38,14 @@ async function expandConfig(configInput) {
         });
     }));
     termPromises.forEach((term) => {
-        if (!!term.aliases) {
-            term.aliases.forEach(function (alias) {
-                newTerms.push({
-                    "key": alias,
-                    "value": term
-                });
-            });
-        }
-    });
-    newTerms.sort((a, b) => {
-        return b.key.length - a.key.length || b.key.localeCompare(a.key);
+        term.aliases = term.aliases.sort((a, b) => {
+            return b.length - a.length || b.localeCompare(a);
+        });
+        term.id = simplifyText(term.title).split(' ').join('_');
+        newTerms.push({
+            "id": term.id,
+            "value": term
+        });
     });
     configInput.terms = newTerms;
 
@@ -60,6 +57,23 @@ async function expandConfig(configInput) {
     configInput.isDevMode = isDevMode;
     return configInput;
 }
+
+function simplifyText(input) {
+    const noComas = input.toLowerCase()
+        .split('ș').join('s')
+        .split('ț').join('t')
+        .split('ă').join('a')
+        .split('â').join('a')
+        .split('î').join('i');
+    const noCedila = noComas.toLowerCase()
+        .split('ş').join('s')
+        .split('ţ').join('t');
+    const noSpecialCharacters = noCedila.toLowerCase()
+        .split('-').join(' ')
+        .split('_').join(' ');
+    return noSpecialCharacters;
+}
+
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse(config);
