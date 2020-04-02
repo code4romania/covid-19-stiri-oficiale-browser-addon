@@ -190,8 +190,12 @@ function appendTitleElement(id, parent, titleText) {
     markAsRead.appendChild(tooltiptext);
 
     div.onclick = () => {
-        document.querySelectorAll(`.emergency_news_item_${id}`).forEach((element)=> {
+        document.querySelectorAll(`.emergency_news_item_${id}`).forEach((element) => {
             element.classList.remove("emergency_news");
+            tippyInstances[id].forEach((instance) => {
+                instance.hide();
+                instance.destroy();
+            });
         });
     };
     parent.appendChild(div);
@@ -249,8 +253,7 @@ function appendChartElement(parent, chartData) {
     }
 }
 
-const tippyes = [];
-
+const tippyInstances = [];
 function createTooltip(termData) {
     const tippyData = {
         content: () => {
@@ -269,7 +272,8 @@ function createTooltip(termData) {
     if (emergencyNewsConfig.isDevMode) {
         tippyData.trigger = 'click';
     }
-    tippy(`.emergency_news_item_${termData.id}`, tippyData);
+    let tippyInsanceList = tippy(`.emergency_news_item_${termData.id}`, tippyData);
+    tippyInstances[termData.id] = tippyInsanceList;
 }
 
 class EmergencyNewsTooltipContent extends HTMLElement {
