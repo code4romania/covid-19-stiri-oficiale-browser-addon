@@ -20,7 +20,7 @@
         "images/logo-news-full.png",
         "images/logo-gov.png",
         "emergency_news_tooltip.css",
-        "dependencies/echarts.min.js"
+        "images/check.svg"
     ],
     "icons": {
         "16": "images/icon-16.png",

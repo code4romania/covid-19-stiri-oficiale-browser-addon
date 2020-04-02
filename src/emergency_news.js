@@ -171,9 +171,22 @@ function appendLinkImgElement(parent, href, imgSrc, itemClass) {
 
 function appendTitleElement(parent, titleText) {
     let div = document.createElement("div");
+    div.classList.add("emergency_news_title_wrapper");
     let bold = document.createElement("b");
     bold.textContent = titleText;
     div.appendChild(bold);
+
+
+    let markAsRead = document.createElement("img");
+    markAsRead.src = browser.runtime.getURL("images/check.svg");
+    markAsRead.classList.add("emergency_news_mark_as_read");
+    div.appendChild(markAsRead);
+
+    let tooltiptext = document.createElement("span");
+    tooltiptext.textContent = `Marchează ca citit '${titleText}' și ascunde pe viitor`;
+    tooltiptext.classList.add("emergency_news_mark_as_read_tooltip");
+    markAsRead.appendChild(tooltiptext);
+
     parent.appendChild(div);
 }
 

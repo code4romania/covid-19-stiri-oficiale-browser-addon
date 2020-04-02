@@ -5,6 +5,7 @@
     line-height: 1.4 !important;
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 12px !important;
+    text-align: left !important;
 }
 
 .emergency_news_header {
@@ -53,3 +54,40 @@ img.emergency_news_gov_logo {
     height: 400px;
     margin: auto;
 }
+
+.emergency_news_title_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.emergency_news_mark_as_read {
+    margin-left: auto;
+}
+
+.emergency_news_mark_as_read {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    width: 2em;
+    height: 2em;
+    border: 0;
+}
+  
+.emergency_news_mark_as_read .emergency_news_mark_as_read_tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.emergency_news_mark_as_read:hover .emergency_news_mark_as_read_tooltip {
+    visibility: visible;
+}
+  
