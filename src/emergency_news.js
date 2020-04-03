@@ -1,5 +1,5 @@
-const MAX_MILLIS = 500;
-const MAX_TERMS_PER_PAGE = 30;
+let MAX_MILLIS = 500;
+let MAX_TERMS_PER_PAGE = 30;
 const START_AFTER_DOM_READY = 200;
 
 var emergencyNewsConfig = {};
@@ -171,6 +171,9 @@ function splitTextByTerm(fullString, term) {
     let originalTerm = term;
     if (termIndex > -1) {
         originalTerm = fullString.substring(termIndex, termIndex + term.length);
+        if (isWordFragment(fullString, termIndex - 1) || isWordFragment(fullString, termIndex + term.length)) {
+            matchType = "MISSING";
+        }
     }
     return {
         begin,
@@ -178,6 +181,16 @@ function splitTextByTerm(fullString, term) {
         matchType,
         originalTerm
     };
+}
+
+function isWordFragment(fullString, charIndex) {
+    if (charIndex < 0) {
+        return false;
+    } else if (charIndex > fullString.length) {
+        return false;
+    } else {
+        return "?!()[]<>-._;: ".indexOf(fullString.charAt(charIndex)) === -1;
+    }
 }
 
 function appendLinkImgElement(parent, href, imgSrc, itemClass) {
