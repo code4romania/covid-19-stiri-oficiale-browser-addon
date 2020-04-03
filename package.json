@@ -13,6 +13,7 @@
         "dev-chrome": "gulp --watch --vendor=chrome --verbose",
         "dev-android": "gulp --watch --vendor=android --verbose",
         "dev-firefox-esr": "web-ext run --pref browser.ctrlTab.recentlyUsedOrder=false --firefox-binary /home/andrei/Dev/firefox_esr/firefox -s dist/firefox/",
+        "dev-firefox-nightly": "web-ext run --pref browser.ctrlTab.recentlyUsedOrder=false --firefox-binary /home/andrei/Soft/firefox_nightly_ro/firefox -s dist/firefox/",
         "gulp": "gulp"
     },
     "repository": {

@@ -1,9 +1,15 @@
+const MAX_MILLIS = 500;
+const MAX_TERMS_PER_PAGE = 30;
+const START_AFTER_DOM_READY = 200;
+
 var emergencyNewsConfig = {};
 
-browser.runtime.sendMessage({}).then((message) => {
+var start;
+browser.runtime.sendMessage({ type: "LOAD_DATA" }).then((message) => {
     if (!emergencyNewsConfig.terms) {
         emergencyNewsConfig = message;
-        setTimeout(() => {
+        setTimeout(async () => {
+            start = Date.now();
             const isDisabledDomain = emergencyNewsConfig.disabledOn
                 .findIndex((disabledUrlFragment) => {
                     return document.URL.indexOf(disabledUrlFragment) > -1;
@@ -21,10 +27,13 @@ browser.runtime.sendMessage({}).then((message) => {
                 return;
             }
             walk(document.body);
-            emergencyNewsConfig.terms.forEach((term) => {
-                createTooltip(term.value);
-            });
-        }, 500);
+            emergencyNewsConfig.terms
+                .filter(termKv => termKv.value.enabled)
+                .forEach((termKv) => {
+                    createTooltip(termKv.value);
+                });
+            const end = Date.now();
+        }, START_AFTER_DOM_READY);
     }
 });
 
@@ -37,7 +46,7 @@ function walk(node) {
     if (node.classList && node.classList.contains('ace_editor')) {
         return;
     }
-
+    let spentTime;
     switch (node.nodeType) {
         case 1: // Element
         case 9: // Document
@@ -45,14 +54,23 @@ function walk(node) {
             child = node.firstChild;
             while (child) {
                 next = child.nextSibling;
-                walk(child);
+                spentTime = Date.now() - start;
+                if (spentTime < MAX_MILLIS && termsMatched < MAX_TERMS_PER_PAGE) {
+                    walk(child);
+                } else {
+                    break;
+                }
                 child = next;
             }
             break;
-
         case 3: // Text node
             try {
-                handleText(node);
+                spentTime = Date.now() - start;
+                if (spentTime < MAX_MILLIS && termsMatched < MAX_TERMS_PER_PAGE) {
+                    handleText(node);
+                } else {
+                    break;
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -79,6 +97,8 @@ function simplifyText(input) {
 var tooltipCount = 0;
 var whiteListTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "p", "strong", "em", "b", "span", "div", "label", "b", "i", "u"]);
 
+let termsMatched = 0;
+
 function handleText(textNode) {
     if (!whiteListTags.has(textNode.parentNode.tagName.toLowerCase())) {
         return;
@@ -92,32 +112,35 @@ function handleText(textNode) {
     if (textNode.nodeValue.trim().length < 10) {
         return;
     }
-    emergencyNewsConfig.terms.forEach((termKv) => {
-        const termData = termKv.value;
-        termData.aliases.forEach((alias) => {
-            try {
-                const splittedText = splitTextByTerm(textNode.nodeValue, alias);
-                if (splittedText.matchType !== "MISSING") {
-                    const textBefore = splittedText.begin;
-                    const textAfter = splittedText.end;
+    emergencyNewsConfig.terms
+        .filter(termKv => termKv.value.enabled)
+        .forEach((termKv) => {
+            const termData = termKv.value;
+            termData.aliases.forEach((alias) => {
+                try {
+                    const splittedText = splitTextByTerm(textNode.nodeValue, alias);
+                    if (splittedText.matchType !== "MISSING") {
+                        termsMatched = termsMatched + 1;
+                        const textBefore = splittedText.begin;
+                        const textAfter = splittedText.end;
 
-                    const before = document.createTextNode(textBefore);
-                    const after = textNode;
-                    after.nodeValue = textAfter;
-                    textNode.parentNode.insertBefore(before, after);
-                    let divWithTooltip = document.createElement("span");
-                    tooltipCount++;
-                    divWithTooltip.classList.add("emergency_news");
-                    divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
-                    divWithTooltip.textContent = splittedText.originalTerm;
+                        const before = document.createTextNode(textBefore);
+                        const after = textNode;
+                        after.nodeValue = textAfter;
+                        textNode.parentNode.insertBefore(before, after);
+                        let divWithTooltip = document.createElement("span");
+                        tooltipCount++;
+                        divWithTooltip.classList.add("emergency_news");
+                        divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
+                        divWithTooltip.textContent = splittedText.originalTerm;
 
-                    textNode.parentNode.insertBefore(divWithTooltip, after);
+                        textNode.parentNode.insertBefore(divWithTooltip, after);
+                    }
+                } catch (error) {
+                    console.error(error);
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            });
         });
-    });
 }
 
 
@@ -190,13 +213,15 @@ function appendTitleElement(id, parent, titleText) {
     markAsRead.appendChild(tooltiptext);
 
     div.onclick = () => {
-        document.querySelectorAll(`.emergency_news_item_${id}`).forEach((element) => {
-            element.classList.remove("emergency_news");
+        browser.runtime.sendMessage({ type: "DISABLE_TERM", termId: id });
+        const elements = document.querySelectorAll(`.emergency_news_item_${id}`);
+        elements.forEach((element) => {
             tippyInstances[id].forEach((instance) => {
-                instance.hide();
                 instance.destroy();
             });
+            element.classList.remove("emergency_news");
         });
+        tippy(elements).destroy();
     };
     parent.appendChild(div);
 }
