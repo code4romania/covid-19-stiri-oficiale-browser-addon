@@ -1,5 +1,5 @@
 let MAX_MILLIS = 500;
-let MAX_TERMS_PER_PAGE = 30;
+let MAX_HIGHLIGHT_PER_TERM = 3;
 const START_AFTER_DOM_READY = 200;
 
 var emergencyNewsConfig = {};
@@ -26,6 +26,11 @@ browser.runtime.sendMessage({ type: "LOAD_DATA" }).then((message) => {
             if (!hasEnablingTerm) {
                 return;
             }
+            emergencyNewsConfig.terms
+                .filter(termKv => termKv.value.enabled)
+                .forEach((termKv) => {
+                    termKv.value.highlightCount = 0;
+                });
             walk(document.body);
             emergencyNewsConfig.terms
                 .filter(termKv => termKv.value.enabled)
@@ -55,7 +60,7 @@ function walk(node) {
             while (child) {
                 next = child.nextSibling;
                 spentTime = Date.now() - start;
-                if (spentTime < MAX_MILLIS && termsMatched < MAX_TERMS_PER_PAGE) {
+                if (spentTime < MAX_MILLIS) {
                     walk(child);
                 } else {
                     break;
@@ -66,7 +71,7 @@ function walk(node) {
         case 3: // Text node
             try {
                 spentTime = Date.now() - start;
-                if (spentTime < MAX_MILLIS && termsMatched < MAX_TERMS_PER_PAGE) {
+                if (spentTime < MAX_MILLIS) {
                     handleText(node);
                 } else {
                     break;
@@ -114,30 +119,34 @@ function handleText(textNode) {
     }
     emergencyNewsConfig.terms
         .filter(termKv => termKv.value.enabled)
+        .filter(termKv => termKv.value.highlightCount < MAX_HIGHLIGHT_PER_TERM)
         .forEach((termKv) => {
             const termData = termKv.value;
             termData.aliases.forEach((alias) => {
-                try {
-                    const splittedText = splitTextByTerm(textNode.nodeValue, alias);
-                    if (splittedText.matchType !== "MISSING") {
-                        termsMatched = termsMatched + 1;
-                        const textBefore = splittedText.begin;
-                        const textAfter = splittedText.end;
+                if (termData.highlightCount < MAX_HIGHLIGHT_PER_TERM) {
+                    try {
+                        const splittedText = splitTextByTerm(textNode.nodeValue, alias);
+                        if (splittedText.matchType !== "MISSING") {
+                            termData.highlightCount = termData.highlightCount + 1;
+                            termsMatched = termsMatched + 1;
+                            const textBefore = splittedText.begin;
+                            const textAfter = splittedText.end;
 
-                        const before = document.createTextNode(textBefore);
-                        const after = textNode;
-                        after.nodeValue = textAfter;
-                        textNode.parentNode.insertBefore(before, after);
-                        let divWithTooltip = document.createElement("span");
-                        tooltipCount++;
-                        divWithTooltip.classList.add("emergency_news");
-                        divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
-                        divWithTooltip.textContent = splittedText.originalTerm;
+                            const before = document.createTextNode(textBefore);
+                            const after = textNode;
+                            after.nodeValue = textAfter;
+                            textNode.parentNode.insertBefore(before, after);
+                            let divWithTooltip = document.createElement("span");
+                            tooltipCount++;
+                            divWithTooltip.classList.add("emergency_news");
+                            divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
+                            divWithTooltip.textContent = splittedText.originalTerm;
 
-                        textNode.parentNode.insertBefore(divWithTooltip, after);
+                            textNode.parentNode.insertBefore(divWithTooltip, after);
+                        }
+                    } catch (error) {
+                        console.error(error);
                     }
-                } catch (error) {
-                    console.error(error);
                 }
             });
         });
