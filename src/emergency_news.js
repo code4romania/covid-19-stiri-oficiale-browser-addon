@@ -1,9 +1,15 @@
+let MAX_MILLIS = 500;
+let MAX_HIGHLIGHT_PER_TERM = 3;
+const START_AFTER_DOM_READY = 200;
+
 var emergencyNewsConfig = {};
 
-browser.runtime.sendMessage({}).then((message) => {
+var start;
+browser.runtime.sendMessage({ type: "LOAD_DATA" }).then((message) => {
     if (!emergencyNewsConfig.terms) {
         emergencyNewsConfig = message;
-        setTimeout(() => {
+        setTimeout(async () => {
+            start = Date.now();
             const isDisabledDomain = emergencyNewsConfig.disabledOn
                 .findIndex((disabledUrlFragment) => {
                     return document.URL.indexOf(disabledUrlFragment) > -1;
@@ -20,11 +26,19 @@ browser.runtime.sendMessage({}).then((message) => {
             if (!hasEnablingTerm) {
                 return;
             }
+            emergencyNewsConfig.terms
+                .filter(termKv => termKv.value.enabled)
+                .forEach((termKv) => {
+                    termKv.value.highlightCount = 0;
+                });
             walk(document.body);
-            emergencyNewsConfig.terms.forEach((term) => {
-                createTooltip(term.value);
-            });
-        }, 500);
+            emergencyNewsConfig.terms
+                .filter(termKv => termKv.value.enabled)
+                .forEach((termKv) => {
+                    createTooltip(termKv.value);
+                });
+            const end = Date.now();
+        }, START_AFTER_DOM_READY);
     }
 });
 
@@ -37,7 +51,7 @@ function walk(node) {
     if (node.classList && node.classList.contains('ace_editor')) {
         return;
     }
-
+    let spentTime;
     switch (node.nodeType) {
         case 1: // Element
         case 9: // Document
@@ -45,14 +59,23 @@ function walk(node) {
             child = node.firstChild;
             while (child) {
                 next = child.nextSibling;
-                walk(child);
+                spentTime = Date.now() - start;
+                if (spentTime < MAX_MILLIS) {
+                    walk(child);
+                } else {
+                    break;
+                }
                 child = next;
             }
             break;
-
         case 3: // Text node
             try {
-                handleText(node);
+                spentTime = Date.now() - start;
+                if (spentTime < MAX_MILLIS) {
+                    handleText(node);
+                } else {
+                    break;
+                }
             } catch (error) {
                 console.error(error);
             }
@@ -79,6 +102,8 @@ function simplifyText(input) {
 var tooltipCount = 0;
 var whiteListTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "p", "strong", "em", "b", "span", "div", "label", "b", "i", "u"]);
 
+let termsMatched = 0;
+
 function handleText(textNode) {
     if (!whiteListTags.has(textNode.parentNode.tagName.toLowerCase())) {
         return;
@@ -92,32 +117,39 @@ function handleText(textNode) {
     if (textNode.nodeValue.trim().length < 10) {
         return;
     }
-    emergencyNewsConfig.terms.forEach((termKv) => {
-        const termData = termKv.value;
-        termData.aliases.forEach((alias) => {
-            try {
-                const splittedText = splitTextByTerm(textNode.nodeValue, alias);
-                if (splittedText.matchType !== "MISSING") {
-                    const textBefore = splittedText.begin;
-                    const textAfter = splittedText.end;
+    emergencyNewsConfig.terms
+        .filter(termKv => termKv.value.enabled)
+        .filter(termKv => termKv.value.highlightCount < MAX_HIGHLIGHT_PER_TERM)
+        .forEach((termKv) => {
+            const termData = termKv.value;
+            termData.aliases.forEach((alias) => {
+                if (termData.highlightCount < MAX_HIGHLIGHT_PER_TERM) {
+                    try {
+                        const splittedText = splitTextByTerm(textNode.nodeValue, alias);
+                        if (splittedText.matchType !== "MISSING") {
+                            termData.highlightCount = termData.highlightCount + 1;
+                            termsMatched = termsMatched + 1;
+                            const textBefore = splittedText.begin;
+                            const textAfter = splittedText.end;
 
-                    const before = document.createTextNode(textBefore);
-                    const after = textNode;
-                    after.nodeValue = textAfter;
-                    textNode.parentNode.insertBefore(before, after);
-                    let divWithTooltip = document.createElement("span");
-                    tooltipCount++;
-                    divWithTooltip.classList.add("emergency_news");
-                    divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
-                    divWithTooltip.textContent = splittedText.originalTerm;
+                            const before = document.createTextNode(textBefore);
+                            const after = textNode;
+                            after.nodeValue = textAfter;
+                            textNode.parentNode.insertBefore(before, after);
+                            let divWithTooltip = document.createElement("span");
+                            tooltipCount++;
+                            divWithTooltip.classList.add("emergency_news");
+                            divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
+                            divWithTooltip.textContent = splittedText.originalTerm;
 
-                    textNode.parentNode.insertBefore(divWithTooltip, after);
+                            textNode.parentNode.insertBefore(divWithTooltip, after);
+                        }
+                    } catch (error) {
+                        console.error(error);
+                    }
                 }
-            } catch (error) {
-                console.error(error);
-            }
+            });
         });
-    });
 }
 
 
@@ -148,6 +180,9 @@ function splitTextByTerm(fullString, term) {
     let originalTerm = term;
     if (termIndex > -1) {
         originalTerm = fullString.substring(termIndex, termIndex + term.length);
+        if (isWordFragment(fullString, termIndex - 1) || isWordFragment(fullString, termIndex + term.length)) {
+            matchType = "MISSING";
+        }
     }
     return {
         begin,
@@ -155,6 +190,16 @@ function splitTextByTerm(fullString, term) {
         matchType,
         originalTerm
     };
+}
+
+function isWordFragment(fullString, charIndex) {
+    if (charIndex < 0) {
+        return false;
+    } else if (charIndex > fullString.length) {
+        return false;
+    } else {
+        return "?!()[]<>-._;: ".indexOf(fullString.charAt(charIndex)) === -1;
+    }
 }
 
 function appendLinkImgElement(parent, href, imgSrc, itemClass) {
@@ -190,13 +235,15 @@ function appendTitleElement(id, parent, titleText) {
     markAsRead.appendChild(tooltiptext);
 
     div.onclick = () => {
-        document.querySelectorAll(`.emergency_news_item_${id}`).forEach((element) => {
-            element.classList.remove("emergency_news");
+        browser.runtime.sendMessage({ type: "DISABLE_TERM", termId: id });
+        const elements = document.querySelectorAll(`.emergency_news_item_${id}`);
+        elements.forEach((element) => {
             tippyInstances[id].forEach((instance) => {
-                instance.hide();
                 instance.destroy();
             });
+            element.classList.remove("emergency_news");
         });
+        tippy(elements).destroy();
     };
     parent.appendChild(div);
 }

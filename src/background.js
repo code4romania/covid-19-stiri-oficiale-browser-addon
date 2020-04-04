@@ -20,6 +20,7 @@ async function loadData() {
 async function expandConfig(configInput) {
     let newTerms = [];
     const termPromises = await Promise.all(configInput.terms.map(async (term) => {
+        term.id = simplifyText(term.title).split(' ').join('_');
         return new Promise((resolve, reject) => {
             if (!!term.chart) {
                 fetch(term.chart.dataSource).then((data) => {
@@ -35,13 +36,16 @@ async function expandConfig(configInput) {
             } else {
                 resolve(term);
             }
+        }).then(async (term) => {
+            const termSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(term.id, { enabled: true });
+            term.enabled = termSettings.enabled;
+            return term;
         });
     }));
     termPromises.forEach((term) => {
         term.aliases = term.aliases.sort((a, b) => {
             return b.length - a.length || b.localeCompare(a);
         });
-        term.id = simplifyText(term.title).split(' ').join('_');
         newTerms.push({
             "id": term.id,
             "value": term
@@ -76,10 +80,22 @@ function simplifyText(input) {
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    sendResponse(config);
+    if (request.type === "LOAD_DATA") {
+        sendResponse(config);
+    } else if (request.type === "DISABLE_TERM") {
+        disableTerm(request.termId);
+    }
 });
 
 loadData();
+
+async function disableTerm(termId) {
+    const termSettings = await LocalOrSyncStorage.getFromCacheStorageOrDefault(termId, { enabled: true });
+    termSettings.enabled = false;
+    LocalOrSyncStorage.save(termId, termSettings);
+    const foundTerm = config.terms.find((term) => { return term.id === termId; });
+    foundTerm.value.enabled = false;
+}
 
 async function injectContentScriptInTab(tabId) {
     await browser.tabs.insertCSS(tabId, { file: "dependencies/light.css" });
