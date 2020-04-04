@@ -1,6 +1,6 @@
 {
     "name": "covid-19-stiri-oficiale",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Extensie de browser care ajută la identificarea expresiilor cheie legate de COVID-19 (coronavirus) și adaugă peste acestea un infobox care trimite către sursele oficiale de informare. Evidențierea surselor oficiale ajută la diminuarea efectelor 'fake news'. \nConcept dezvoltat ca parte din programul Civic Labs al Code for Romania în parteneriat cu Autoritatea pentru Digitalizarea României.",
     "scripts": {
         "start": "npm ci ; npm run dev",

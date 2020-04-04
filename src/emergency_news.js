@@ -218,23 +218,23 @@ function appendLinkImgElement(parent, href, imgSrc, itemClass) {
 }
 
 function appendTitleElement(id, parent, titleText) {
-    let div = document.createElement("div");
-    div.classList.add("emergency_news_title_wrapper");
-    let bold = document.createElement("b");
-    bold.textContent = titleText;
-    div.appendChild(bold);
+    let headerElement = document.createElement("div");
+    headerElement.classList.add("emergency_news_title_wrapper");
 
-    let markAsRead = document.createElement("img");
-    markAsRead.src = browser.runtime.getURL("images/check.svg");
-    markAsRead.classList.add("emergency_news_mark_as_read");
-    div.appendChild(markAsRead);
+    let titleElement = document.createElement("b");
+    titleElement.textContent = titleText;
+
+    let tooltipWrapper = document.createElement("div");
+    tooltipWrapper.classList.add("emergency_news_mark_as_read_tooltip");
+
+    let markAsReadImage = document.createElement("img");
+    markAsReadImage.src = browser.runtime.getURL("images/check.svg");
 
     let tooltiptext = document.createElement("span");
     tooltiptext.textContent = `Marchează ca citit '${titleText}' și ascunde pe viitor`;
-    tooltiptext.classList.add("emergency_news_mark_as_read_tooltip");
-    markAsRead.appendChild(tooltiptext);
+    tooltiptext.classList.add("emergency_news_mark_as_read_tooltiptext");
 
-    div.onclick = () => {
+    headerElement.onclick = () => {
         browser.runtime.sendMessage({ type: "DISABLE_TERM", termId: id });
         const elements = document.querySelectorAll(`.emergency_news_item_${id}`);
         elements.forEach((element) => {
@@ -245,7 +245,12 @@ function appendTitleElement(id, parent, titleText) {
         });
         tippy(elements).destroy();
     };
-    parent.appendChild(div);
+
+    parent.appendChild(headerElement);
+    headerElement.appendChild(titleElement);
+    headerElement.appendChild(tooltipWrapper);
+    tooltipWrapper.appendChild(markAsReadImage);
+    tooltipWrapper.appendChild(tooltiptext);
 }
 
 function appendParagraphElements(parent, paragraphs) {
