@@ -1,5 +1,5 @@
 {
-    "name": "COVID-20 STIRI OFICIALE",
+    "name": "COVID-19 STIRI OFICIALE",
     "background": {
         "scripts": [
             "dependencies/browser-polyfill.js",
