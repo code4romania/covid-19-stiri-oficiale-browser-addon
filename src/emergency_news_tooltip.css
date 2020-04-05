@@ -60,34 +60,45 @@ img.emergency_news_gov_logo {
     align-items: center;
 }
 
-.emergency_news_mark_as_read {
+.emergency_news_mark_as_read_tooltip {
     margin-left: auto;
-}
-
-.emergency_news_mark_as_read {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted black;
     width: 2em;
     height: 2em;
-    border: 0;
 }
-  
-.emergency_news_mark_as_read .emergency_news_mark_as_read_tooltip {
+
+.emergency_news_mark_as_read_tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
+    background-color: #555;
     color: #fff;
     text-align: center;
+    padding: 10px;
     border-radius: 6px;
-    padding: 5px 0;
 
-    /* Position the tooltip */
     position: absolute;
     z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-.emergency_news_mark_as_read:hover .emergency_news_mark_as_read_tooltip {
-    visibility: visible;
+.emergency_news_mark_as_read_tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
 }
-  
+
+.emergency_news_mark_as_read_tooltip:hover .emergency_news_mark_as_read_tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
