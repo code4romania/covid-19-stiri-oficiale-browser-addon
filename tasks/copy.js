@@ -2,6 +2,7 @@ const args = require('./lib/args');
 const fs = require('fs-extra');
 const { watch, series } = require('gulp');
 const path = require('path');
+const lint = require('./lint');
 
 function copyDependencies(cb) {
   fs.ensureDirSync(`dist/${args.vendor}/dependencies/`);
@@ -58,12 +59,13 @@ function copySrc(cb) {
 }
 
 function copy(cb) {
-  copyDependencies();
-  copyManifest();
-  copySrc();
+  const steps = series(lint, copyDependencies, copySrc, copyManifest);
   if (args.watch) {
+    steps();
     watch(['package.json', 'src/**/*.*'],
-      series(copyDependencies, copySrc, copyManifest));
+      steps);
+  } else {
+    steps();
   }
   cb();
 }
