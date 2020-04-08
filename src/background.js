@@ -22,7 +22,7 @@ async function expandConfig(configInput) {
     const termPromises = await Promise.all(configInput.terms.map(async (term) => {
         term.id = simplifyText(term.title).split(' ').join('_');
         return new Promise((resolve, reject) => {
-            if (!!term.chart) {
+            if (term.chart) {
                 fetch(term.chart.dataSource).then((data) => {
                     data.json().then((json) => {
                         term.chart.state = json;
@@ -191,7 +191,7 @@ class LocalOrSyncStorage {
     }
 
     static getStorage() {
-        if (!!browser.storage.sync) {
+        if (browser.storage.sync) {
             return browser.storage.sync;
         } else {
             return browser.storage.local;

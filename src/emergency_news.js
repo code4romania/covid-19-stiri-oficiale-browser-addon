@@ -36,8 +36,7 @@ browser.runtime.sendMessage({ type: "LOAD_DATA" }).then((message) => {
                 .filter(termKv => termKv.value.enabled)
                 .forEach((termKv) => {
                     createTooltip(termKv.value);
-                });
-            const end = Date.now();
+            });
         }, START_AFTER_DOM_READY);
     }
 });
@@ -99,7 +98,6 @@ function simplifyText(input) {
     return noSpecialCharacters;
 }
 
-var tooltipCount = 0;
 var whiteListTags = new Set(["h1", "h2", "h3", "h4", "h5", "h6", "p", "strong", "em", "b", "span", "div", "label", "b", "i", "u"]);
 
 let termsMatched = 0;
@@ -137,7 +135,6 @@ function handleText(textNode) {
                             after.nodeValue = textAfter;
                             textNode.parentNode.insertBefore(before, after);
                             let divWithTooltip = document.createElement("span");
-                            tooltipCount++;
                             divWithTooltip.classList.add("emergency_news");
                             divWithTooltip.classList.add(`emergency_news_item_${termData.id}`);
                             divWithTooltip.textContent = splittedText.originalTerm;
@@ -269,7 +266,7 @@ function appendLinkElements(parent, links) {
         let listItemElement = document.createElement("li");
         let linkElement = document.createElement("a");
         let linkTitle;
-        if (!!emergencyNewsConfig.links[link]) {
+        if (emergencyNewsConfig.links[link]) {
             linkTitle = emergencyNewsConfig.links[link];
         } else {
             linkTitle = link;
@@ -290,7 +287,7 @@ function appendChartElement(parent, chartData) {
     const chart = echarts.init(chartWrapper);
     const options = convertStateToChartOptions(chartData.state);
     chart.setOption(options);
-    chart.on('click', function (params) {
+    chart.on('click', function () {
         window.open(chartData.href, '_blank');
     });
     parent.appendChild(chartWrapper);
@@ -400,7 +397,7 @@ function convertStateToChartOptions(state) {
         return entry.complete === false ? [] : Math.max(entry.deaths, 0);
     });
     const dateStrings = history.flatMap((entry) => {
-        return entry.complete === false ? [] : this.formattedShortDateString(this.dateFromTimestamp(entry.datePublished));
+        return entry.complete === false ? [] : formattedShortDateString(dateFromTimestamp(entry.datePublished));
     });
 
     var labels = ['Confirmați', 'Vindecați', 'Decedaţi'];
