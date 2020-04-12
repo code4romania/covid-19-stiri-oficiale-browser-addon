@@ -45,6 +45,7 @@
         "fs-extra": "^9.0.0",
         "gulp": "^4.0.2",
         "gulp-cli": "^2.2.0",
+        "gulp-concat": "^2.6.1",
         "gulp-eslint": "^6.0.0",
         "gulp-shell": "^0.8.0",
         "jshint": "^2.11.0",

@@ -1,8 +1,9 @@
 const args = require('./lib/args');
 const fs = require('fs-extra');
-const { watch, series } = require('gulp');
+const { watch, series, src, dest } = require('gulp');
 const path = require('path');
-const lint = require('./lint');
+const lintSrc = require('./lint');
+const concat = require('gulp-concat');
 
 function copyDependencies(cb) {
   fs.ensureDirSync(`dist/${args.vendor}/dependencies/`);
@@ -46,20 +47,32 @@ function copyManifest(cb) {
   }
 }
 
-function noManifests(fileName) {
-  return fileName.indexOf('manifest.') === -1;
+function ignoredFiles(fileName) {
+  return fileName.indexOf('manifest.') === -1 &&
+    fileName.indexOf('src/background') === -1 &&
+    fileName.indexOf('src/terms.json') === -1 &&
+    fileName.indexOf('src/config.json') === -1;
 }
 
 function copySrc(cb) {
   fs.copySync('src', `dist/${args.vendor}/`,
-    { filter: noManifests });
+    { filter: ignoredFiles });
+  if (cb) {
+    cb();
+  }
+}
+
+function concatBackground(cb) {
+  src('src/background/**/*.js')
+    .pipe(concat('background.js'))
+    .pipe(dest(`dist/${args.vendor}`));
   if (cb) {
     cb();
   }
 }
 
 function copy(cb) {
-  const steps = series(lint, copyDependencies, copySrc, copyManifest);
+  const steps = series(lintSrc, copyDependencies, copySrc, concatBackground, copyManifest);
   if (args.watch) {
     steps();
     watch(['package.json', 'src/**/*.*'],

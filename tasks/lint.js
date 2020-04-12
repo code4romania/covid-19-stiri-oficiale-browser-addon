@@ -1,11 +1,11 @@
 const { src } = require('gulp');
 const eslint = require('gulp-eslint');
 
-function lint() {
+function lintSrc() {
   return src(['src/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 }
 
-module.exports = lint;
+module.exports = lintSrc;
