@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const { watch, series } = require('gulp');
 const lintSrc = require('./lintSrc');
 const concatBackground = require('./concatBackground');
-const copyDependencies = require('./copyDependencies');
+const copyNodeModules = require('./copyNodeModules');
 const copyManifest = require('./copyManifest');
 
 function ignoredFiles(fileName) {
@@ -22,7 +22,7 @@ function copySrc(cb) {
 }
 
 function copy(cb) {
-  const steps = series(lintSrc, copyDependencies, copySrc, concatBackground, copyManifest);
+  const steps = series(lintSrc, copyNodeModules, copySrc, concatBackground, copyManifest);
   if (args.watch) {
     steps();
     watch(['package.json', 'src/**/*.*'],

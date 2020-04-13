@@ -99,16 +99,16 @@ async function disableTerm(termId) {
 }
 
 async function injectContentScriptInTab(tabId) {
-    await browser.tabs.insertCSS(tabId, { file: "dependencies/light.css" });
+    await browser.tabs.insertCSS(tabId, { file: "node_modules/light.css" });
     await browser.tabs.insertCSS(tabId, { file: "emergency_news.css" });
     const scripts = [];
     if (!isFirefox) {
-        scripts.push('dependencies/browser-polyfill.js');
-        scripts.push('dependencies/webcomponents-bundle.js');
+        scripts.push('node_modules/browser-polyfill.js');
+        scripts.push('node_modules/webcomponents-bundle.js');
     }
-    scripts.push('dependencies/popper.js');
-    scripts.push('dependencies/echarts.js');
-    scripts.push('dependencies/tippy-bundle.umd.js');
+    scripts.push('node_modules/popper.js');
+    scripts.push('node_modules/echarts.js');
+    scripts.push('node_modules/tippy-bundle.umd.js');
     scripts.push('emergency_news.js');
     scripts.forEach(async (file) => {
         try {
