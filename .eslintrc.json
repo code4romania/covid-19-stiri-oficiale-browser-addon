@@ -10,7 +10,9 @@
         "browser": true,
         "chrome": true,
         "tippy": true,
-        "echarts": true
+        "echarts": true,
+        "module": true,
+        "require": true
     },
     "parserOptions": {
         "ecmaVersion": 2018,
