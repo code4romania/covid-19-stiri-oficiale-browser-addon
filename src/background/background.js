@@ -109,7 +109,7 @@ async function injectContentScriptInTab(tabId) {
     scripts.push('node_modules/popper.js');
     scripts.push('node_modules/echarts.js');
     scripts.push('node_modules/tippy-bundle.umd.js');
-    scripts.push('emergency_news.js');
+    scripts.push('content.js');
     scripts.forEach(async (file) => {
         try {
             await browser.tabs.executeScript(tabId, { file });
