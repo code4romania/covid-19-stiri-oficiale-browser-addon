@@ -6,6 +6,7 @@ const concatBackground = require('./concatBackground');
 const concatContent = require('./concatContent');
 const copyNodeModules = require('./copyNodeModules');
 const copyManifest = require('./copyManifest');
+const lintDist = require('./lintDist');
 
 function ignoredFiles(fileName) {
   return fileName.indexOf('manifest.') === -1 &&
@@ -24,7 +25,7 @@ function copySrc(cb) {
 }
 
 function copy(cb) {
-  const steps = series(lintSrc, copyNodeModules, copySrc, concatBackground, concatContent, copyManifest);
+  const steps = series(lintSrc, copyNodeModules, copySrc, concatBackground, concatContent, copyManifest, lintDist);
   if (args.watch) {
     steps();
     watch(['package.json', 'src/**/*.*'],
