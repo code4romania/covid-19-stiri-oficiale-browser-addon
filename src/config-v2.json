@@ -15,7 +15,8 @@
                 "Mai multe informații găsiți aici:"
             ],
             "links": [
-                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus"
+                "https://www.prefectura.mai.gov.ro/ce-trebuie-sa-stiti-despre-noul-coronavirus",
+                "https://cetrebuiesafac.ro/ai-simptome"
             ]
         },
         {
@@ -104,6 +105,149 @@
             ]
         },
         {
+            "title": "Pentru cei care oferă ajutor",
+            "aliases": [
+                "doctor",
+                "doctoriță",
+                "asistent",
+                "asistentă",
+                "medic",
+                "cadru medical",
+                "cadre medicale"
+            ],
+            "paragraphs": [
+                "Implicarea ta în gestionarea crizei asociate cu COVID-19 te poate afecta din punct de vedere emoțional. Există acțiuni pe care le poți face pentru a te ajuta să reduci reacțiile de stres traumatic secundar (STS), asociate cu gestionarea evenimentelor de criză.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://cetrebuiesafac.ro/pentru-cei-care-ofera-ajutor"
+            ]
+        },
+        {
+            "title": "Diminuarea stigmatului",
+            "aliases": [
+                "stigmă",
+                "stigmatizat",
+                "stigmatizată",
+                "stigmatizați",
+                "stigmatului"
+            ],
+            "paragraphs": [
+                "Stigmatizarea și discriminarea pot avea loc atunci când oamenii asociază o epidemie, cum e COVID-19, cu o populație sau o naționalitate, chiar dacă nu toți indivizii din respectiva țară sau regiune se află în situații de risc pentru boală. Stigmatizarea mai poate fi întâlnită când o persoană tocmai a ieșit din carantina COVID-19, chiar dacă ea nu mai este considerată un factor de risc în răspândirea virusului către ceilalți. ",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://cetrebuiesafac.ro/adaptare-si-rezistenta/diminuarea-stigmatului"
+            ]
+        },
+        {
+            "title": "Reacții obișnuite pentru copii și adolescenți",
+            "aliases": [
+                "copii",
+                "copiii",
+                "copiilor",
+                "copil",
+                "adolescenților",
+                "adolescentelor",
+                "adolescenți",
+                "adolescent",
+                "adolescentă",
+                "bebeluși",
+                "bebeluș",
+                "pre-adolescenți"
+            ],
+            "paragraphs": [
+                "Reacțiile obișnuite, ca urmare a situațiilor de stres, se vor diminua cu timpul, în cazul majorității copiilor. Copiii care au fost direct expuși la dezastre pot trece, din nou, prin stări de supărare; pot reveni comportamente legate de eveniment, dacă aceștia văd sau aud lucruri care să le reamintească de ceea ce s-a întâmplat. Dacă cei mici continuă să fie foarte afectați sau dacă reacțiile lor periclitează activitatea școlară ori relațiile cu ceilalți, părinții sunt sfătuiți să se adreseze unui specialist sau să discute cu cineva care are competențe în gestionarea nevoilor emoționale ale copiilor.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://cetrebuiesafac.ro/adaptare-si-rezistenta/reactii-obisnuite"
+            ]
+        },
+        {
+            "title": "Sfaturi pentru părinți",
+            "aliases": [
+                "părinți",
+                "părinte",
+                "părinților",
+                "părintelui"
+            ],
+            "paragraphs": [
+                "Copiii și adolescenții reacționează, în mare parte, la ceea ce văd la adulții din jurul lor. Când părinții și îngrijitorii gestionează situația cu calm și încredere, dau dovadă de cel mai bun sprijin pentru copiii lor. Părinții pot oferi mai multă siguranță celor din jurul lor, în special copiilor, dacă sunt bine pregătiți. ",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://cetrebuiesafac.ro/adaptare-si-rezistenta/sfaturi-pentru-parinti"
+            ]
+        },
+        {
+            "title": "Adaptare și rezistență",
+            "aliases": [
+                "Adaptare",
+                "rezistență",
+                "adaptează",
+                "adapta",
+                "adaptat",
+                "adaptează"
+            ],
+            "paragraphs": [
+                "Adaptarea la stres te face mai puternic pe tine, pe cei dragi și pe cei aparținând comunității tale.",
+                "Fiecare răspunde diferit la situații de stres. Felul în care reacționezi în fața acestei epidemii poate depinde de experiențele anterioare, de lucrurile care te fac diferit de ceilalți și de comunitatea în care trăiești.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://cetrebuiesafac.ro/adaptare-si-rezistenta"
+            ]
+        },
+        {
+            "title": "15 RECOMANDĂRI privind conduita socială responsabilă",
+            "aliases": [
+                "recomandări",
+                "recomandat",
+                "recomandare",
+                "conduită socială",
+                "responsabil"
+            ],
+            "paragraphs": [
+                "Grupul de Comunicare Strategică are 15 recomandări pentru o conduită socială și responsabilă.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://stirioficiale.ro/15-recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus"
+            ]
+        },
+        {
+            "title": "Adeverință angajator",
+            "aliases": [
+                "Adeverință angajator",
+                "Adeverința angajator",
+                "adeverinței angajator"
+            ],
+            "paragraphs": [
+                "Ordonanţa Militară nr. 3/2020 prevede în clar „angajații prezintă legitimația de serviciu SAU adeverința eliberată de angajatorˮ, deci este necesară prezentarea unuia dintre cele două documente menționate."
+            ],
+            "links": [
+                "https://cdn.stirioficiale.ro/storage/MODEL%20Adeverinta%20pentru%20angajatori.pdf",
+                "https://stirioficiale.ro/informatii/q-and-a-coronavirus"
+            ]
+        },
+        {
+            "title": "Declarație pe proprie răspundere",
+            "aliases": [
+                "Declarație pe proprie răspundere",
+                "declarației pe proprie răspundere",
+                "declarața pe proprie răspundere"
+            ],
+            "paragraphs": [
+                "Declarația pe proprie răspundere completată se va afla în posesia persoanei care efectuează deplasarea, împreună cu documentul de identitate, și va fi pusă la dispoziția reprezentanților Poliției Române, ai Jandarmeriei sau ai Poliției Locale la momentul legitimării persoanei.",
+                "Mai multe informații găsiți aici:"
+            ],
+            "links": [
+                "https://cdn.stirioficiale.ro/storage/28MODEL%20Declaratie%20proprie%20raspundere%202503.pdf",
+                "https://stirioficiale.ro/informatii/q-and-a-coronavirus"
+            ]
+        },
+        {
             "title": "Date la zi",
             "aliases": [
                 "pacienți",
@@ -147,6 +291,46 @@
         {
             "title": "Ministerul Sănătății",
             "href": "http://www.ms.ro/recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus-covid-19"
+        },
+        {
+            "title": "Ce trebuie să fac - Pentru cei care oferă ajutor",
+            "href": "https://cetrebuiesafac.ro/pentru-cei-care-ofera-ajutor"
+        },
+        {
+            "title": "Ce trebuie să fac - Diminuarea stigmatului",
+            "href": "https://cetrebuiesafac.ro/adaptare-si-rezistenta/diminuarea-stigmatului"
+        },
+        {
+            "title": "Ce trebuie să fac - Ai simptome?",
+            "href": "https://cetrebuiesafac.ro/ai-simptome"
+        },
+        {
+            "title": "Ce trebuie să fac - Reacții obișnuite pentru copii și adolescenți",
+            "href": "https://cetrebuiesafac.ro/adaptare-si-rezistenta/reactii-obisnuite"
+        },
+        {
+            "title": "Ce trebuie să fac - Sfaturi pentru părinți",
+            "href": "https://cetrebuiesafac.ro/adaptare-si-rezistenta/sfaturi-pentru-parinti"
+        },
+        {
+            "title": "Ce trebuie să fac - Adaptare și rezistență",
+            "href": "https://cetrebuiesafac.ro/adaptare-si-rezistenta"
+        },
+        {
+            "title": "15 RECOMANDĂRI privind conduita socială responsabilă în prevenirea răspândirii coronavirus",
+            "href": "https://stirioficiale.ro/15-recomandari-privind-conduita-sociala-responsabila-in-prevenirea-raspandirii-coronavirus"
+        },
+        {
+            "title": "Întrebări Frecvente Coronavirus",
+            "href": "https://stirioficiale.ro/informatii/q-and-a-coronavirus"
+        },
+        {
+            "title": "Descarcă de aici Model Declarație Angajator OM2",
+            "href": "https://cdn.stirioficiale.ro/storage/MODEL%20Adeverinta%20pentru%20angajatori.pdf"
+        },
+        {
+            "title": "Descarcă de aici Model Declarație pe proprie răspundere OM2",
+            "href": "https://cdn.stirioficiale.ro/storage/28MODEL%20Declaratie%20proprie%20raspundere%202503.pdf"
         },
         {
             "title": "Decret semnat de Președintele României",
